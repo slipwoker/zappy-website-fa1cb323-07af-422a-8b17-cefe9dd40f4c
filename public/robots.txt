@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://avi-ben-david-law.zappy5.app/sitemap.xml
+Sitemap: https://bendavidlaw.co.il/sitemap.xml
