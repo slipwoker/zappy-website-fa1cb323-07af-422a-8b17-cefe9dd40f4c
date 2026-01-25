@@ -1,47 +1,57 @@
-# Business — Generative Engine Optimization Map
+# אבי בן דוד, עו"ד — Generative Engine Optimization Map
+
+> A שירותים משפטיים - ייצוג נכי צה"ל business.
 
 ---
 
 ## Pages
 
 ### דף הבית
-https://example.com
+https://avi-ben-david-law.zappy5.app
 עורך דין נכי צה״ל חרבות ברזל - ייצוג משפטי מקצועי והכרה בנכות. אבי בן דוד מספק שקט נפשי לחיילים ומשפחות כדי להתמקד בהחלמה
 
 ### שירותים
-https://example.com/services
+https://avi-ben-david-law.zappy5.app/services
 שירותי ייצוג משפטי הכרה בנכות צה״ל מקצועיים לחיילי חרבות ברזל ומשפחותיהם. ליווי מלא בתהליך ההכרה בנכות והשגת זכויות
 
 ### אודות
-https://example.com/about
+https://avi-ben-david-law.zappy5.app/about
 אבי בן דוד - עורך דין לנכי צה״ל המתמחה בייצוג חיילי חרבות ברזל. ניסיון רב, גישה אישית, ומחויבות להשגת הזכויות המגיעות לך
 
 ### צור קשר
-https://example.com/contact
+https://avi-ben-david-law.zappy5.app/contact
 צור קשר עם אבי בן דוד - עורך דין נכי צה״ל חרבות ברזל. פגישת ייעוץ ראשונית ללא התחייבות. נשמח לענות על שאלות ולעזור
 
 ## Legal & Policy
 
 ### Privacy Policy
-https://example.com/privacy
+https://avi-ben-david-law.zappy5.app/privacy
 Information about how user data is collected, stored, and protected.
 
 ### Terms & Conditions
-https://example.com/terms
+https://avi-ben-david-law.zappy5.app/terms
 Legal terms describing service usage, rights, and policies.
 
 ### Accessibility Statement
-https://example.com/accessibility
+https://avi-ben-david-law.zappy5.app/accessibility
 Information about WCAG compliance and accessibility features.
 
 ---
 
 # Business Context (for LLM understanding)
 
-## About Business
+## About אבי בן דוד, עו"ד
+אבי בן דוד, עו"ד is a business in the שירותים משפטיים - ייצוג נכי צה"ל industry.
+
+## Target Audience
+1. חיילים שנלחמו בחרבות ברזל בני 22-35, 2. חיילים/אנשי קבע שנפצעו בצבא, 3. הורים לחיילים שנפצעו
+
+## Industry
+שירותים משפטיים - ייצוג נכי צה"ל
+
 ---
 
 # Additional Resources
 
-- **Sitemap**: https://example.com/sitemap.xml
-- **Robots.txt**: https://example.com/robots.txt
+- **Sitemap**: https://avi-ben-david-law.zappy5.app/sitemap.xml
+- **Robots.txt**: https://avi-ben-david-law.zappy5.app/robots.txt
