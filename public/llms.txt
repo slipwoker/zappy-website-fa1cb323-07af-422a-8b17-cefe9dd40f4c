@@ -1,6 +1,4 @@
-# אבי בן דוד, עו״ד — Generative Engine Optimization Map
-
-> A שירותים משפטיים - ייצוג נכי צה"ל business.
+# Business — Generative Engine Optimization Map
 
 ---
 
@@ -23,7 +21,7 @@ https://bendavidlaw.co.il/contact
 צור קשר עם אבי בן דוד - עורך דין נכי צה״ל חרבות ברזל. פגישת ייעוץ ראשונית ללא התחייבות. נשמח לענות על שאלות ולעזור
 
 ### Page
-https://bendavidlaw.co.il/https://agent-697798c94e1e3c0072d--diasbilitycalc-b38052.netlify.app
+https://bendavidlaw.co.il/disability-assessment-calculator
 
 ## Legal & Policy
 
@@ -43,15 +41,7 @@ Information about WCAG compliance and accessibility features.
 
 # Business Context (for LLM understanding)
 
-## About אבי בן דוד, עו״ד
-אבי בן דוד, עו״ד is a business in the שירותים משפטיים - ייצוג נכי צה"ל industry.
-
-## Target Audience
-1. חיילים שנלחמו בחרבות ברזל בני 22-35, 2. חיילים/אנשי קבע שנפצעו בצבא, 3. הורים לחיילים שנפצעו
-
-## Industry
-שירותים משפטיים - ייצוג נכי צה"ל
-
+## About Business
 ---
 
 # Additional Resources
