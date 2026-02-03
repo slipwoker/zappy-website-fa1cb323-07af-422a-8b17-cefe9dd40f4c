@@ -66,7 +66,66 @@
     <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
     <!-- Mickidum Accessibility Toolbar -->
     <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
-<!-- Zappy Analytics -->
+<style>
+      /* Dropdown sub-menu styles (AI-generated page) */
+      .nav-menu li:has(.sub-menu),
+      nav li:has(.sub-menu),
+      .navbar li:has(.sub-menu) {
+        position: relative;
+      }
+      .nav-menu .sub-menu,
+      nav .sub-menu,
+      .navbar .sub-menu {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 220px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        padding: 8px 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+        z-index: 1000;
+        list-style: none;
+        pointer-events: none;
+      }
+      .nav-menu li:hover > .sub-menu,
+      nav li:hover > .sub-menu,
+      .navbar li:hover > .sub-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      .sub-menu li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .sub-menu a {
+        display: block;
+        padding: 10px 16px;
+        color: #333;
+        font-weight: 500;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: background-color 0.2s;
+      }
+      .sub-menu a:hover {
+        background-color: #f5f5f5;
+      }
+      /* RTL dropdown positioning */
+      [dir="rtl"] .sub-menu,
+      html[lang="he"] .sub-menu,
+      html[lang="ar"] .sub-menu {
+        left: auto;
+        right: 0;
+      }
+    </style><!-- Zappy Analytics -->
 <script>
 (function() {
   'use strict';
@@ -328,23 +387,23 @@
       
       <button class="mobile-toggle" id="mobileToggle" aria-label="תפריט">
         <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
         <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;">
-          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </button>
       
       <button class="phone-header-btn" aria-label="התקשר אלינו">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
         </svg>
       </button>
       
       <ul class="nav-menu" id="navMenu">
         <li><a href="/services">השירותים שלנו&nbsp;</a></li>
-        <li><a href="/about">אודות</a></li><li><a href="/disability-assessment-calculator" class="">מחשבון הערכת נכות</a></li>
-      </ul>
+        <li><a href="/about">אודות</a></li><li><a href="/disability-assessment-calculator" class>מחשבון הערכת נכות</a></li>
+      <li><a href="/blog" class="nav-link">מאמרים</a><ul class="sub-menu"><li><a href="/blog/rehabilitation-guide" class="nav-link">מדריך לזכויות</a></li><li><a href="/blog/ptsd-claims" class="nav-link">פוסט טראומה</a></li><li><a href="/blog/medical-committee" class="nav-link">וועדה רפואית</a></li></ul></li></ul>
       
       <div class="nav-cta-container">
         <li class="nav-cta-item">
@@ -358,8 +417,8 @@
     <div class="hero-overlay"></div>
     <img data-placeholder="hero-1" data-context="עורך דין ישראלי מקצועי יושב עם חייל צה״ל ומשפחתו במשרד משפטי חם ומזמין, אווירה של אמפתיה ותמיכה" src="/assets/image-hero-1-1769355623693-uuxk39.webp?v=1769355623817" alt="עורך דין נכי צה״ל חרבות ברזל - ייצוג משפטי אישי" class="hero-img zappy-editable-image" data-element-type="image" data-element-id="img-1769338245016-v3eg0sgbr" style="object-position: 50% 50%; object-fit: cover; width: 100%; height: 100%;">
     <div class="container hero-content">
-      <h1 style="">ייצוג משפטי מקצועי לפצועי צה״ל&nbsp;</h1>
-      <h3 style="">אנחנו כאן כדי לספק לך ולמשפחתך שקט נפשי, כדי שתוכלו להתרכז בהחלמה ושיקום ולא בעניני בירוקרטיה</h3>
+      <h1 style>ייצוג משפטי מקצועי לפצועי צה״ל&nbsp;</h1>
+      <h3 style>אנחנו כאן כדי לספק לך ולמשפחתך שקט נפשי, כדי שתוכלו להתרכז בהחלמה ושיקום ולא בעניני בירוקרטיה</h3>
       <a href="/about" class="btn btn-primary" style="text-decoration: none; padding: 12px 24px; border-radius: 6px; display: inline-block; background-color: var(--primary-color, #8B0000) !important; border-width: 2px; border-style: solid; border-color: var(--primary-color, #8B0000) !important; border-image: initial; color: rgb(255, 255, 255) !important; outline: none; width: auto !important; flex: 0 0 auto !important;" data-element-type="button" data-text-color="auto" data-element-id="zappy-element-1769415607639-csuj9451i" id="zappy-element-1769415607639-csuj9451i" data-original-href="/about">הסיפור שלי</a><div class="hero-cta">
         <a href="/contact" class="btn-primary" data-original-href="/contact" data-element-type="button" data-element-id="btn-1769338245009-9wtgl78j1" data-native-element="true" style="outline: none;">קבע פגישת ייעוץ</a>
         <a href="/services" class="btn-secondary" data-original-href="/services" data-element-type="button" data-element-id="btn-1769338245009-a46j5ibor" data-native-element="true">למד עוד על השירותים</a>
@@ -382,20 +441,20 @@
       <h2>השירותים שלנו&nbsp; המשפטיים שלנו</h2>
       <div class="services-grid zappy-preserve-css-grid" data-original-item-width="326" data-original-gap="32px" style="display: grid; grid-template-columns: 326px 326px 326px 326px 0px;" id="zappy-auto-grid-1769526238619-iaqkpp" data-zappy-auto-grid="true"><div class="service-card">
           <img data-placeholder="service-1" data-context="עורך דין בוחן מסמכים משפטיים עם חייל צה״ל במשרד, אווירה מקצועית וחמה" src="/assets/business-general-service-upload-1769355033716.webp?t=1769355033925" alt="ייצוג משפטי הכרה בנכות צה״ל" data-element-type="image" data-element-id="img-1769350214897-mz6efstv5" class="zappy-editable-image" data-original-position="static" style="position: relative; object-position: 50% 50%; width: 278px; height: auto; object-fit: cover; max-width: 100%;" data-zappy-original-width="278" data-zappy-original-height="200">
-          <h3 class="">הכרה בנכות צה״ל</h3>
-          <p class="">ליווי מלא בתהליך ההכרה בנכות, כולל הגשת תביעות, ייצוג בוועדות רפואיות, וערעורים במידת הצורך.</p>
+          <h3 class>הכרה בנכות צה״ל</h3>
+          <p class>ליווי מלא בתהליך ההכרה בנכות, כולל הגשת תביעות, ייצוג בוועדות רפואיות, וערעורים במידת הצורך.</p>
         </div><div class="service-card">
           <img data-placeholder="service-2" data-context="פגישה משפטית בין עורך דין למשפחת חייל, שיחה רגועה וידידותית סביב שולחן" src="/assets/business-general-service-upload-1769355135810.webp?t=1769355136041" alt="ייעוץ משפטי למשפחות חיילים" data-element-type="image" data-element-id="img-1769350214897-gj2an48gw" class="zappy-editable-image" data-original-position="static" style="position: relative; object-position: 50% 50%; width: 278px; height: auto; object-fit: cover; max-width: 100%;" data-zappy-original-width="278" data-zappy-original-height="200">
-          <h3 class="">ייעוץ למשפחות</h3>
-          <p class="">תמיכה וייעוץ משפטי להורים ולבני משפחה של חיילים שנפצעו, כדי להבין את הזכויות והתהליכים.</p>
+          <h3 class>ייעוץ למשפחות</h3>
+          <p class>תמיכה וייעוץ משפטי להורים ולבני משפחה של חיילים שנפצעו, כדי להבין את הזכויות והתהליכים.</p>
         </div><div class="service-card">
           <img data-placeholder="service-3" data-context="עורך דין מציג מצגת משפטית לחייל ומשפחתו, הסבר ברור ומפורט" src="/assets/business-general-service-upload-1769355235468.webp?t=1769355235678" alt="ליווי בתהליכי שיקום" data-element-type="image" data-element-id="img-1769350214897-i4zsysl19" class="zappy-editable-image" data-original-position="static" style="position: relative; object-position: 50% 50%; width: 278px; height: auto; object-fit: cover; max-width: 100%;" data-zappy-original-width="278" data-zappy-original-height="200">
-          <h3 class="">ליווי בתהליכי שיקום</h3>
-          <p class="">סיוע משפטי בכל הקשור לתהליכי השיקום, כולל קבלת טיפולים, תמיכה כלכלית, והכשרה מקצועית.</p>
+          <h3 class>ליווי בתהליכי שיקום</h3>
+          <p class>סיוע משפטי בכל הקשור לתהליכי השיקום, כולל קבלת טיפולים, תמיכה כלכלית, והכשרה מקצועית.</p>
         </div><div class="service-card">
           <img data-placeholder="service-4" data-context="עורך דין עובד על מחשב נייד במשרד מודרני, מסמכים משפטיים על השולחן" src="/assets/business-general-service-upload-1769355198373.webp?t=1769355198535" alt="ערעורים וייצוג בוועדות" data-element-type="image" data-element-id="img-1769350214897-rn5z46uri" class="zappy-editable-image" data-original-position="static" style="position: relative; object-position: 50% 50%; width: 278px; height: auto; object-fit: cover; max-width: 100%;" data-zappy-original-width="278" data-zappy-original-height="200">
-          <h3 class="">ערעורים וייצוג בוועדות</h3>
-          <p class="">ייצוג מקצועי בערעורים על החלטות ועדות רפואיות ובירור זכויות נוספות.</p>
+          <h3 class>ערעורים וייצוג בוועדות</h3>
+          <p class>ייצוג מקצועי בערעורים על החלטות ועדות רפואיות ובירור זכויות נוספות.</p>
         </div></div>
       <div class="services-cta">
         <a href="/services" class="btn-primary" data-original-href="/services" data-element-type="button" data-element-id="btn-1769350214896-7ugxjqf7q" data-native-element="true">כל ההשירותים שלנו&nbsp; שלנו</a>
