@@ -1655,7 +1655,8 @@ body.accessibility-widget-visible ._access-menu {
   
   /* Hero sections need extra padding-top to clear the sticky navbar */
   /* The navbar is ~70px tall, so hero needs at least 100px padding-top */
-  [class*="-hero-section"]:first-of-type,
+  /* IMPORTANT: Use section tag to avoid matching child elements like buttons that contain "-hero-section" in their BEM class */
+  section[class*="-hero-section"]:first-of-type,
   main > section:first-child {
     padding-top: 100px !important;
   }
