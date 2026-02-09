@@ -1715,6 +1715,19 @@ body.accessibility-widget-visible ._access-menu {
   }
 }
 
+/* ========== HERO SECTION WIDTH CONSTRAINT (ALL VIEWPORTS) ========== */
+/* Prevent hero sections from exceeding viewport width.                */
+/* Root cause: AI-generated CSS may use width:100vw or add horizontal  */
+/* padding to the section, causing it to overflow the viewport.        */
+/* NOTE: Do NOT add overflow:hidden here — it clips SVG bottom dividers */
+/* that need overflow:visible to extend into the next section.          */
+section[class*="hero" i],
+section[class*="Hero"],
+section[data-hero-type] {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
 /* ========== SVG DIVIDER OVERLAY FIX ========== */
 /* Many AI sections place .section-divider absolutely at the bottom of a section,
    which can overlap/cut off the last row of content. The safest CSS-only fix
