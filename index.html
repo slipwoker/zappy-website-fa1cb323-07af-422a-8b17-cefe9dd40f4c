@@ -227,27 +227,331 @@
     </div>
   </nav>
 
-  <section class="hero" id="zappy-section-0">
-    <div class="hero-overlay"></div>
-    <img data-placeholder="hero-1" data-context="עורך דין ישראלי מקצועי יושב עם חייל צה״ל ומשפחתו במשרד משפטי חם ומזמין, אווירה של אמפתיה ותמיכה" src="/assets/image-hero-1-1769355623693-uuxk39.webp?v=1769355623817" alt="עורך דין נכי צה״ל חרבות ברזל - ייצוג משפטי אישי" class="hero-img zappy-editable-image" data-element-type="image" data-element-id="img-1769338245016-v3eg0sgbr" style="object-position: 50% 50%; object-fit: cover; width: 100%; height: 100%;" data-resize-handler-attached="true">
-    <div class="container hero-content">
-      <h1 style="">ייצוג משפטי מקצועי לפצועי צה״ל&nbsp;</h1>
-      <h3 style="">אנחנו כאן כדי לספק לך ולמשפחתך שקט נפשי, כדי שתוכלו להתרכז בהחלמה ושיקום ולא בעניני בירוקרטיה</h3>
-      <a href="/about" class="btn btn-primary" style="text-decoration: none; padding: 12px 24px; border-radius: 6px; display: inline-block; background-color: var(--primary-color, #8B0000) !important; border-width: 2px; border-style: solid; border-color: var(--primary-color, #8B0000) !important; border-image: initial; color: rgb(255, 255, 255) !important; outline: none; width: auto !important; flex: 0 0 auto !important;" data-element-type="button" data-text-color="auto" data-element-id="zappy-element-1769415607639-csuj9451i" id="zappy-element-1769415607639-csuj9451i">הסיפור שלי</a><div class="hero-cta">
-        <a href="/contact" class="btn-primary" data-element-type="button" data-element-id="btn-1769338245009-9wtgl78j1" data-native-element="true" style="outline: none;">קבע פגישת ייעוץ</a>
-        <a href="/services" class="btn-secondary" data-element-type="button" data-element-id="btn-1769338245009-a46j5ibor" data-native-element="true">למד עוד על השירותים</a>
-      </div>
+  <section style="position: relative; width: 100%; max-width: 100%; box-sizing: border-box; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);" data-zappy-section="true" class="section">
+  <style>
+    .hero-section-bold {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    
+    .hero-bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background-size: cover;
+      background-position: center;
+      animation: slowZoom 20s ease-in-out infinite alternate;
+    }
+    
+    @keyframes slowZoom {
+      from { transform: scale(1); }
+      to { transform: scale(1.1); }
+    }
+    
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background: linear-gradient(135deg, rgba(107, 142, 111, 0.85) 0%, rgba(139, 115, 85, 0.9) 100%);
+      mix-blend-mode: multiply;
+    }
+    
+    .hero-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      opacity: 0.05;
+      background-image: 
+        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px);
+    }
+    
+    .hero-content-wrapper {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 40px 80px;
+      text-align: center;
+    }
+    
+    .hero-icon-circle {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 40px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      animation: floatIcon 3s ease-in-out infinite;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    
+    @keyframes floatIcon {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    .hero-icon-circle svg {
+      width: 60px;
+      height: 60px;
+      color: var(--text-light);
+    }
+    
+    .hero-main-heading {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 900;
+      color: var(--text-light);
+      margin: 0 0 30px;
+      line-height: 1.2;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      animation: fadeInUp 1s ease-out;
+      letter-spacing: -1px;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .hero-subheading {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: var(--text-light);
+      margin: 0 auto 50px;
+      max-width: 800px;
+      line-height: 1.7;
+      font-weight: 300;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      animation: fadeInUp 1s ease-out 0.2s backwards;
+      opacity: 0.95;
+    }
+    
+    .hero-cta-group {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 1s ease-out 0.4s backwards;
+    }
+    
+    .hero-btn {
+      padding: 18px 40px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    .hero-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    
+    .hero-btn:hover::before {
+      width: 400px;
+      height: 400px;
+    }
+    
+    .hero-btn span {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .hero-btn-primary {
+      background: var(--secondary-color);
+      color: var(--text-dark);
+      border: 3px solid var(--secondary-color);
+    }
+    
+    .hero-btn-primary:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(212, 165, 116, 0.4);
+    }
+    
+    .hero-btn-secondary {
+      background: transparent;
+      color: var(--text-light);
+      border: 3px solid var(--text-light);
+      backdrop-filter: blur(10px);
+    }
+    
+    .hero-btn-secondary:hover {
+      transform: translateY(-5px) scale(1.05);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 15px 40px rgba(255,255,255,0.2);
+    }
+    
+    .hero-btn-tertiary {
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--text-light);
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+    }
+    
+    .hero-btn-tertiary:hover {
+      transform: translateY(-5px) scale(1.05);
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 15px 40px rgba(255,255,255,0.3);
+    }
+    
+    .hero-scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+      40% { transform: translateX(-50%) translateY(-15px); }
+      60% { transform: translateX(-50%) translateY(-8px); }
+    }
+    
+    .hero-scroll-indicator svg {
+      width: 30px;
+      height: 30px;
+      color: var(--text-light);
+      opacity: 0.7;
+    }
+    
+    .hero-decorative-line {
+      width: 80px;
+      height: 4px;
+      background: var(--secondary-color);
+      margin: 0 auto 30px;
+      border-radius: 2px;
+      box-shadow: 0 0 20px var(--secondary-color);
+    }
+    
+    @media (max-width: 768px) {
+      .hero-content-wrapper {
+        padding: 120px 20px 60px;
+      }
+      
+      .hero-icon-circle {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 30px;
+      }
+      
+      .hero-icon-circle svg {
+        width: 45px;
+        height: 45px;
+      }
+      
+      .hero-main-heading {
+        margin-bottom: 20px;
+      }
+      
+      .hero-subheading {
+        margin-bottom: 40px;
+        font-size: 1.1rem;
+      }
+      
+      .hero-cta-group {
+        gap: 15px;
+      }
+      
+      .hero-btn {
+        padding: 15px 30px;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      .hero-scroll-indicator {
+        bottom: 25px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero-content-wrapper {
+        padding: 100px 15px 50px;
+      }
+      
+      .hero-btn {
+        padding: 14px 25px;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+
+  <div class="hero-bg-image" style="background-image: url('assets/image-hero-1-1769355623693-uuxk39.webp?v=1769355623817');  background-size: cover; background-position: center;"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-pattern"></div>
+  
+  <div class="hero-content-wrapper">
+    <div class="hero-icon-circle">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path>
+      </svg>
     </div>
-  <div style="width: 100%; max-width: 600px;" data-full-width="" data-custom-width="">
-        <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; background: #f9fafb; border-radius: 8px; overflow: hidden; border: 2px dashed #d1d5db;" data-element-type="iframe" data-custom-height="">
-          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; flex-direction: column; color: #6b7280;">
-            <svg style="width: 48px; height: 48px; margin-bottom: 8px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-            </svg>
-            <span style="font-size: 14px;">Embed content will appear here</span>
-          </div>
-        </div>
-      </div></section>
+    
+    <div class="hero-decorative-line"></div>
+    
+    <h1 class="hero-main-heading">ייצוג משפטי מקצועי לפצועי צה״ל</h1>
+    
+    <h3 class="hero-subheading">אנחנו כאן כדי לספק לך ולמשפחתך שקט נפשי, כדי שתוכלו להתרכז בהחלמה ושיקום ולא בעניני בירוקרטיה</h3>
+    
+    <div class="hero-cta-group">
+      <a href="/about" class="hero-btn hero-btn-primary">
+        <span>הסיפור שלי</span>
+      </a>
+      <a href="/contact" class="hero-btn hero-btn-secondary">
+        <span>קבע פגישת ייעוץ</span>
+      </a>
+      <a href="/services" class="hero-btn hero-btn-tertiary">
+        <span>למד עוד על השירותים</span>
+      </a>
+    </div>
+  </div>
+  
+  <div class="hero-scroll-indicator">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+    </svg>
+  </div>
+</section>
 
   <section class="intro-section">
     <div class="container">
