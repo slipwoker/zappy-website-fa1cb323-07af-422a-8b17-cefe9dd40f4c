@@ -141,6 +141,26 @@
 </script>
 <!-- ZAPPY_INTEGRATION_END analytics:add_facebook_pixel -->
 <meta name="facebook-domain-verification" content="nc4rvkhd1ksy361kw72yd8oj6g6vlr">
+      <!-- ZAPPY_INTEGRATION_START analytics:add_google_tag_manager -->
+<!-- Google Consent Mode v2 (default) -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  'ad_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+  'analytics_storage': 'denied',
+  'wait_for_update': 500
+});
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TN44STVH');</script>
+<!-- ZAPPY_INTEGRATION_END analytics:add_google_tag_manager -->
   
     <style id="zappy-dropdown-submenu-styles">
       /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
@@ -186,6 +206,11 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+    <!-- ZAPPY_INTEGRATION_START analytics:add_google_tag_manager -->
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TN44STVH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- ZAPPY_INTEGRATION_END analytics:add_google_tag_manager -->
 
 <!-- Zappy Attribution Header -->
 <div id="zappy-attribution-header" class="zappy-header" style="display: none;">
@@ -227,151 +252,154 @@
     </div>
   </nav>
 
-  <section style="position: relative; width: 100%; max-width: 100%; box-sizing: border-box; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);" data-zappy-section="true" class="section">
+  <section style="position: relative; width: 100%; max-width: 100%; box-sizing: border-box; min-height: 100vh; overflow: visible; margin: 0; padding: 0;" data-zappy-section="true" class="section" id="zappy-section-0">
   <style>
-    .hero-section-bold {
-      position: relative;
-      width: 100%;
-      max-width: 100%;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    
-    .hero-bg-image {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      background-size: cover;
-      background-position: center;
-      animation: slowZoom 20s ease-in-out infinite alternate;
-    }
-    
-    @keyframes slowZoom {
-      from { transform: scale(1); }
-      to { transform: scale(1.1); }
-    }
-    
-    .hero-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      background: linear-gradient(135deg, rgba(107, 142, 111, 0.85) 0%, rgba(139, 115, 85, 0.9) 100%);
-      mix-blend-mode: multiply;
-    }
-    
-    .hero-pattern {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      opacity: 0.05;
-      background-image: 
-        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px);
-    }
-    
-    .hero-content-wrapper {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 120px 40px 80px;
-      text-align: center;
-    }
-    
-    .hero-icon-circle {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 40px;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(10px);
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      animation: floatIcon 3s ease-in-out infinite;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    }
-    
-    @keyframes floatIcon {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-    
-    .hero-icon-circle svg {
-      width: 60px;
-      height: 60px;
-      color: var(--text-light);
-    }
-    
-    .hero-main-heading {
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      font-weight: 900;
-      color: var(--text-light);
-      margin: 0 0 30px;
-      line-height: 1.2;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.4);
-      animation: fadeInUp 1s ease-out;
-      letter-spacing: -1px;
-    }
-    
     @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(40px);
       }
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
-    
-    .hero-subheading {
-      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .hero-section-wrapper {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(107, 142, 111, 0.85) 0%, rgba(139, 115, 85, 0.75) 50%, rgba(212, 165, 116, 0.65) 100%);
+      z-index: 1;
+    }
+
+    .hero-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.03) 35px, rgba(255,255,255,.03) 70px);
+      z-index: 2;
+    }
+
+    .hero-content-container {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      width: 100%;
+      padding: 120px 40px 80px;
+      text-align: center;
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    .hero-icon-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 100px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 50%;
+      margin-bottom: 30px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .hero-icon-badge svg {
+      width: 50px;
+      height: 50px;
+      fill: var(--text-light);
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 900;
+      color: var(--text-light);
+      margin: 0 0 30px 0;
+      line-height: 1.2;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      letter-spacing: -1px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      font-weight: 400;
       color: var(--text-light);
       margin: 0 auto 50px;
       max-width: 800px;
-      line-height: 1.7;
-      font-weight: 300;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-      animation: fadeInUp 1s ease-out 0.2s backwards;
+      line-height: 1.6;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
       opacity: 0.95;
     }
-    
+
     .hero-cta-group {
       display: flex;
       gap: 20px;
       justify-content: center;
       flex-wrap: wrap;
-      animation: fadeInUp 1s ease-out 0.4s backwards;
+      margin-top: 40px;
     }
-    
+
     .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       padding: 18px 40px;
       font-size: 1.1rem;
-      font-weight: 600;
+      font-weight: 700;
       text-decoration: none;
       border-radius: 50px;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      cursor: pointer;
-      display: inline-block;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
-    
+
     .hero-btn::before {
       content: '';
       position: absolute;
@@ -380,175 +408,181 @@
       width: 0;
       height: 0;
       border-radius: 50%;
-      background: rgba(255,255,255,0.3);
+      background: rgba(255, 255, 255, 0.3);
       transform: translate(-50%, -50%);
       transition: width 0.6s, height 0.6s;
     }
-    
+
     .hero-btn:hover::before {
       width: 400px;
       height: 400px;
     }
-    
+
     .hero-btn span {
       position: relative;
       z-index: 1;
     }
-    
+
     .hero-btn-primary {
-      background: var(--secondary-color);
-      color: var(--text-dark);
-      border: 3px solid var(--secondary-color);
+      background: var(--text-light);
+      color: var(--primary-color);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
-    
+
     .hero-btn-primary:hover {
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 15px 40px rgba(212, 165, 116, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
     }
-    
+
     .hero-btn-secondary {
       background: transparent;
       color: var(--text-light);
       border: 3px solid var(--text-light);
-      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
-    
+
     .hero-btn-secondary:hover {
-      transform: translateY(-5px) scale(1.05);
+      transform: translateY(-3px);
       background: rgba(255, 255, 255, 0.1);
-      box-shadow: 0 15px 40px rgba(255,255,255,0.2);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
     }
-    
+
     .hero-btn-tertiary {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(212, 165, 116, 0.9);
       color: var(--text-light);
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(212, 165, 116, 0.4);
     }
-    
+
     .hero-btn-tertiary:hover {
-      transform: translateY(-5px) scale(1.05);
-      background: rgba(255, 255, 255, 0.25);
-      box-shadow: 0 15px 40px rgba(255,255,255,0.3);
+      transform: translateY(-3px);
+      background: var(--secondary-color);
+      box-shadow: 0 15px 40px rgba(212, 165, 116, 0.5);
     }
-    
+
     .hero-scroll-indicator {
       position: absolute;
       bottom: 40px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 10;
-      animation: bounce 2s infinite;
+      animation: float 2s ease-in-out infinite;
     }
-    
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-      40% { transform: translateX(-50%) translateY(-15px); }
-      60% { transform: translateX(-50%) translateY(-8px); }
-    }
-    
+
     .hero-scroll-indicator svg {
       width: 30px;
       height: 30px;
-      color: var(--text-light);
+      fill: var(--text-light);
       opacity: 0.7;
     }
-    
-    .hero-decorative-line {
-      width: 80px;
-      height: 4px;
-      background: var(--secondary-color);
-      margin: 0 auto 30px;
-      border-radius: 2px;
-      box-shadow: 0 0 20px var(--secondary-color);
+
+    .divider-wrapper {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      pointer-events: none;
+      z-index: 5;
+      overflow: hidden;
     }
-    
+
+    .divider-wrapper svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
     @media (max-width: 768px) {
-      .hero-content-wrapper {
-        padding: 120px 20px 60px;
+      .hero-content-container {
+        padding: 140px 20px 60px;
       }
-      
-      .hero-icon-circle {
-        width: 90px;
-        height: 90px;
-        margin-bottom: 30px;
+
+      .hero-title {
+        font-size: 2.5rem;
       }
-      
-      .hero-icon-circle svg {
-        width: 45px;
-        height: 45px;
+
+      .hero-subtitle {
+        font-size: 1.2rem;
       }
-      
-      .hero-main-heading {
-        margin-bottom: 20px;
-      }
-      
-      .hero-subheading {
-        margin-bottom: 40px;
-        font-size: 1.1rem;
-      }
-      
+
       .hero-cta-group {
-        gap: 15px;
+        flex-direction: column;
+        align-items: center;
       }
-      
+
+      .hero-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+
+      .hero-icon-badge {
+        width: 80px;
+        height: 80px;
+      }
+
+      .hero-icon-badge svg {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+
       .hero-btn {
         padding: 15px 30px;
         font-size: 1rem;
-        width: 100%;
-        max-width: 300px;
-      }
-      
-      .hero-scroll-indicator {
-        bottom: 25px;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .hero-content-wrapper {
-        padding: 100px 15px 50px;
-      }
-      
-      .hero-btn {
-        padding: 14px 25px;
-        font-size: 0.95rem;
       }
     }
   </style>
 
-  <div class="hero-bg-image" style="background-image: url('assets/image-hero-1-1769355623693-uuxk39.webp?v=1769355623817');  background-size: cover; background-position: center;"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-pattern"></div>
-  
-  <div class="hero-content-wrapper">
-    <div class="hero-icon-circle">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path>
+  <div class="hero-section-wrapper">
+    <div class="hero-bg-layer zappy-editable-bg-image" style="background-image: url('assets/image-hero-1-1769355623693-uuxk39.webp?v=1769355623817'); background-size: cover; background-position: center;"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-pattern"></div>
+
+    <div class="hero-content-container">
+      <div class="hero-icon-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 18c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"></path>
+          <path d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"></path>
+        </svg>
+      </div>
+
+      <h1 class="hero-title">ייצוג משפטי מקצועי לפצועי צה״ל</h1>
+      
+      <h3 class="hero-subtitle">אנחנו כאן כדי לספק לך ולמשפחתך שקט נפשי, כדי שתוכלו להתרכז בהחלמה ושיקום ולא בעניני בירוקרטיה</h3>
+
+      <div class="hero-cta-group">
+        <a href="/contact" class="hero-btn hero-btn-primary" data-element-type="button" data-element-id="btn-1770892123696-3sc2ahiaw" data-native-element="true">
+          <span>קבע פגישת ייעוץ</span>
+        </a>
+        <a href="/about" class="hero-btn hero-btn-secondary" data-element-type="button" data-element-id="btn-1770892123696-88mqqaj6x" data-native-element="true">
+          <span>הסיפור שלי</span>
+        </a>
+        <a href="/services" class="hero-btn hero-btn-tertiary" data-element-type="button" data-element-id="btn-1770892123696-k821jadtc" data-native-element="true">
+          <span>למד עוד על השירותים</span>
+        </a>
+      </div>
+    <div class="zappy-inserted-element" id="zappy-element-1770892333915-biko4cmfu" data-element-id="zappy-element-1770892333915-biko4cmfu" data-element-type="iframe" data-zappy-newly-inserted="true" style="max-width: 1440px; margin: 20px auto; display: flex; justify-content: center;"><div style="width: 100%; max-width: 600px; display: block; margin-left: auto; margin-right: auto;" data-full-width="" data-custom-width=""><div style="position: relative; width: 100%; height: 0px; padding-bottom: 56.25%; background: rgb(249, 250, 251); border: 2px dashed rgb(209, 213, 219); border-radius: 8px; overflow: hidden;" data-element-type="iframe" data-element-id="zappy-element-1770892333915-biko4cmfu" id="zappy-element-1770892333915-biko4cmfu"><div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #6b7280;"><svg style="width: 48px; height: 48px; margin-bottom: 8px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg><span style="font-size: 14px;">Click to add embed URL</span></div></div></div></div></div>
+
+    <div class="hero-scroll-indicator">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path>
       </svg>
     </div>
-    
-    <div class="hero-decorative-line"></div>
-    
-    <h1 class="hero-main-heading">ייצוג משפטי מקצועי לפצועי צה״ל</h1>
-    
-    <h3 class="hero-subheading">אנחנו כאן כדי לספק לך ולמשפחתך שקט נפשי, כדי שתוכלו להתרכז בהחלמה ושיקום ולא בעניני בירוקרטיה</h3>
-    
-    <div class="hero-cta-group">
-      <a href="/about" class="hero-btn hero-btn-primary">
-        <span>הסיפור שלי</span>
-      </a>
-      <a href="/contact" class="hero-btn hero-btn-secondary">
-        <span>קבע פגישת ייעוץ</span>
-      </a>
-      <a href="/services" class="hero-btn hero-btn-tertiary">
-        <span>למד עוד על השירותים</span>
-      </a>
-    </div>
   </div>
-  
-  <div class="hero-scroll-indicator">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+
+  <div class="divider-wrapper">
+    <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
+      <path d="M0,100 C300,20 900,20 1200,100 L1200,100 L0,100 Z" fill="#ffffff"></path>
     </svg>
   </div>
 </section>
