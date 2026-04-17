@@ -886,11 +886,10 @@ img, picture, figure {
 }
 
 /* Legal Pages Content Styles */
-
-/* Legal Pages Content Styles */
 .legal-page-content {
-  padding: 60px 0;
+  padding: 120px 0 60px;
   min-height: 60vh;
+  color: inherit;
 }
 
 .legal-page-content .container {
@@ -938,20 +937,39 @@ img, picture, figure {
   line-height: 1.6;
 }
 
-.legal-page-content .contact-box {
+.legal-page-content .contact-box,
+.legal-page-content .contact-info {
   background: rgba(0, 0, 0, 0.03);
   padding: 1.5rem;
   border-radius: 8px;
   margin-top: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-.legal-page-content .contact-box a {
+.legal-page-content .contact-box a,
+.legal-page-content .contact-info a {
   color: inherit;
   text-decoration: underline;
 }
 
-.legal-page-content .contact-box a:hover {
+.legal-page-content .contact-box a:hover,
+.legal-page-content .contact-info a:hover {
   opacity: 0.8;
+}
+
+.legal-page-content .important-notice,
+.legal-page-content .legal-reference {
+  background: rgba(0, 0, 0, 0.03);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  border-left: 4px solid currentColor;
+}
+
+[dir="rtl"] .legal-page-content .important-notice,
+[dir="rtl"] .legal-page-content .legal-reference {
+  border-left: none;
+  border-right: 4px solid currentColor;
 }
 
 
@@ -1488,6 +1506,50 @@ body.accessibility-widget-visible ._access-menu {
   }
 }
 
+/* zappy-nav-child-indent */
+.zappy-products-dropdown .zappy-nav-child > a,
+.sub-menu .zappy-nav-child > a {
+  padding-left: 28px !important;
+  font-size: 0.9em !important;
+  opacity: 0.85 !important;
+}
+[dir="rtl"] .zappy-products-dropdown .zappy-nav-child > a,
+[dir="rtl"] .sub-menu .zappy-nav-child > a,
+html[lang="he"] .zappy-products-dropdown .zappy-nav-child > a,
+html[lang="he"] .sub-menu .zappy-nav-child > a,
+html[lang="ar"] .zappy-products-dropdown .zappy-nav-child > a,
+html[lang="ar"] .sub-menu .zappy-nav-child > a {
+  padding-left: 0 !important;
+  padding-right: 28px !important;
+}
+.zappy-products-dropdown .zappy-nav-parent > a,
+.sub-menu .zappy-nav-parent > a {
+  font-weight: 600 !important;
+}
+@media (max-width: 768px) {
+  .nav-menu.active,
+  #navMenu.active {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+}
+
+
+/* ========== EMPTY SUBMENU HIDING (Auto-added by Zappy) ========== */
+.sub-menu:empty,
+.dropdown-menu:empty,
+.sub-menu.zappy-empty-submenu,
+.dropdown-menu.zappy-empty-submenu,
+.nav-menu .sub-menu.zappy-empty-submenu,
+nav .sub-menu.zappy-empty-submenu,
+.navbar .sub-menu.zappy-empty-submenu,
+#navMenu .sub-menu.zappy-empty-submenu,
+#navMenu .dropdown-menu.zappy-empty-submenu {
+  display: none !important;
+}
+
+
 /* ========== RTL MOBILE NAVBAR FIX (zappy-rtl-mobile-fix) ========== */
 /* High-specificity rules to ensure RTL positioning wins over any [lang="en"] conflicts */
 /* For RTL sites: hamburger on RIGHT, phone on LEFT (mirror of LTR layout) */
@@ -1615,11 +1677,71 @@ body.accessibility-widget-visible ._access-menu {
 /* ========== END HERO IMAGE GRADIENT FIX ========== */
 
 
+/* ========== FULLSCREEN HERO OVERFLOW FIX (fullscreen-hero-overflow-fix) ========== */
+@media (max-width: 768px) {
+
+  section[data-hero-type*="fullscreen"] {
+    height: auto !important;
+    min-height: 100svh !important;
+    padding: 0 0 90px 0 !important;
+  }
+  section[data-hero-type*="fullscreen"] > [class*="-container"]:not([class*="bg"]):not([class*="scrim"]):not([class*="divider"]),
+  section[data-hero-type*="fullscreen"] > .container {
+    padding-bottom: 100px !important;
+    min-height: auto !important;
+  }
+}
+/* ========== END FULLSCREEN HERO OVERFLOW FIX ========== */
+
+
+/* ========== PRODUCT ICON STYLES (product-icon-styles) ========== */
+.product-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; width: 100%; }
+.product-title-row h1 { flex: 1; min-width: 0; }
+.product-icon-actions { display: flex; gap: 8px; flex-shrink: 0; padding-top: 6px; }
+.icon-btn { width: 36px; height: 36px; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: color 0.2s; color: currentColor; padding: 0; }
+.icon-btn:hover { color: var(--primary-color, #ff0083); }
+.icon-btn.active { color: #e74c3c; }
+.icon-btn.active .heart-outline { display: none !important; }
+.icon-btn.active .heart-filled { display: block !important; }
+.profile-section, .addresses-section, .favorites-section, .orders-section { border: 1px solid var(--border-color, rgba(128,128,128,0.2)); border-radius: 12px; padding: 24px; margin-bottom: 24px; background: transparent; }
+.favorites-section h2 { font-size: 1.25rem; color: var(--text-color, #1f2937); margin-bottom: 20px; }
+.favorites-loading { text-align: center; padding: 20px; color: var(--text-secondary, #6b7280); }
+.favorites-empty { text-align: center; padding: 32px; color: var(--text-secondary, #6b7280); }
+.favorites-empty p { margin-bottom: 16px; }
+.favorites-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
+.favorite-card { background: transparent; border: 1px solid var(--border-color, rgba(128,128,128,0.2)); border-radius: 10px; overflow: hidden; transition: box-shadow 0.2s; position: relative; }
+.favorite-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+.favorite-card-img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.favorite-card-body { padding: 12px; }
+.favorite-card-body h4 { font-size: 0.875rem; font-weight: 500; color: var(--text-color, #1f2937); margin: 0 0 6px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.favorite-price { font-weight: 600; color: var(--primary-color, #ff0083); font-size: 0.9rem; }
+.favorite-remove-btn { position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; border-radius: 50%; border: none; background: rgba(255,255,255,0.9); color: #dc2626; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; transition: all 0.2s; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+.favorite-remove-btn:hover { background: #dc2626; color: white; }
+@media (max-width: 480px) { .favorites-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
+/* ========== END PRODUCT ICON STYLES ========== */
+
+/* ========== ORPHANED_ZOOM_IMG_FIX ========== */
+@media (max-width: 768px) {
+  .zappy-preserve-css-grid > img[data-zappy-zoom],
+  [class*="-grid"] > img[data-zappy-zoom] {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 300px !important;
+    object-fit: cover !important;
+    left: auto !important;
+    top: auto !important;
+  }
+}
+/* ========== END ORPHANED_ZOOM_IMG_FIX ========== */
+
+
 /* ========== GRID RESPONSIVE FIX (zappy-grid-mobile-fix) ========== */
 /* Ensures grids with explicit columns use CSS variable and are responsive on mobile */
 
 /* DESKTOP: Explicit column grids use CSS variable for grid-template-columns */
-/* This rule reads the --zappy-grid-cols CSS variable set in inline styles */
+/* The deployment process ensures --zappy-grid-cols is always set in inline styles */
 [data-zappy-explicit-columns="true"] {
   display: grid !important;
   grid-template-columns: var(--zappy-grid-cols, repeat(2, minmax(0, 1fr))) !important;
@@ -1638,9 +1760,10 @@ body.accessibility-widget-visible ._access-menu {
   position: relative !important;
 }
 
-/* Prevent inserted elements from exceeding their container width */
+/* Prevent inserted elements from exceeding their container width.
+   max-width uses no !important so inline styles can set a specific constraint. */
 .zappy-inserted-element {
-  max-width: 100% !important;
+  max-width: 100%;
   box-sizing: border-box !important;
 }
 
@@ -1662,9 +1785,8 @@ body.accessibility-widget-visible ._access-menu {
     max-width: 100% !important;
   }
   
-  /* Featured/product grids - force single column on mobile */
-  .featured-grid,
-  .product-grid {
+  /* Featured grids - force single column on mobile */
+  .featured-grid {
     grid-template-columns: 1fr !important;
   }
   
@@ -1741,7 +1863,8 @@ body.accessibility-widget-visible ._access-menu {
   }
   
   /* Fix zoom wrapper images on mobile - make responsive */
-  [data-zappy-zoom-wrapper="true"] img {
+  /* Exclude images with mobile overrides — those are handled by JS to honor user settings */
+  [data-zappy-zoom-wrapper="true"] img:not([data-zappy-mobile-object-position]):not([data-zappy-mobile-zoom]) {
     position: relative !important;
     width: 100% !important;
     height: auto !important;
@@ -1918,6 +2041,35 @@ body.accessibility-widget-visible ._access-menu {
   .hero-container {
     gap: 16px !important;
   }
+
+  /* ========== GRID OVERFLOW FIX ========== */
+  /* CSS Grid items default to min-width:auto, preventing them from shrinking
+     below their content's intrinsic size. Fixed-width zoom wrappers or large
+     images inside grid items can force the column wider than the viewport. */
+  .hero-container > * {
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Zappy-inserted image elements with fixed-width zoom wrappers must
+     respect the parent container width on mobile */
+  .zappy-inserted-element,
+  [data-zappy-zoom-wrapper] {
+    max-width: 100% !important;
+  }
+
+  /* ========== FULLSCREEN HERO OVERFLOW FIX ========== */
+
+  section[data-hero-type*="fullscreen"] {
+    height: auto !important;
+    min-height: 100svh !important;
+    padding: 0 0 90px 0 !important;
+  }
+  section[data-hero-type*="fullscreen"] > [class*="-container"]:not([class*="bg"]):not([class*="scrim"]):not([class*="divider"]),
+  section[data-hero-type*="fullscreen"] > .container {
+    padding-bottom: 100px !important;
+    min-height: auto !important;
+  }
 }
 
 /* ========== HERO SECTION WIDTH CONSTRAINT (ALL VIEWPORTS) ========== */
@@ -2031,3 +2183,33 @@ section[data-hero-type] {
 /* ========== END HORIZONTAL-PAIR GRID MEDIA FIX ========== */
 
 /* ========== END GRID RESPONSIVE FIX ========== */
+
+
+/* ZAPPY_CONTACT_FORM_LAYOUT_FIX */
+form.contact-form, .contact-form { flex-direction: column !important; align-items: stretch !important; }
+form.contact-form > .contact-form-field, .contact-form > .contact-form-field { width: 100% !important; align-self: stretch !important; }
+form.contact-form .contact-input, form.contact-form .contact-textarea { width: 100% !important; box-sizing: border-box !important; }
+
+
+/* ZAPPY_NAVBAR_CTA_ALIGNMENT_FIX */
+.nav-cta-container .zappy-search-container,
+.zappy-search-container { align-self: center; }
+.nav-cta-container p { margin: 0 !important; }
+
+
+/* ZAPPY_SECTION_BG_TYPE_FIX */
+[data-zappy-bg-type="color"] { background-image: none !important; background-color: var(--zappy-bg-color, transparent) !important; }
+[data-zappy-bg-type="image"] { background-image: linear-gradient(var(--zappy-bg-overlay, rgba(0,0,0,0)), var(--zappy-bg-overlay, rgba(0,0,0,0))), var(--zappy-bg-image, none) !important; background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important; }
+[data-zappy-bg-type="video"] { background-image: none !important; }
+
+/* Footer contact alignment fix */
+.footer-contact li > a { display: flex; align-items: flex-start; gap: inherit; }
+
+/* RTL footer contact: icon on the right (start) side, text on the left */
+html[dir="rtl"] .footer-contact li, html[dir="rtl"] .site-footer .footer-contact li, html[dir="rtl"] .site-footer .footer-col:nth-child(3) .footer-contact li { flex-direction: row !important; justify-content: flex-start !important; }
+html[dir="rtl"] .footer-contact .contact-icon { order: 0 !important; }
+html[dir="rtl"] .footer-contact .contact-text { order: 1 !important; }
+html[dir="rtl"] .footer-contact li > a { flex-direction: row !important; }
+
+/* Spec table BiDi fix: isolate cells so mixed LTR/RTL content renders correctly */
+.specs-table th, .specs-table td { unicode-bidi: plaintext !important; }

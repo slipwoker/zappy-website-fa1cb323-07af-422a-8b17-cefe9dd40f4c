@@ -507,8 +507,31 @@ window.onload = function() {
       } catch (e) {}
     }
 
+    function ensureLightboxCss(){
+      try {
+        var head = document.head || document.querySelector('head');
+        if (!head || head.querySelector('style[data-zappy-image-lightbox="true"]')) return;
+        var s = document.createElement('style');
+        s.setAttribute('data-zappy-image-lightbox','true');
+        s.textContent =
+          '.zappy-lightbox{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;z-index:9999;padding:24px;}'+
+          '.zappy-lightbox-content{position:relative;max-width:min(1100px,92vw);max-height:92vh;}'+
+          '.zappy-lightbox-content img{max-width:92vw;max-height:92vh;display:block;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.45);}'+
+          '.zappy-lightbox-close{position:absolute;top:-14px;right:-14px;width:32px;height:32px;border-radius:999px;background:#fff;color:#111;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 8px 24px rgba(0,0,0,.25);cursor:pointer;}'+
+          '.zappy-lightbox-backdrop{position:absolute;inset:0;display:block;cursor:pointer;}'+
+          'input.zappy-lightbox-toggle{position:absolute;opacity:0;pointer-events:none;}'+
+          'label.zappy-lightbox-trigger{display:contents;}'+
+          'label.zappy-lightbox-trigger{cursor:zoom-in;}'+
+          'label.zappy-lightbox-trigger [data-zappy-zoom-wrapper="true"],'+
+          'label.zappy-lightbox-trigger img{cursor:zoom-in !important;}'+
+          'input.zappy-lightbox-toggle:checked + label.zappy-lightbox-trigger + .zappy-lightbox{display:flex;}';
+        head.appendChild(s);
+      } catch(e){}
+    }
+
     function initZappyPublishedLightboxes(){
       try {
+        ensureLightboxCss();
         // Repair orphaned labels (label has for=toggleId but input is missing)
         var orphanLabels = document.querySelectorAll('label.zappy-lightbox-trigger[for^="zappy-lightbox-toggle-"]');
         for (var i=0;i<orphanLabels.length;i++){
@@ -570,6 +593,17 @@ window.onload = function() {
     if (window.__zappyPublishedZoomInit) return;
     window.__zappyPublishedZoomInit = true;
 
+    function isHeroBgWrapper(wrapper) {
+      var img = wrapper.querySelector('img');
+      if (img && (img.getAttribute('data-hero-bg') === 'true' || img.getAttribute('data-hero-background') === 'true')) return true;
+      var pos = (wrapper.style.position || '').replace(/\s*!important\s*/g, '').trim();
+      var w = (wrapper.style.width || '').replace(/\s*!important\s*/g, '').trim();
+      var h = (wrapper.style.height || '').replace(/\s*!important\s*/g, '').trim();
+      if (pos === 'absolute' && w === '100%' && h === '100%') return true;
+      return false;
+    }
+
+    // SYNC: These helpers must match sharedZoomCropMath.js
     function parseObjPos(op) {
       var x = 50, y = 50;
       try {
@@ -595,7 +629,117 @@ window.onload = function() {
 
       var widthMode = wrapper.getAttribute('data-zappy-zoom-wrapper-width-mode');
       if (widthMode === 'full') return;
+      if (isHeroBgWrapper(wrapper)) return;
 
+      var isMobile = window.innerWidth <= 768;
+      if (isMobile) {
+        var mSrc = img.getAttribute('data-zappy-mobile-src');
+        var mPos = img.getAttribute('data-zappy-mobile-object-position');
+        var mZoomStr = img.getAttribute('data-zappy-mobile-zoom');
+        var mZoom = parseFloat(mZoomStr);
+        var hasMobileOverrides = mPos || mZoomStr;
+        if (mSrc) img.src = mSrc;
+
+        if (hasMobileOverrides) {
+          // User configured mobile zoom/position — apply zoom/crop math
+          // to match what the editor mobile preview shows.
+          wrapper.style.setProperty('width', '100%', 'important');
+          wrapper.style.setProperty('max-width', '100%', 'important');
+          wrapper.style.setProperty('overflow', 'hidden', 'important');
+          wrapper.style.setProperty('position', 'relative', 'important');
+          var _sW = parseFloat(wrapper.getAttribute('data-zappy-zoom-wrapper-width')) || 0;
+          var _sH = parseFloat(wrapper.getAttribute('data-zappy-zoom-wrapper-height')) || 0;
+          if (_sW > 0 && _sH > 0) {
+            wrapper.style.setProperty('aspect-ratio', _sW + '/' + _sH, 'important');
+            wrapper.style.setProperty('height', 'auto', 'important');
+          }
+          var effZoom = (isFinite(mZoom) && mZoom > 0) ? mZoom : zoom;
+          var effPos = mPos || '50% 50%';
+
+          function applyMobileZoomCrop(_img, _wrapper, _effPos, _effZoom) {
+            var rect = _wrapper.getBoundingClientRect();
+            if (!rect || !rect.width || !rect.height) return;
+            var nW = _img.naturalWidth || 0, nH = _img.naturalHeight || 0;
+            if (!(nW > 0 && nH > 0)) return;
+            var imgA = nW / nH;
+            var contA = rect.width / rect.height;
+            var cover = coverPercents(imgA, contA);
+            var wP = 100, hP = 100;
+            if (_effZoom >= 1) { wP = cover.w * _effZoom; hP = cover.h * _effZoom; }
+            else { var t2 = (_effZoom - 0.5) / 0.5; if (!isFinite(t2)) t2 = 0; t2 = Math.max(0, Math.min(1, t2)); wP = 100 + t2 * (cover.w - 100); hP = 100 + t2 * (cover.h - 100); }
+            var p2 = parseObjPos(_effPos);
+            var lP = (100 - wP) * (p2.x / 100);
+            var tP = (100 - hP) * (p2.y / 100);
+            _img.style.setProperty('position', 'absolute', 'important');
+            _img.style.setProperty('left', lP + '%', 'important');
+            _img.style.setProperty('top', tP + '%', 'important');
+            _img.style.setProperty('width', wP + '%', 'important');
+            _img.style.setProperty('height', hP + '%', 'important');
+            _img.style.setProperty('max-width', 'none', 'important');
+            _img.style.setProperty('max-height', 'none', 'important');
+            _img.style.setProperty('display', 'block', 'important');
+            _img.style.setProperty('object-fit', _effZoom < 1 ? 'fill' : 'cover', 'important');
+            _img.style.setProperty('margin', '0', 'important');
+          }
+
+          applyMobileZoomCrop(img, wrapper, effPos, effZoom);
+
+          // If src changed, the image may not be loaded yet (naturalWidth=0).
+          // Re-apply after it loads so the zoom math uses correct dimensions.
+          if (mSrc && !(img.complete && img.naturalWidth > 0)) {
+            img.addEventListener('load', function _onLoad() {
+              img.removeEventListener('load', _onLoad);
+              try { applyMobileZoomCrop(img, wrapper, effPos, effZoom); } catch(e) {}
+            });
+          }
+          return;
+        }
+
+        img.style.setProperty('position', 'relative', 'important');
+        img.style.setProperty('width', '100%', 'important');
+        img.style.setProperty('height', 'auto', 'important');
+        img.style.setProperty('max-width', '100%', 'important');
+        img.style.setProperty('display', 'block', 'important');
+        img.style.setProperty('object-fit', 'cover', 'important');
+        img.style.removeProperty('left');
+        img.style.removeProperty('top');
+        img.style.setProperty('margin', '0', 'important');
+        return;
+      }
+
+      // Desktop zoom === 1: image fills the wrapper exactly — no crop math
+      // needed. Always set 100%/100% to override any stale inline styles
+      // that may have been baked in with incorrect values.
+      if (zoom === 1) {
+        wrapper.style.setProperty('overflow', 'hidden', 'important');
+        wrapper.style.setProperty('position', 'relative', 'important');
+        img.style.setProperty('position', 'absolute', 'important');
+        img.style.setProperty('width', '100%', 'important');
+        img.style.setProperty('height', '100%', 'important');
+        img.style.setProperty('left', '0%', 'important');
+        img.style.setProperty('top', '0%', 'important');
+        img.style.setProperty('max-width', 'none', 'important');
+        img.style.setProperty('max-height', 'none', 'important');
+        img.style.setProperty('object-fit', 'cover', 'important');
+        img.style.setProperty('display', 'block', 'important');
+        img.style.setProperty('margin', '0', 'important');
+        return;
+      }
+
+      // Desktop zoom > 1: if the image already has zoom styles saved from
+      // the editor (position:absolute + percentage-based width), trust
+      // them.  Sites published before the zoom-out fix had wrong values
+      // baked in for zoom < 1 (used cover*zoom instead of the
+      // interpolation formula), so those must always be recalculated.
+      var existingPos = (img.style.position || '').replace(/s*!importants*/g, '').trim();
+      var existingW = (img.style.width || '').replace(/s*!importants*/g, '').trim();
+      if (existingPos === 'absolute' && existingW.indexOf('%') !== -1 && zoom > 1) {
+        wrapper.style.setProperty('overflow', 'hidden', 'important');
+        wrapper.style.setProperty('position', 'relative', 'important');
+        return;
+      }
+
+      // Image lacks saved zoom styles — calculate from scratch
       var rect = wrapper.getBoundingClientRect();
       if (!rect || !rect.width || !rect.height) return;
 
@@ -618,33 +762,101 @@ window.onload = function() {
         hPct = 100 + t * (cover.h - 100);
       }
 
-      var op = img.style.objectPosition || window.getComputedStyle(img).objectPosition || '50% 50%';
+      var op = img.getAttribute('data-zappy-object-position') || img.style.objectPosition || window.getComputedStyle(img).objectPosition || '50% 50%';
       var pos = parseObjPos(op);
       var leftPct = (100 - wPct) * (pos.x / 100);
       var topPct = (100 - hPct) * (pos.y / 100);
 
-      var isMobile = window.innerWidth <= 768;
-      if (isMobile) {
+      img.style.setProperty('position', 'absolute', 'important');
+      img.style.setProperty('left', leftPct + '%', 'important');
+      img.style.setProperty('top', topPct + '%', 'important');
+      img.style.setProperty('width', wPct + '%', 'important');
+      img.style.setProperty('height', hPct + '%', 'important');
+      img.style.setProperty('max-width', 'none', 'important');
+      img.style.setProperty('max-height', 'none', 'important');
+      img.style.setProperty('display', 'block', 'important');
+      img.style.setProperty('object-fit', zoom < 1 ? 'fill' : 'cover', 'important');
+      img.style.setProperty('margin', '0', 'important');
+    }
+
+    function fixOrphanedZoomImages() {
+      if (window.innerWidth > 768) return;
+      var zoomImgs = document.querySelectorAll('img[data-zappy-zoom]');
+      for (var j = 0; j < zoomImgs.length; j++) {
+        var img = zoomImgs[j];
+        if (img.closest && img.closest('[data-zappy-zoom-wrapper="true"]')) continue;
         img.style.setProperty('position', 'relative', 'important');
         img.style.setProperty('width', '100%', 'important');
         img.style.setProperty('height', 'auto', 'important');
         img.style.setProperty('max-width', '100%', 'important');
-        img.style.setProperty('display', 'block', 'important');
+        img.style.setProperty('max-height', '300px', 'important');
         img.style.setProperty('object-fit', 'cover', 'important');
         img.style.removeProperty('left');
         img.style.removeProperty('top');
-      } else {
-        img.style.setProperty('position', 'absolute', 'important');
-        img.style.setProperty('left', leftPct + '%', 'important');
-        img.style.setProperty('top', topPct + '%', 'important');
-        img.style.setProperty('width', wPct + '%', 'important');
-        img.style.setProperty('height', hPct + '%', 'important');
+      }
+    }
+
+    function restoreWrapperDimensions(wrapper) {
+      var widthMode = wrapper.getAttribute('data-zappy-zoom-wrapper-width-mode') || 'px';
+      if (widthMode === 'full' || widthMode === 'grid-responsive') return;
+      if (isHeroBgWrapper(wrapper)) return;
+
+      var storedW = wrapper.getAttribute('data-zappy-zoom-wrapper-width');
+      var storedH = wrapper.getAttribute('data-zappy-zoom-wrapper-height');
+      if (!storedW && !storedH) return;
+
+      if (widthMode === 'px' && storedW) {
+        var curW = (wrapper.style.width || '').replace(/s*!importants*/g, '').trim();
+        var storedWNorm = storedW.replace(/s*!importants*/g, '').trim();
+        if (!curW || curW === '100%' || curW.indexOf('%') !== -1 || curW !== storedWNorm) {
+          wrapper.style.setProperty('width', storedW, 'important');
+          wrapper.style.setProperty('max-width', '100%', 'important');
+        }
+      }
+      if (storedH) {
+        var curH = (wrapper.style.height || '').replace(/s*!importants*/g, '').trim();
+        var storedHNorm = storedH.replace(/s*!importants*/g, '').trim();
+        if (!curH || curH === 'auto' || curH === '100%' || curH.indexOf('%') !== -1 || curH !== storedHNorm) {
+          wrapper.style.setProperty('height', storedH, 'important');
+        }
+      }
+      wrapper.style.setProperty('overflow', 'hidden', 'important');
+      wrapper.style.setProperty('position', 'relative', 'important');
+    }
+
+    function fixHeroBgWrapperStyles(wrapper) {
+      if (!isHeroBgWrapper(wrapper)) return;
+      wrapper.style.setProperty('position', 'absolute', 'important');
+      wrapper.style.setProperty('top', '0', 'important');
+      wrapper.style.setProperty('left', '0', 'important');
+      wrapper.style.setProperty('width', '100%', 'important');
+      wrapper.style.setProperty('height', '100%', 'important');
+      wrapper.style.setProperty('max-width', 'none', 'important');
+      wrapper.style.setProperty('overflow', 'hidden', 'important');
+      wrapper.setAttribute('data-zappy-zoom-wrapper-width-mode', 'full');
+      var img = wrapper.querySelector('img');
+      if (img) {
+        img.style.setProperty('width', '100%', 'important');
+        img.style.setProperty('height', '100%', 'important');
+        img.style.setProperty('object-fit', 'cover', 'important');
+        img.style.setProperty('position', 'relative', 'important');
+        img.style.setProperty('top', '0', 'important');
+        img.style.setProperty('left', '0', 'important');
         img.style.setProperty('max-width', 'none', 'important');
         img.style.setProperty('max-height', 'none', 'important');
         img.style.setProperty('display', 'block', 'important');
-        img.style.setProperty('object-fit', zoom < 1 ? 'fill' : 'cover', 'important');
+        if (window.innerWidth <= 768) {
+          var mSrc = img.getAttribute('data-zappy-mobile-src');
+          var mPos = img.getAttribute('data-zappy-mobile-object-position');
+          var mZoom = parseFloat(img.getAttribute('data-zappy-mobile-zoom'));
+          if (mSrc) img.src = mSrc;
+          if (mPos) img.style.setProperty('object-position', mPos, 'important');
+          if (mZoom > 1) {
+            img.style.setProperty('transform', 'scale(' + mZoom + ')', 'important');
+            img.style.setProperty('transform-origin', mPos || '50% 50%', 'important');
+          }
+        }
       }
-      img.style.setProperty('margin', '0', 'important');
     }
 
     function initZoomWrappers() {
@@ -654,6 +866,8 @@ window.onload = function() {
           var img = wrapper.querySelector('img');
           if (!img) return;
           if (wrapper.closest && wrapper.closest('.zappy-carousel-js-init, .zappy-carousel-active')) return;
+          fixHeroBgWrapperStyles(wrapper);
+          if (window.innerWidth > 768) restoreWrapperDimensions(wrapper);
           if (img.complete && img.naturalWidth > 0) {
             setTimeout(function() { applyZoom(wrapper, img); }, 0);
           } else {
@@ -664,6 +878,7 @@ window.onload = function() {
           }
         })(wrappers[i]);
       }
+      fixOrphanedZoomImages();
     }
 
     if (document.readyState === 'loading') {
@@ -754,10 +969,44 @@ window.onload = function() {
       });
     }
 
+    function initPhoneButton() {
+      var phoneBtn = document.querySelector('.phone-header-btn');
+      if (!phoneBtn || phoneBtn.__zappyPhoneBound) return;
+      phoneBtn.__zappyPhoneBound = true;
+
+      phoneBtn.addEventListener('click', function() {
+        var phoneNumber = phoneBtn.getAttribute('data-phone') || null;
+
+        if (!phoneNumber) {
+          var telLinks = document.querySelectorAll('a[href^="tel:"]');
+          if (telLinks.length > 0) {
+            phoneNumber = telLinks[0].getAttribute('href').replace('tel:', '');
+          }
+        }
+
+        if (!phoneNumber) {
+          var allLinks = document.querySelectorAll('a[href]');
+          for (var i = 0; i < allLinks.length; i++) {
+            var h = allLinks[i].getAttribute('href') || '';
+            var cleaned = h.replace(/[-\s()]/g, '');
+            if (/^(\+?\d{9,15}|0\d{8,9})$/.test(cleaned)) {
+              phoneNumber = cleaned;
+              break;
+            }
+          }
+        }
+
+        if (phoneNumber && phoneNumber.indexOf('[') === -1) {
+          window.location.href = 'tel:' + phoneNumber;
+        }
+      });
+    }
+
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initMobileToggle, { once: true });
+      document.addEventListener('DOMContentLoaded', function() { initMobileToggle(); initPhoneButton(); }, { once: true });
     } else {
       initMobileToggle();
+      initPhoneButton();
     }
   } catch (e) {}
 })();
@@ -770,8 +1019,9 @@ window.onload = function() {
     if (window.__zappyFaqToggleInit) return;
     window.__zappyFaqToggleInit = true;
 
+    var answerSel = '[class*="faq-answer"], [class*="faq-content"], [class*="faq-body"], .accordion-content, .accordion-body';
+
     function initFaqToggle() {
-      // Match both exact (.faq-item) and page-prefixed (e.g. .home-faq-item) classes
       var items = document.querySelectorAll('[class*="faq-item"], .accordion-item');
       if (!items.length) return;
 
@@ -782,11 +1032,12 @@ window.onload = function() {
         if (!question) return;
         if (question.__zappyFaqBound) return;
         question.__zappyFaqBound = true;
+        question.style.cursor = 'pointer';
 
         question.addEventListener('click', function(e) {
           e.preventDefault();
+          e.stopPropagation();
 
-          // Close sibling items in the same accordion group
           var parent = item.parentElement;
           if (parent) {
             var siblings = parent.querySelectorAll('[class*="faq-item"], .accordion-item');
@@ -795,14 +1046,59 @@ window.onload = function() {
                 sib.classList.remove('active');
                 var sibQ = sib.querySelector('[class*="faq-question"], [class*="faq-header"], .accordion-header');
                 if (sibQ) sibQ.setAttribute('aria-expanded', 'false');
+                var sibA = sib.querySelector(answerSel);
+                if (sibA) {
+                  sibA.style.maxHeight = '0';
+                  sibA.style.overflow = 'hidden';
+                  sibA.style.opacity = '0';
+                  sibA.style.paddingTop = '0';
+                  sibA.style.paddingBottom = '0';
+                }
               }
             });
           }
 
-          // Toggle current item
           var isActive = item.classList.toggle('active');
           question.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+
+          var answer = item.querySelector(answerSel);
+          if (answer) {
+            answer.style.transition = 'max-height 0.35s ease, opacity 0.25s ease, padding 0.25s ease';
+            if (isActive) {
+              answer.style.display = '';
+              answer.style.maxHeight = answer.scrollHeight + 'px';
+              answer.style.overflow = 'hidden';
+              answer.style.opacity = '1';
+              answer.style.paddingTop = '';
+              answer.style.paddingBottom = '';
+            } else {
+              answer.style.maxHeight = '0';
+              answer.style.overflow = 'hidden';
+              answer.style.opacity = '0';
+              answer.style.paddingTop = '0';
+              answer.style.paddingBottom = '0';
+            }
+          }
+
+          var chevron = question.querySelector('[class*="chevron"], [class*="icon"], svg');
+          if (chevron) {
+            chevron.style.transform = isActive ? 'rotate(180deg)' : 'rotate(0deg)';
+            chevron.style.transition = 'transform 0.3s ease';
+          }
         });
+      });
+
+      items.forEach(function(item) {
+        if (item.classList.contains('active')) return;
+        var answer = item.querySelector(answerSel);
+        if (answer) {
+          answer.style.maxHeight = '0';
+          answer.style.overflow = 'hidden';
+          answer.style.opacity = '0';
+          answer.style.paddingTop = '0';
+          answer.style.paddingBottom = '0';
+          answer.style.transition = 'max-height 0.35s ease, opacity 0.25s ease, padding 0.25s ease';
+        }
       });
     }
 
@@ -816,6 +1112,200 @@ window.onload = function() {
 /* END ZAPPY_FAQ_ACCORDION_TOGGLE */
 
 
+/* ZAPPY_NAV_SCROLL_PADDING */
+(function(){
+  try {
+    if (window.__zappyNavScrollPaddingInit) return;
+    window.__zappyNavScrollPaddingInit = true;
+    function updateScrollPadding() {
+      var nav = document.querySelector('nav.navbar') || document.querySelector('nav') || document.querySelector('header');
+      if (!nav) return;
+      var s = window.getComputedStyle(nav);
+      if (s.position !== 'fixed' && s.position !== 'sticky') return;
+      var h = nav.offsetHeight;
+      if (h > 0) document.documentElement.style.scrollPaddingTop = h + 'px';
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', updateScrollPadding, { once: true });
+    } else {
+      updateScrollPadding();
+    }
+    window.addEventListener('resize', updateScrollPadding, { passive: true });
+  } catch (e) {}
+})();
+/* END ZAPPY_NAV_SCROLL_PADDING */
+
+
+/* ZAPPY_CONTACT_FORM_PREVENT_DEFAULT */
+(function(){
+  try {
+    var _kw=['contact','booking','inquiry','enquiry','register','signup','sign-up','order','request','apply'];
+    function isContactForm(form) {
+      var cls=(form.className||'').toLowerCase();
+      var id=(form.id||'').toLowerCase();
+      var act=(form.getAttribute('action')||'').toLowerCase();
+      if(_kw.some(function(k){return cls.indexOf(k)!==-1||id.indexOf(k)!==-1||act.indexOf(k)!==-1;})) return true;
+      var sec=form.closest&&form.closest('section');
+      if(sec){
+        var sc=(sec.className||'').toLowerCase();
+        var si=(sec.id||'').toLowerCase();
+        if(_kw.some(function(k){return sc.indexOf(k)!==-1||si.indexOf(k)!==-1;})) return true;
+        if(sc.indexOf('form-section')!==-1||sc.indexOf('form_section')!==-1) return true;
+      }
+      if(window.zappyContactFormLoaded){
+        var inputs=form.querySelectorAll('input,textarea,select');
+        var hasEmail=false,hasPassword=false,visibleCount=0;
+        for(var i=0;i<inputs.length;i++){
+          var inp=inputs[i];
+          var t=(inp.type||'').toLowerCase();
+          var n=(inp.name||'').toLowerCase();
+          if(t==='hidden'||t==='submit'||t==='button'||t==='reset') continue;
+          visibleCount++;
+          if(t==='email'||n.indexOf('email')!==-1||n.indexOf('mail')!==-1) hasEmail=true;
+          if(t==='password') hasPassword=true;
+        }
+        if(hasEmail&&visibleCount>=2&&!hasPassword) return true;
+      }
+      return false;
+    }
+
+    function showFormFeedback(form, msg, type) {
+      var old = form.querySelector('.zappy-form-feedback');
+      if (old) old.remove();
+
+      var bg = type==='success'?'#d4edda':type==='error'?'#f8d7da':'#d1ecf1';
+      var fg = type==='success'?'#155724':type==='error'?'#721c24':'#0c5460';
+      var bd = type==='success'?'#c3e6cb':type==='error'?'#f5c6cb':'#bee5eb';
+      var ic = type==='success'?'\u2705':type==='error'?'\u274C':'\u2139\uFE0F';
+
+      var el = document.createElement('div');
+      el.className = 'zappy-form-feedback';
+      el.setAttribute('role', 'alert');
+      el.style.cssText = 'padding:14px 18px;border-radius:8px;margin:12px 0 0;font-size:14px;line-height:1.5;background:'+bg+';color:'+fg+';border:1px solid '+bd+';text-align:center;font-family:inherit;';
+      el.innerHTML = '<span style="margin-inline-end:6px">'+ic+'</span>'+msg;
+
+      if (type === 'success') {
+        form.reset();
+        var formChildren = form.children;
+        for (var i = 0; i < formChildren.length; i++) {
+          if (formChildren[i] !== el) formChildren[i].style.display = 'none';
+        }
+        form.appendChild(el);
+        el.style.cssText += 'padding:32px 24px;font-size:16px;';
+      } else {
+        var btn = form.querySelector('button[type="submit"],input[type="submit"]');
+        if (btn) btn.parentNode.insertBefore(el, btn.nextSibling);
+        else form.appendChild(el);
+        setTimeout(function(){ if(el.parentElement) el.remove(); }, 8000);
+      }
+    }
+
+    var _coreNameFields=['name','firstName','first_name','fname','lastName','last_name','lname'];
+    var _coreEmailFields=['email','emailAddress','mail','e-mail'];
+    var _corePhoneFields=['phone','tel','telephone','mobile','cellphone'];
+    var _coreMsgFields=['message','msg','comments','comment','description','details','notes','body','text','inquiry'];
+    var _coreSubjectFields=['subject','topic','regarding','re'];
+    var _allCoreFields=[].concat(_coreNameFields,_coreEmailFields,_corePhoneFields,_coreMsgFields,_coreSubjectFields);
+
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      if (!form || form.tagName !== 'FORM' || !isContactForm(form)) return;
+      e.preventDefault();
+      e.stopPropagation();
+
+      var origSubmit = form.submit;
+      form.submit = function(){ };
+
+      if (form.__zappySubmitting) return;
+      form.__zappySubmitting = true;
+
+      var oldFeedback = form.querySelector('.zappy-form-feedback');
+      if (oldFeedback) oldFeedback.remove();
+
+      var btn = form.querySelector('button[type="submit"],input[type="submit"]');
+      var origText = btn ? (btn.value || btn.textContent) : '';
+      if (btn) {
+        if (btn.tagName === 'INPUT') btn.value = 'Sending...';
+        else btn.textContent = 'Sending...';
+        btn.disabled = true;
+      }
+
+      var fd = new FormData(form);
+      var data = {};
+      for(var pair of fd.entries()){
+        if(data[pair[0]]!==undefined){
+          if(Array.isArray(data[pair[0]])) data[pair[0]].push(pair[1]);
+          else data[pair[0]]=[data[pair[0]],pair[1]];
+        } else data[pair[0]]=pair[1];
+      }
+
+      var resolvedName=(data.name||'').trim()
+        ||[data.firstName||data.first_name||data.fname||'',data.lastName||data.last_name||data.lname||''].filter(Boolean).join(' ').trim()
+        ||(data.email||data.emailAddress||data.mail||'').trim()
+        ||'Anonymous';
+      var resolvedEmail=(data.email||data.emailAddress||data.mail||data['e-mail']||'').trim();
+      var resolvedPhone=data.phone||data.tel||data.telephone||data.mobile||data.cellphone||null;
+      var resolvedSubject=data.subject||data.topic||data.regarding||data.re||'Contact Form Submission';
+      var resolvedMsg=(data.message||data.msg||data.comments||data.comment||data.description||data.details||data.notes||data.body||data.text||data.inquiry||'').trim();
+      if(!resolvedMsg){
+        var _extra=Object.entries(data).filter(function(e){return _allCoreFields.indexOf(e[0])===-1;});
+        if(_extra.length>0) resolvedMsg=_extra.map(function(e){var l=e[0].replace(/([A-Z])/g,' $1').replace(/[_-]/g,' ').trim();var v=Array.isArray(e[1])?e[1].join(', '):e[1];return l+': '+v;}).join('\n');
+        else resolvedMsg='Form submission from '+window.location.pathname;
+      }
+
+      var extraFields={};
+      Object.keys(data).forEach(function(k){if(_allCoreFields.indexOf(k)===-1&&data[k]!==''&&data[k]!=null) extraFields[k]=data[k];});
+
+      var currentPath = window.location.pathname;
+      try { var pg=new URLSearchParams(window.location.search).get('page'); if(pg) currentPath=pg; } catch(x){}
+
+      var wid = 'fa1cb323-07af-422a-8b17-cefe9dd40f4c';
+
+      var apiBase = (window.ZAPPY_API_BASE || 'https://api.zappy5.com').replace(/\/$/,'');
+      apiBase = apiBase + '/api/email/contact-form';
+
+      var payload={
+        websiteId: wid,
+        name: resolvedName,
+        email: resolvedEmail,
+        subject: resolvedSubject,
+        message: resolvedMsg,
+        phone: resolvedPhone,
+        currentPagePath: currentPath
+      };
+      if(Object.keys(extraFields).length>0) payload.extraFields=extraFields;
+
+      fetch(apiBase, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function(r){ return r.json(); }).then(function(result){
+        if (result.success) {
+          if (result.thankYouPagePath && result.ticketNumber) {
+            window.location.href = result.thankYouPagePath + '?ticket=' + encodeURIComponent(result.ticketNumber);
+            return;
+          }
+          showFormFeedback(form, result.message || 'Thank you! We will get back to you soon.', 'success');
+        } else {
+          showFormFeedback(form, result.error || 'Failed to send. Please try again.', 'error');
+        }
+      }).catch(function(){
+        showFormFeedback(form, 'Unable to send message right now. Please try again later.', 'error');
+      }).finally(function(){
+        form.__zappySubmitting = false;
+        form.submit = origSubmit;
+        if (btn) {
+          if (btn.tagName === 'INPUT') btn.value = origText;
+          else btn.textContent = origText;
+          btn.disabled = false;
+        }
+      });
+    }, true);
+  } catch (e) {}
+})();
+/* END ZAPPY_CONTACT_FORM_PREVENT_DEFAULT */
+
+
 /* ZAPPY_PUBLISHED_GRID_CENTERING */
 (function(){
   try {
@@ -827,8 +1317,19 @@ window.onload = function() {
       for (var g = 0; g < grids.length; g++) {
         try {
           var container = grids[g];
-          // Skip if already processed
-          if (container.getAttribute('data-zappy-grid-centered') === 'true') continue;
+
+          // Clear previous centering so we can recalculate (e.g. after i18n direction change)
+          if (container.getAttribute('data-zappy-grid-centered') === 'true') {
+            var prevItems = Array.from(container.children);
+            for (var p = 0; p < prevItems.length; p++) {
+              if (prevItems[p].getAttribute && prevItems[p].getAttribute('data-zappy-gc') === '1') {
+                prevItems[p].style.transform = prevItems[p].getAttribute('data-zappy-gc-orig') || '';
+                prevItems[p].removeAttribute('data-zappy-gc');
+                prevItems[p].removeAttribute('data-zappy-gc-orig');
+              }
+            }
+            container.removeAttribute('data-zappy-grid-centered');
+          }
 
           var items = [];
           for (var c = 0; c < container.children.length; c++) {
@@ -836,6 +1337,10 @@ window.onload = function() {
             if (!ch || !ch.tagName) continue;
             var tag = ch.tagName.toLowerCase();
             if (tag === 'script' || tag === 'style') continue;
+            if (ch.getAttribute('aria-hidden') === 'true') continue;
+            if (ch.getAttribute('data-zappy-internal') === 'true') continue;
+            var pos = window.getComputedStyle(ch).position;
+            if (pos === 'absolute' || pos === 'fixed') continue;
             items.push(ch);
           }
           var totalItems = items.length;
@@ -843,6 +1348,8 @@ window.onload = function() {
 
           var cs = window.getComputedStyle(container);
           if (cs.display !== 'grid') continue;
+          var gta = (cs.gridTemplateAreas || '').trim();
+          if (gta && gta !== 'none') continue;
           var gtc = (cs.gridTemplateColumns || '').trim();
           if (!gtc || gtc === 'none') continue;
           var colWidths = gtc.split(' ').filter(function(v) { return v && parseFloat(v) > 0; });
@@ -859,19 +1366,13 @@ window.onload = function() {
           var missingCols = colCount - itemsInLastRow;
           var offset = missingCols * (colWidth + gap) / 2;
 
-          // Detect RTL
+          // Detect RTL — use the computed direction which already accounts for
+          // CSS cascade, html[dir], and inheritance. Do NOT walk up checking inline
+          // styles because multi-language sites may have stale direction:rtl on
+          // parent elements from the primary language while serving an LTR page.
           var dir = cs.direction || 'ltr';
-          var el = container;
-          while (el && dir === 'ltr') {
-            if (el.getAttribute && el.getAttribute('dir')) { dir = el.getAttribute('dir'); break; }
-            if (el.style && el.style.direction) { dir = el.style.direction; break; }
-            el = el.parentElement;
-          }
           var translateValue = dir === 'rtl' ? -offset : offset;
 
-          // Apply transform to last-row items
-          // Temporarily disable CSS transitions to prevent visible animation
-          // Preserve any existing transforms (e.g., scale, rotate) by composing
           var startIndex = totalItems - itemsInLastRow;
           var savedTransitions = [];
           for (var i = startIndex; i < totalItems; i++) {
@@ -879,31 +1380,200 @@ window.onload = function() {
             savedTransitions.push(item.style.transition);
             item.style.transition = 'none';
             var existingTransform = item.style.transform || '';
+            item.setAttribute('data-zappy-gc-orig', existingTransform);
             var newTransform = existingTransform
               ? existingTransform + ' translateX(' + translateValue + 'px)'
               : 'translateX(' + translateValue + 'px)';
             item.style.transform = newTransform;
+            item.setAttribute('data-zappy-gc', '1');
           }
 
-          // Force synchronous reflow so the transform is applied instantly
           void container.offsetHeight;
 
-          // Restore original transitions
           for (var j = startIndex; j < totalItems; j++) {
             items[j].style.transition = savedTransitions[j - startIndex];
           }
 
-          // Mark grid as processed so we don't double-apply
           container.setAttribute('data-zappy-grid-centered', 'true');
         } catch(e) {}
       }
     }
 
-    // Run once after DOM is fully loaded (fonts, images, layout complete)
     if (document.readyState === 'complete') {
       centerPartialGridRows();
     } else {
       window.addEventListener('load', centerPartialGridRows);
     }
+
+    // Re-center when i18n script changes the page direction
+    try {
+      var dirObs = new MutationObserver(function() { centerPartialGridRows(); });
+      dirObs.observe(document.documentElement, { attributes: true, attributeFilter: ['dir'] });
+    } catch(e) {}
   } catch(e) {}
+})();
+
+
+/* ZAPPY_CONTENT_ALIGNMENT_RUNTIME */
+(function(){
+  try {
+    if (window.__zappyContentAlignInit) return;
+    window.__zappyContentAlignInit = true;
+
+    var vShiftMap = { top: -0.5, upper: -0.25, center: 0, lower: 0.25, bottom: 0.5 };
+    var hShiftMap = { left: -0.5, 'mid-left': -0.25, center: 0, 'mid-right': 0.25, right: 0.5 };
+
+    function restoreContentAlignments() {
+      var sections = document.querySelectorAll('[data-zappy-content-align]');
+      for (var i = 0; i < sections.length; i++) {
+        try { applyAlignment(sections[i]); } catch(e) {}
+      }
+    }
+
+    function applyAlignment(section) {
+      var target = section.querySelector('[data-zappy-align-target]');
+      if (!target) return;
+
+      var align = section.getAttribute('data-zappy-content-align') || 'center-center';
+      var idx = align.indexOf('-');
+      if (idx === -1) return;
+      var vAlign = align.substring(0, idx) || 'center';
+      var hAlign = align.substring(idx + 1) || 'center';
+
+      if (!section.id) {
+        section.id = 'zappy-section-' + Date.now() + '-' + Math.random().toString(36).substr(2, 6);
+      }
+      var sel = '#' + section.id;
+
+      var old = section.querySelector('style[data-zappy-align-style]');
+      if (old) old.remove();
+
+      var ts = window.getComputedStyle(target);
+      var isFlex = (ts.display === 'flex' || ts.display === 'inline-flex');
+      var isColumn = (ts.flexDirection === 'column' || ts.flexDirection === 'column-reverse');
+
+      var sectionRect = section.getBoundingClientRect();
+      var sW = sectionRect.width || section.offsetWidth || 0;
+      var sH = sectionRect.height || section.offsetHeight || 0;
+
+      var orig = target.style.cssText;
+      target.style.setProperty('width', 'fit-content', 'important');
+      target.style.setProperty('height', 'auto', 'important');
+      target.style.setProperty('min-height', '0', 'important');
+      target.style.setProperty('max-height', 'none', 'important');
+      target.style.setProperty('align-self', 'flex-start', 'important');
+      target.style.setProperty('flex', 'none', 'important');
+      var tRect = target.getBoundingClientRect();
+      var tW = tRect.width || 0;
+      var tH = tRect.height || 0;
+      target.style.cssText = orig;
+
+      var freeH = Math.max(0, sW - tW);
+      var freeV = Math.max(0, sH - tH);
+      var hPx = Math.round((hShiftMap[hAlign] || 0) * freeH);
+      var vPx = Math.round((vShiftMap[vAlign] || 0) * freeV);
+
+      var t = [];
+      t.push('margin:auto!important');
+      if (hPx !== 0 || vPx !== 0) {
+        t.push('transform:translate(' + hPx + 'px,' + vPx + 'px)!important');
+      }
+      if (isFlex) {
+        t.push('align-items:center!important');
+        t.push('justify-content:center!important');
+      } else {
+        t.push('display:flex!important');
+        t.push('flex-direction:column!important');
+        t.push('align-items:center!important');
+      }
+
+      var c = ['justify-content:center!important'];
+      if (!isFlex && hAlign !== 'center') {
+        c.push('min-width:33.33%!important');
+        c.push('text-align:start!important');
+      }
+
+      var css = '';
+      if (hPx !== 0 || vPx !== 0) css += sel + '{overflow:hidden!important}';
+      css += sel + '>[data-zappy-align-target]{' + t.join(';') + '}';
+      css += sel + '>[data-zappy-align-target]>*{' + c.join(';') + '}';
+      css += '@media(max-width:768px){' +
+        sel + '>[data-zappy-align-target]{align-items:center!important;margin-left:auto!important;margin-right:auto!important;' +
+        (vPx !== 0 ? 'transform:translateY(' + vPx + 'px)!important' : 'transform:none!important') +
+        '}' + sel + '>[data-zappy-align-target]>*{margin-left:auto!important;margin-right:auto!important}}';
+
+      var s = document.createElement('style');
+      s.setAttribute('data-zappy-align-style', 'true');
+      s.textContent = css;
+      section.insertBefore(s, section.firstChild);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', restoreContentAlignments);
+    } else {
+      restoreContentAlignments();
+    }
+
+    var _timer = null;
+    window.addEventListener('resize', function() {
+      clearTimeout(_timer);
+      _timer = setTimeout(restoreContentAlignments, 200);
+    });
+    window.addEventListener('orientationchange', function() {
+      clearTimeout(_timer);
+      _timer = setTimeout(restoreContentAlignments, 200);
+    });
+  } catch(e) {}
+})();
+
+
+/* ZAPPY_SECTION_ID_FROM_CLASS */
+(function(){
+  function assignIds(){
+    document.querySelectorAll('section').forEach(function(s){
+      if(s.id)return;
+      var cls=(s.className||'').split(/\s+/)[0];
+      if(cls && !document.getElementById(cls)){s.id=cls;}
+    });
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',assignIds,{once:true});}
+  else{assignIds();}
+})();
+/* END ZAPPY_SECTION_ID_FROM_CLASS */
+
+
+/* ZAPPY_EMPTY_SUBMENU_HIDDEN */
+(function(){
+  function markEmpty(){
+    document.querySelectorAll('.sub-menu, .dropdown-menu').forEach(function(ul){
+      var hasVisible=false;
+      for(var i=0;i<ul.children.length;i++){
+        if(window.getComputedStyle(ul.children[i]).display!=='none'){hasVisible=true;break;}
+      }
+      ul.classList.toggle('zappy-empty-submenu',!hasVisible);
+    });
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',markEmpty,{once:true});}
+  else{markEmpty();}
+})();
+/* END ZAPPY_EMPTY_SUBMENU_HIDDEN */
+
+
+/* ZAPPY_INTERNAL_LINKS_NO_NEW_TAB */
+(function(){
+  try {
+    function fixLinks(){
+      var docRe=/\.(pdf|doc|docx|xls|xlsx|ppt|pptx|txt|csv|rtf|odt|ods|odp)(\?|$)/i;
+      document.querySelectorAll('a[target="_blank"]').forEach(function(a){
+        var h=a.getAttribute('href');
+        if(!h)return;
+        if(h.indexOf('://')!==-1||h.indexOf('mailto:')===0||h.indexOf('tel:')===0)return;
+        if(docRe.test(h))return;
+        a.removeAttribute('target');
+        a.removeAttribute('rel');
+      });
+    }
+    if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fixLinks)}
+    else{fixLinks()}
+  }catch(e){}
 })();
