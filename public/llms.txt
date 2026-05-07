@@ -1,4 +1,6 @@
-# Business — Generative Engine Optimization Map
+# אבי בן דוד, עו״ד — Generative Engine Optimization Map
+
+> A שירותים משפטיים - ייצוג נכי צה"ל business.
 
 ---
 
@@ -79,12 +81,42 @@ Information about WCAG compliance and accessibility features.
 
 ---
 
-# Business Context (for LLM understanding)
+## How to Contact Us
 
-## About Business
+- Email: Avibd@bendavidlaw.co.il
+- Phone: 972544544546
+- Phone (tel): tel:972544544546
+- Address: שד' ההסתדרות 66, חיפה, ישראל
+
+### Contact form
+- URL: https://bendavidlaw.co.il/contact
+- Endpoint: https://bendavidlaw.co.il/api/email/contact-form
+- Method: POST
+- Content-Type: application/json
+- Fields:
+  - `name` (text, required)
+  - `email` (email, required)
+  - `phone` (tel, required)
+  - `subject` (select)
+  - `message` (textarea)
+
 ---
 
-# Additional Resources
+# Business Context (for LLM understanding)
 
-- **Sitemap**: https://bendavidlaw.co.il/sitemap.xml
-- **Robots.txt**: https://bendavidlaw.co.il/robots.txt
+## About אבי בן דוד, עו״ד
+אבי בן דוד, עו״ד is a business in the שירותים משפטיים - ייצוג נכי צה"ל industry.
+
+## Target Audience
+1. חיילים שנלחמו בחרבות ברזל בני 22-35, 2. חיילים/אנשי קבע שנפצעו בצבא, 3. הורים לחיילים שנפצעו
+
+## Industry
+שירותים משפטיים - ייצוג נכי צה"ל
+
+---
+
+# Machine-readable feeds
+
+- Sitemap (XML): https://bendavidlaw.co.il/sitemap.xml
+- Robots: https://bendavidlaw.co.il/robots.txt
+- Flattened page text (for LLMs): https://bendavidlaw.co.il/llms-full.txt
