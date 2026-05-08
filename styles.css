@@ -2616,7 +2616,7 @@ form.contact-form .contact-input, form.contact-form .contact-textarea { width: 1
     max-width: none !important;
     left: 0 !important;
     right: 0 !important;
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
     box-sizing: border-box !important;
   }
   #navMenu,
