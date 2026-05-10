@@ -31,12 +31,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bendavidlaw.co.il/blog/rehabilitation-guide</loc>
-    <lastmod>2026-05-10</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://bendavidlaw.co.il/blog/ptsd-claims</loc>
     <lastmod>2026-05-10</lastmod>
     <changefreq>daily</changefreq>
@@ -68,6 +62,12 @@
   </url>
   <url>
     <loc>https://bendavidlaw.co.il/blog/family-rights</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bendavidlaw.co.il/blog/rehabilitation-guide</loc>
     <lastmod>2026-05-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
