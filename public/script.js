@@ -2049,8 +2049,19 @@ window.onload = function() {
     }
     
     function _isOOS(v) {
-      return v.stock_status === 'out_of_stock' ||
-        (v.stock_quantity !== null && v.stock_quantity !== undefined && v.stock_quantity <= 0);
+      if (!v) return true;
+      if (v.stock_status === 'out_of_stock') return true;
+      var i = v.inventory_quantity != null ? v.inventory_quantity : v.inventoryQuantity;
+      if (i != null && i !== '') {
+        var n = parseFloat(i);
+        if (isFinite(n)) return n <= 0;
+      }
+      var s = v.stock_quantity;
+      if (s != null && s !== '') {
+        var m = parseFloat(s);
+        if (isFinite(m)) return m <= 0;
+      }
+      return false;
     }
     
     function _updateVisuals() {
@@ -2069,9 +2080,11 @@ window.onload = function() {
         btn.disabled = false;
         if (matching.length === 0) {
           btn.classList.add('disabled');
+          btn.disabled = true;
         } else if (matching.every(function(v) { return _isOOS(v); })) {
           btn.classList.add('disabled');
           btn.classList.add('out-of-stock');
+          btn.disabled = true;
         }
       });
     }
@@ -2221,6 +2234,7 @@ window.onload = function() {
       var ak = btn.getAttribute('data-attr');
       var av = btn.getAttribute('data-value');
       if (!ak || !av) return;
+      if (btn.disabled || btn.classList.contains('disabled')) return;
       
       // If already selected, do nothing (no manual deselect)
       if (selectedAttributes[ak] === av) {
