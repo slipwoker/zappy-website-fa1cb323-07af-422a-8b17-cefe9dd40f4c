@@ -1226,6 +1226,334 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
   </div>
+</section><section style="position: relative; width: 100%; max-width: 100%; box-sizing: border-box; min-height: 100vh; overflow: hidden; margin: 0; padding: 0;" data-zappy-section="true" class="section" id="section-dup-1778754311227">
+  <style>
+    @keyframes heroFadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes floatIcon {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+    
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(107, 142, 111, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(107, 142, 111, 0.6); }
+    }
+
+    .hero-redesign-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    
+    .hero-bg-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(44, 62, 80, 0.85) 0%, rgba(107, 142, 111, 0.75) 100%);
+      z-index: 1;
+    }
+    
+    .hero-diagonal-accent {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 0%, rgba(212, 165, 116, 0.2) 100%);
+      clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+      z-index: 2;
+      animation: slideInRight 1.2s ease-out;
+    }
+    
+    @keyframes slideInRight {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+    
+    .hero-content-wrapper {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      width: 90%;
+      margin: 0 auto;
+      padding: 120px 20px 60px;
+      text-align: center;
+      animation: heroFadeIn 1s ease-out 0.3s both;
+    }
+    
+    .hero-badge {
+      display: inline-block;
+      background: rgba(212, 165, 116, 0.9);
+      color: var(--text-light);
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      animation: heroFadeIn 1s ease-out 0.5s both;
+    }
+    
+    .hero-main-title {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 900;
+      color: var(--text-light);
+      line-height: 1.1;
+      margin: 0 0 30px 0;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      animation: heroFadeIn 1s ease-out 0.7s both;
+    }
+    
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: var(--text-light);
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto 50px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      animation: heroFadeIn 1s ease-out 0.9s both;
+    }
+    
+    .hero-cta-group {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: heroFadeIn 1s ease-out 1.1s both;
+      margin-bottom: 60px;
+    }
+    
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 40px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 3px solid transparent;
+      min-width: 200px;
+    }
+    
+    .hero-btn-primary {
+      background: var(--secondary-color);
+      color: var(--text-dark);
+      box-shadow: 0 8px 25px rgba(212, 165, 116, 0.4);
+      animation: pulseGlow 2s infinite;
+    }
+    
+    .hero-btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(212, 165, 116, 0.6);
+      background: #e0b585;
+    }
+    
+    .hero-btn-secondary {
+      background: transparent;
+      color: var(--text-light);
+      border-color: var(--text-light);
+    }
+    
+    .hero-btn-secondary:hover {
+      background: var(--text-light);
+      color: var(--text-dark);
+      transform: translateY(-3px);
+    }
+    
+    .hero-icons-section {
+      display: flex;
+      gap: 60px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      animation: heroFadeIn 1s ease-out 1.3s both;
+    }
+    
+    .hero-icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      animation: floatIcon 3s ease-in-out infinite;
+    }
+    
+    .hero-icon-item:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+    
+    .hero-icon-item:nth-child(3) {
+      animation-delay: 1s;
+    }
+    
+    .hero-icon-circle {
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .hero-icon-circle:hover {
+      background: rgba(212, 165, 116, 0.3);
+      transform: scale(1.1) rotate(10deg);
+      border-color: var(--secondary-color);
+    }
+    
+    .hero-icon-circle svg {
+      width: 40px;
+      height: 40px;
+      fill: var(--text-light);
+    }
+    
+    .hero-decorative-element {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 165, 116, 0.2) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 3;
+    }
+    
+    .hero-decorative-1 {
+      width: 400px;
+      height: 400px;
+      top: 10%;
+      left: 5%;
+      animation: float 8s ease-in-out infinite;
+    }
+    
+    .hero-decorative-2 {
+      width: 300px;
+      height: 300px;
+      bottom: 15%;
+      right: 10%;
+      animation: float 6s ease-in-out infinite reverse;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(30px, -30px); }
+    }
+    
+    @media (max-width: 768px) {
+      .hero-redesign-container {
+        min-height: 100vh;
+      }
+      
+      .hero-content-wrapper {
+        padding: 100px 20px 40px;
+      }
+      
+      .hero-cta-group {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .hero-btn {
+        width: 100%;
+      }
+      
+      .hero-icons-section {
+        gap: 30px;
+      }
+      
+      .hero-icon-circle {
+        width: 60px;
+        height: 60px;
+      }
+      
+      .hero-icon-circle svg {
+        width: 30px;
+        height: 30px;
+      }
+      
+      .hero-diagonal-accent {
+        width: 70%;
+        clip-path: polygon(40% 0, 100% 0, 100% 100%, 0% 100%);
+      }
+      
+      .hero-decorative-1,
+      .hero-decorative-2 {
+        display: none;
+      }
+    }
+  </style>
+  
+  <div class="hero-redesign-container">
+    <div class="hero-bg-layer" style="background-image: url('assets/image-hero-1-1769355623693-uuxk39.webp?v=1769355623817'); background-size: cover; background-position: center;"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-diagonal-accent"></div>
+    <div class="hero-decorative-element hero-decorative-1"></div>
+    <div class="hero-decorative-element hero-decorative-2"></div>
+    
+    <div style="position: absolute; top: 80px; right: 40px; z-index: 20; width: 280px; height: 340px; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.4); border: 3px solid rgba(255,255,255,0.3);">
+      <img src="/assets/Picture1-1778753919977-79l66f.webp?v=1778753919977" alt="אבי בן דוד, עו&quot;ד" style="width: 100%; height: 100%; object-fit: cover; object-position: center top;">
+    </div>
+    <div class="hero-content-wrapper">
+      
+      
+      <h1 class="hero-main-title" style="color: rgb(44, 62, 80) !important;">ייצוג משפטי מקצועי לפצועי צה״ל</h1>
+      
+      <h3 class="hero-subtitle" style="color: rgb(44, 62, 80) !important;">אנחנו כאן כדי לספק לך ולמשפחתך שקט נפשי, כדי שתוכלו להתרכז בהחלמה ושיקום ולא בעניני בירוקרטיה</h3>
+      
+      <div class="hero-cta-group">
+        <a href="/contact" class="hero-btn hero-btn-primary" data-element-type="button" data-element-id="btn-1778752317050-heyt5xjcq" data-native-element="true">קבע פגישת ייעוץ</a>
+        <a href="/about" class="hero-btn hero-btn-secondary" style="color: rgb(44, 62, 80) !important;" data-element-type="button" data-element-id="btn-1778752317050-2jv1ejakp" data-native-element="true">הסיפור שלי</a>
+      </div>
+      
+      <div class="hero-icons-section">
+        <div class="hero-icon-item">
+          <div class="hero-icon-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"></path></svg>
+          </div>
+        </div>
+        
+        <div class="hero-icon-item">
+          <div class="hero-icon-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"></path></svg>
+          </div>
+        </div>
+        
+        <div class="hero-icon-item">
+          <div class="hero-icon-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
+          </div>
+        </div>
+      </div>
+      
+      <div style="margin-top: 40px;">
+        <a href="/services" class="hero-btn hero-btn-secondary" style="color: rgb(44, 62, 80) !important;" data-element-type="button" data-element-id="btn-1778752317050-dmcvt40iw" data-native-element="true">למד עוד על השירותים</a>
+      </div>
+    </div>
+  </div>
 </section>
 
   <section class="intro-section">
@@ -1343,7 +1671,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
-  <a href="https://wa.me/972544544546" target="_blank" class="whatsapp-float" aria-label="WhatsApp" rel="noopener noreferrer" style="position:fixed;bottom:30px;width:60px;height:60px;background-color:#25D366;color:#ffffff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 4px 16px rgba(37,211,102,0.5);z-index:9999;text-decoration:none">
+  <a href="https://wa.me/972544544546" target="_blank" class="whatsapp-float" aria-label="WhatsApp" rel="noopener noreferrer" style="position:fixed;bottom:30px;left:30px;width:60px;height:60px;background-color:#25D366;color:#ffffff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 4px 16px rgba(37,211,102,0.5);z-index:9999;text-decoration:none;">
     <i class="fab fa-whatsapp"></i>
   </a>
 
