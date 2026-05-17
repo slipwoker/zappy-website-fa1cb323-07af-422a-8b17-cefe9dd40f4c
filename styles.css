@@ -3084,6 +3084,8 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
   display: none !important;
 }
 }
+/* Batch: Fix WhatsApp floating button desktop right padding */
+@media (min-width: 769px) { a.whatsapp-float { right: 24px !important; } }
 
 /* zappy-nav-child-indent */
 .zappy-products-dropdown .zappy-nav-child > a,
