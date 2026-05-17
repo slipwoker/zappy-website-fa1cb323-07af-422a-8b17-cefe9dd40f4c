@@ -3043,6 +3043,42 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
   }
 }
 
+@media (max-width: 768px) {
+#section .hero-redesign-container > div[style*="width: 280px"] {
+  width: 110px !important;
+  height: 130px !important;
+  top: 16px !important;
+  right: 16px !important;
+}
+}
+
+@media (max-width: 768px) {
+#section .hero-redesign-container > div[style*="width: 280px"] {
+  width: 110px !important;
+  height: 130px !important;
+  top: 16px !important;
+  right: 16px !important;
+}
+}
+
+@media (max-width: 768px) {
+#section .hero-portrait-container {
+  width: 110px !important;
+  height: 130px !important;
+  top: 16px !important;
+  right: 16px !important;
+}
+}
+
+@media (min-width: 769px) {
+#section .hero-portrait-container {
+  width: 280px !important;
+  height: 340px !important;
+  top: 80px !important;
+  right: 40px !important;
+}
+}
+
 /* zappy-nav-child-indent */
 .zappy-products-dropdown .zappy-nav-child > a,
 .sub-menu .zappy-nav-child > a {
