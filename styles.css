@@ -2629,6 +2629,420 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
   }
 }
 
+/* ── Restored from v354 (idf-about section CSS) ── */
+.idf-about-section {
+  background: #f5f7f5;
+  padding: 90px 20px;
+  font-family: system-ui, sans-serif;
+  direction: rtl;
+  position: relative;
+  overflow: hidden;
+}
+
+.idf-about-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, rgba(107, 142, 111, 0.10) 0%, transparent 70%);
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.idf-about-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(212, 165, 116, 0.10) 0%, transparent 70%);
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.idf-about-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.idf-about-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.idf-about-badge {
+  display: inline-block;
+  background: rgba(107, 142, 111, 0.12);
+  color: var(--primary-color, #6b8e6f);
+  border: 1px solid rgba(107, 142, 111, 0.35);
+  border-radius: 30px;
+  padding: 6px 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.idf-about-title {
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: var(--nav-color, #2c3e50);
+  margin: 0 0 18px 0;
+  line-height: 1.25;
+}
+
+.idf-about-subtitle {
+  font-size: 1.08rem;
+  color: #4a5568;
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+
+.idf-about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.idf-about-image-col {
+  position: relative;
+}
+
+.idf-about-image-wrapper {
+  position: relative;
+  border-radius: 18px;
+  overflow: visible;
+}
+
+.idf-about-image-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 22px;
+  border: 2px solid rgba(107, 142, 111, 0.25);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.idf-about-img {
+  width: 100%;
+  height: 440px;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 16px 48px rgba(44, 62, 80, 0.14);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.idf-about-img:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 64px rgba(44, 62, 80, 0.20);
+}
+
+.idf-about-image-badge {
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
+  background: var(--secondary-color, #d4a574);
+  color: #fff;
+  border-radius: 14px;
+  padding: 14px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 8px 24px rgba(212, 165, 116, 0.40);
+  z-index: 2;
+  min-width: 90px;
+}
+
+.idf-about-image-badge-number {
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #fff;
+}
+
+.idf-about-image-badge-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  margin-top: 4px;
+  white-space: nowrap;
+}
+
+.idf-about-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.idf-about-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.idf-about-intro-text {
+  font-size: 1.02rem;
+  color: #3d4a5c;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.idf-about-values {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.idf-about-value-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: #fff;
+  border: 1px solid rgba(107, 142, 111, 0.20);
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: 0 2px 10px rgba(44, 62, 80, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.idf-about-value-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(44, 62, 80, 0.10);
+  border-color: rgba(107, 142, 111, 0.45);
+}
+
+.idf-about-value-icon {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  background: rgba(107, 142, 111, 0.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color, #6b8e6f);
+  margin-top: 2px;
+}
+
+.idf-about-value-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.idf-about-value-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.idf-about-value-title {
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--nav-color, #2c3e50);
+}
+
+.idf-about-value-desc {
+  font-size: 0.87rem;
+  color: #5a6a7a;
+  line-height: 1.5;
+}
+
+.idf-about-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--primary-color, #6b8e6f);
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.02rem;
+  font-weight: 700;
+  padding: 15px 32px;
+  border-radius: 50px;
+  border: 2px solid var(--primary-color, #6b8e6f);
+  box-shadow: 0 6px 24px rgba(107, 142, 111, 0.30);
+  transition: background 0.28s ease, transform 0.25s ease, box-shadow 0.28s ease;
+  align-self: flex-start;
+}
+
+.idf-about-cta:hover,
+.idf-about-cta:focus-visible {
+  background: var(--nav-color, #2c3e50);
+  border-color: var(--nav-color, #2c3e50);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(44, 62, 80, 0.22);
+  outline: none;
+}
+
+.idf-about-cta:focus-visible {
+  outline: 3px solid var(--secondary-color, #d4a574);
+  outline-offset: 3px;
+}
+
+.idf-about-cta-arrow {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  transform: rotate(180deg);
+  transition: transform 0.25s ease;
+}
+
+.idf-about-cta:hover .idf-about-cta-arrow {
+  transform: rotate(180deg) translateX(3px);
+}
+
+.idf-about-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: var(--nav-color, #2c3e50);
+  border-radius: 18px;
+  padding: 36px 40px;
+  box-shadow: 0 12px 40px rgba(44, 62, 80, 0.18);
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.idf-about-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1 1 120px;
+}
+
+.idf-about-stat-number {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--secondary-color, #d4a574);
+  line-height: 1;
+}
+
+.idf-about-stat-label {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.idf-about-stat-divider {
+  width: 1px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .idf-about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .idf-about-image-col {
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .idf-about-img {
+    height: 360px;
+  }
+
+  .idf-about-image-badge {
+    left: 10px;
+    bottom: -16px;
+  }
+
+  .idf-about-title {
+    font-size: 1.9rem;
+  }
+
+  .idf-about-stat-divider {
+    display: none;
+  }
+
+  .idf-about-stats {
+    gap: 24px;
+    padding: 28px 24px;
+  }
+
+  .idf-about-stat {
+    flex: 1 1 80px;
+  }
+}
+
+@media (max-width: 600px) {
+  .idf-about-section {
+    padding: 60px 16px;
+  }
+
+  .idf-about-title {
+    font-size: 1.55rem;
+  }
+
+  .idf-about-subtitle {
+    font-size: 0.97rem;
+  }
+
+  .idf-about-header {
+    margin-bottom: 40px;
+  }
+
+  .idf-about-img {
+    height: 280px;
+  }
+
+  .idf-about-image-badge {
+    left: 8px;
+    bottom: -14px;
+    padding: 10px 16px;
+  }
+
+  .idf-about-image-badge-number {
+    font-size: 1.35rem;
+  }
+
+  .idf-about-stats {
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 20px;
+    gap: 20px;
+  }
+
+  .idf-about-stat-number {
+    font-size: 1.8rem;
+  }
+
+  .idf-about-cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .idf-about-value-item {
+    padding: 12px 14px;
+  }
+
+  .idf-about-value-title {
+    font-size: 0.93rem;
+  }
+}
+
 /* zappy-nav-child-indent */
 .zappy-products-dropdown .zappy-nav-child > a,
 .sub-menu .zappy-nav-child > a {
@@ -3095,6 +3509,25 @@ nav .sub-menu.zappy-empty-submenu,
   section[class*="-hero-section"]:first-of-type,
   main > section:first-child {
     padding-top: 100px !important;
+  }
+
+  /* Split hero (.hero-sbs-wrap) already applies ~100px top padding for the navbar.
+     Without this override, the global rule above stacks and mobile shows ~200px
+     of dead air above the hero image. */
+  main > section:first-child:has(.hero-sbs-wrap),
+  section[class*="-hero-section"]:first-of-type:has(.hero-sbs-wrap) {
+    padding-top: 0 !important;
+  }
+
+  /* Zoom-crop hero portraits: anchor with inset:0 so RTL/LTR matches and cover
+     cropping stays centered (physical left:0 absolute imgs can mis-read in RTL). */
+  .hero-sbs-image-frame [data-zappy-zoom-wrapper="true"] img {
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: none !important;
+    object-fit: cover !important;
+    object-position: center center !important;
   }
   
   /* ========== HERO CONTAINER FULL-WIDTH (FULLSCREEN HEROES ONLY) ========== */
@@ -3781,6 +4214,8 @@ html[dir="ltr"] .zappy-products-dropdown .zappy-nav-child > a {
 .cookie-preferences-btn:hover {
   text-decoration: none !important;
 }
+.whatsapp-float { position: fixed !important; bottom: 20px !important; width: 50px !important; height: 50px !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 24px !important; z-index: 9999 !important; box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important; background: #25d366 !important; color: white !important; text-decoration: none !important; }
+
 html[dir="rtl"] #mic-access-tool-general-button, html[dir="rtl"] .mic-access-tool-general-button,
 html[dir="rtl"] #mic-init-access-tool .mic-access-tool-general-button,
 html[dir="rtl"] #mic-init-access-tool #mic-access-tool-general-button,
@@ -3799,6 +4234,42 @@ html[dir="ltr"] .solution-item.solution-reverse .solution-image { order: -1 !imp
 html[dir="ltr"] .solution-item.solution-reverse .solution-content { order: 1 !important; }
 html[dir="ltr"] .service-detail.service-reverse .service-detail-image { order: -1 !important; }
 html[dir="ltr"] .service-detail.service-reverse .service-detail-content { order: 1 !important; }
+
+
+/* ZAPPY_PUBLISHED_MOBILE_MEDIA_FIT_FIX */
+@media (max-width: 768px) {
+  /* Published sites can carry stale editor-generated transform:scale(...) rules.
+     Fullscreen hero backgrounds must keep filling their absolute wrapper; mobile
+     crop runtime can still override this with inline styles when needed. */
+  html body main section[class*="hero"] [data-hero-bg],
+  html body main section[class*="hero"] [data-hero-background="true"],
+  html body main section[data-hero-type*="fullscreen"] img[data-hero-bg],
+  html body main section[data-hero-type*="fullscreen"] img[data-hero-background="true"] {
+    transform: none !important;
+    transform-origin: center center !important;
+    max-width: none !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  /* Filter chip rows should wrap on narrow RTL screens instead of hiding most
+     options off-canvas behind a horizontal scroller. */
+  html body main #showcaseAdvancedFilter .adv-filter-group > .adv-filter-scroll-row,
+  html body main .index-showcase-section #showcaseAdvancedFilter .adv-filter-group > .adv-filter-scroll-row,
+  html body main .index-showcase-section .adv-filter-group > .adv-filter-scroll-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    padding-inline: 0 !important;
+    margin-inline: 0 !important;
+    height: auto !important;
+    cursor: default !important;
+  }
+}
 
 /* Footer contact alignment fix */
 .footer-contact li > a { display: flex; align-items: flex-start; gap: inherit; }
