@@ -3079,6 +3079,12 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 }
 }
 
+@media (max-width: 768px) {
+#section .hero-portrait-container {
+  display: none !important;
+}
+}
+
 /* zappy-nav-child-indent */
 .zappy-products-dropdown .zappy-nav-child > a,
 .sub-menu .zappy-nav-child > a {
