@@ -3086,6 +3086,8 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 }
 /* Batch: Fix WhatsApp floating button desktop right padding */
 @media (min-width: 769px) { a.whatsapp-float { right: 24px !important; } }
+/* Batch: העברת כפתור וואטסאפ לפינה ימין עליונה והגדלה ב-100% */
+.whatsapp-float { position: fixed !important; top: 120px !important; bottom: auto !important; right: 24px !important; left: auto !important; width: 100px !important; height: 100px !important; font-size: 48px !important; }
 
 /* zappy-nav-child-indent */
 .zappy-products-dropdown .zappy-nav-child > a,
@@ -4266,8 +4268,6 @@ html[dir="ltr"] .zappy-products-dropdown .zappy-nav-child > a {
 .cookie-preferences-btn:hover {
   text-decoration: none !important;
 }
-.whatsapp-float { position: fixed !important; bottom: 20px !important; width: 50px !important; height: 50px !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 24px !important; z-index: 9999 !important; box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important; background: #25d366 !important; color: white !important; text-decoration: none !important; }
-
 html[dir="rtl"] #mic-access-tool-general-button, html[dir="rtl"] .mic-access-tool-general-button,
 html[dir="rtl"] #mic-init-access-tool .mic-access-tool-general-button,
 html[dir="rtl"] #mic-init-access-tool #mic-access-tool-general-button,
