@@ -1138,10 +1138,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     @media (max-width: 768px) {
       .hero-redesign-container {
         min-height: 100vh;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 80px;
+      }
+
+      .hero-portrait-container {
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        left: auto !important;
+        width: 140px !important;
+        height: 170px !important;
+        margin: 0 auto 20px !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        z-index: 20 !important;
+        flex-shrink: 0;
       }
       
       .hero-content-wrapper {
-        padding: 100px 20px 40px;
+        padding: 0 20px 40px;
+        position: relative;
+        z-index: 10;
       }
       
       .hero-cta-group {
