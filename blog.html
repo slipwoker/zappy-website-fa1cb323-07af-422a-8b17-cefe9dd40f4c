@@ -1000,6 +1000,47 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
       </div>
     </footer>
+<div class="zappy-sticky-bar">
+  <a href="tel:0544544546" class="zappy-sticky-btn zappy-sticky-call">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+    <span>חייג עכשיו</span>
+  </a>
+  <a href="https://wa.me/972544544546?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A0%D7%99%20%D7%A6%D7%A8%D7%99%D7%9A%20%D7%99%D7%99%D7%A6%D7%95%D7%92%20%D7%9E%D7%A9%D7%A4%D7%98%D7%99%20%D7%9C%D7%A0%D7%9B%D7%95%D7%AA%20%D7%A6%D7%94%22%D7%9C" target="_blank" rel="noopener noreferrer" class="zappy-sticky-btn zappy-sticky-whatsapp">
+    <i class="fab fa-whatsapp" style="font-size:22px;"></i>
+    <span>דבר איתנו בוואטסאפ</span>
+  </a>
+</div>
+<style>
+.zappy-sticky-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  z-index: 99990;
+  box-shadow: 0 -3px 16px rgba(0,0,0,0.18);
+}
+.zappy-sticky-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: #ffffff;
+  transition: filter 0.2s;
+}
+.zappy-sticky-btn:hover { filter: brightness(1.1); }
+.zappy-sticky-call { background: #2c3e50; }
+.zappy-sticky-whatsapp { background: #25D366; }
+@media (max-width: 480px) {
+  .zappy-sticky-btn { font-size: 0.88rem; gap: 6px; padding: 13px 6px; }
+}
+</style>
 
 
 <!-- Zappy Attribution Header Script -->
