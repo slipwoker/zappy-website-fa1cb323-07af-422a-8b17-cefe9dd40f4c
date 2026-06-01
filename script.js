@@ -3209,10 +3209,10 @@ function fixContrast(){
 })();
 
 
-/* ZAPPY_ECOM_LANGUAGE_ROUTING_RUNTIME_V17 */
+/* ZAPPY_ECOM_LANGUAGE_ROUTING_RUNTIME_V19 */
 (function() {
-  if (window.__zappyEcomLanguageRoutingRuntime >= 17) return;
-  window.__zappyEcomLanguageRoutingRuntime = 17;
+  if (window.__zappyEcomLanguageRoutingRuntime >= 19) return;
+  window.__zappyEcomLanguageRoutingRuntime = 19;
 
   // Routing strategy: use path-based language URLs for ALL storefront pages
   // (including dynamic /product/:slug and /category/:slug). The publish
@@ -3339,7 +3339,12 @@ function fixContrast(){
   }
 
   function isStorefrontPath(href) {
-    return /^\/(?:[a-z]{2}\/)?(?:product|category|products)(?:\/|\?|#|$)/i.test(href || '');
+    // Includes the static account/login/cart/checkout pages (in addition to
+    // product/category/products) so the navbar login/account icon, the
+    // "please sign in" CTA, etc. keep the active language prefix — otherwise
+    // an English shopper clicking the account icon lands on the unprefixed
+    // default-language /account static file (Hebrew navbar + footer + body).
+    return /^\/(?:[a-z]{2}\/)?(?:product|category|products|account|login|cart|checkout)(?:\/|\?|#|$)/i.test(href || '');
   }
 
   function patchLinks(root) {
@@ -3620,20 +3625,20 @@ function fixContrast(){
   // declaration merging that was eating the standalone CSS injection.
   function ensureRuntimeCssInjected() {
     var existing = document.getElementById('zappy-ecom-routing-runtime-css');
-    if (existing && existing.getAttribute('data-v') === '20') return;
+    if (existing && existing.getAttribute('data-v') === '24') return;
     if (existing) existing.remove();
     var style = document.createElement('style');
     style.id = 'zappy-ecom-routing-runtime-css';
     style.setAttribute('data-zappy-runtime', 'ecom-routing');
-    style.setAttribute('data-v', '20');
+    style.setAttribute('data-v', '24');
     style.textContent =
       '@media (min-width: 769px){' +
         'html[dir="ltr"] .nav-container > .nav-brand,body[dir="ltr"] .nav-container > .nav-brand,html[dir="ltr"] .nav-right-group > .nav-brand,body[dir="ltr"] .nav-right-group > .nav-brand{order:-1!important}' +
-        'html[dir="ltr"] .nav-container > .nav-menu,body[dir="ltr"] .nav-container > .nav-menu,html[dir="ltr"] .nav-right-group > .nav-menu,body[dir="ltr"] .nav-right-group > .nav-menu{order:1!important;margin-inline-start:0!important;margin-inline-end:24px!important;flex:1 1 0!important;min-width:0!important;max-height:44px!important;overflow:visible!important;flex-wrap:wrap!important;align-items:center!important;align-content:flex-start!important;row-gap:4px!important}' +
+        'html[dir="ltr"] .nav-container > .nav-menu,body[dir="ltr"] .nav-container > .nav-menu,html[dir="ltr"] .nav-right-group > .nav-menu,body[dir="ltr"] .nav-right-group > .nav-menu{order:1!important;margin-inline-start:0!important;flex:1 1 0!important;min-width:0!important;overflow:visible!important;align-items:center!important}' +
         'html[dir="ltr"] .nav-container > .nav-menu > li,body[dir="ltr"] .nav-container > .nav-menu > li,html[dir="ltr"] .nav-right-group > .nav-menu > li,body[dir="ltr"] .nav-right-group > .nav-menu > li{flex:0 0 auto!important}' +
         'html[dir="ltr"] .nav-container > .lang-switcher,body[dir="ltr"] .nav-container > .lang-switcher,html[dir="ltr"] .nav-container > .nav-ecommerce-icons,body[dir="ltr"] .nav-container > .nav-ecommerce-icons,html[dir="ltr"] .nav-right-group > .lang-switcher,body[dir="ltr"] .nav-right-group > .lang-switcher,html[dir="ltr"] .nav-right-group > .nav-ecommerce-icons,body[dir="ltr"] .nav-right-group > .nav-ecommerce-icons{order:2!important;flex:0 0 auto!important;min-width:max-content!important}' +
         'html[dir="ltr"] .nav-container > .nav-ecommerce-icons.nav-icons-left,body[dir="ltr"] .nav-container > .nav-ecommerce-icons.nav-icons-left,html[dir="ltr"] .nav-right-group > .nav-ecommerce-icons.nav-icons-left,body[dir="ltr"] .nav-right-group > .nav-ecommerce-icons.nav-icons-left{margin-inline-start:auto!important;flex:0 0 auto!important;min-width:max-content!important}' +
-        'html[dir="rtl"] .nav-container > .nav-menu,body[dir="rtl"] .nav-container > .nav-menu,html[dir="rtl"] .nav-right-group > .nav-menu,body[dir="rtl"] .nav-right-group > .nav-menu{flex:1 1 0!important;min-width:0!important;max-height:44px!important;overflow:visible!important;flex-wrap:wrap!important;align-items:center!important;align-content:flex-start!important;row-gap:4px!important}' +
+        'html[dir="rtl"] .nav-container > .nav-menu,body[dir="rtl"] .nav-container > .nav-menu,html[dir="rtl"] .nav-right-group > .nav-menu,body[dir="rtl"] .nav-right-group > .nav-menu{flex:1 1 0!important;min-width:0!important;overflow:visible!important;align-items:center!important}' +
         'html[dir="rtl"] .nav-container > .nav-menu > li,body[dir="rtl"] .nav-container > .nav-menu > li,html[dir="rtl"] .nav-right-group > .nav-menu > li,body[dir="rtl"] .nav-right-group > .nav-menu > li{flex:0 0 auto!important}' +
         'html[dir="rtl"] .nav-container > .nav-ecommerce-icons,body[dir="rtl"] .nav-container > .nav-ecommerce-icons,html[dir="rtl"] .nav-right-group > .nav-ecommerce-icons,body[dir="rtl"] .nav-right-group > .nav-ecommerce-icons,html[dir="rtl"] .nav-container > .nav-ecommerce-icons.nav-icons-left,body[dir="rtl"] .nav-container > .nav-ecommerce-icons.nav-icons-left,html[dir="rtl"] .nav-right-group > .nav-ecommerce-icons.nav-icons-left,body[dir="rtl"] .nav-right-group > .nav-ecommerce-icons.nav-icons-left{flex:0 0 auto!important;min-width:max-content!important}' +
         'html[dir="ltr"] .nav-search-btn,body[dir="ltr"] .nav-search-btn{position:absolute!important;left:auto!important;right:4px!important}' +
@@ -3647,6 +3652,7 @@ function fixContrast(){
         'html[dir="ltr"] .zappy-catalog-menu .catalog-menu-all{margin-top:0!important;align-self:flex-start!important}' +
         '.nav-menu .zappy-products-dropdown>.sub-menu,#navMenu .zappy-products-dropdown>.sub-menu{left:50%!important;right:auto!important;transform:translateX(-50%) translateY(8px)!important}' +
         '.nav-menu .zappy-products-dropdown:hover>.sub-menu,#navMenu .zappy-products-dropdown:hover>.sub-menu,.nav-menu .zappy-products-dropdown:focus-within>.sub-menu,#navMenu .zappy-products-dropdown:focus-within>.sub-menu{transform:translateX(-50%) translateY(0)!important}' +
+        '.nav-menu.zappy-desktop-wrap,#navMenu.zappy-desktop-wrap{flex-wrap:wrap!important;max-height:44px!important;align-content:flex-start!important;row-gap:4px!important}' +
       '}' +
       '@media (max-width:768px){' +
         '.nav-menu li:has(.sub-menu),.navbar li:has(.sub-menu),nav li:has(.sub-menu){direction:ltr!important;display:flex!important;flex-wrap:wrap!important;align-items:flex-start!important;max-width:100%!important;width:100%!important;overflow:visible!important;box-sizing:border-box!important}' +
@@ -3664,6 +3670,31 @@ function fixContrast(){
     (document.head || document.documentElement).appendChild(style);
   }
 
+  function tuneDesktopNavWrapping() {
+    if (window.innerWidth <= 768) return;
+    document.querySelectorAll('.nav-container > .nav-menu, .nav-right-group > .nav-menu, .nav-container > #navMenu, .nav-right-group > #navMenu').forEach(function(menu) {
+      if (!menu || !menu.querySelectorAll) return;
+      menu.classList.remove('zappy-desktop-wrap');
+
+      var styles = window.getComputedStyle(menu);
+      var gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+      var items = Array.prototype.filter.call(menu.children || [], function(child) {
+        return child && child.nodeType === 1 && child.tagName !== 'SCRIPT' && child.tagName !== 'STYLE';
+      });
+      if (items.length < 2) return;
+
+      var required = items.reduce(function(total, item) {
+        return total + item.getBoundingClientRect().width;
+      }, 0) + (items.length - 1) * gap;
+
+      // A tiny tolerance prevents sub-pixel/browser-font differences from
+      // wrapping a menu that visually fits in the editor preview.
+      if (required > menu.getBoundingClientRect().width + 8) {
+        menu.classList.add('zappy-desktop-wrap');
+      }
+    });
+  }
+
   function patch() {
     ensureRuntimeCssInjected();
     installMobileMenuRefreshHooks();
@@ -3671,6 +3702,7 @@ function fixContrast(){
     ensureProductsChevron();
     ensureMobileSubmenuToggles();
     patchCatalogDirection();
+    tuneDesktopNavWrapping();
   }
 
   if (document.readyState === 'loading') {
@@ -3681,8 +3713,27 @@ function fixContrast(){
   window.addEventListener('popstate', function() { setTimeout(patch, 0); });
   window.addEventListener('zappy:languageChanged', function() { setTimeout(patch, 0); });
   window.addEventListener('languageChanged', function() { setTimeout(patch, 0); });
+  window.addEventListener('resize', function() { setTimeout(tuneDesktopNavWrapping, 100); }, { passive: true });
   new MutationObserver(function(mutations) {
     var shouldPatch = mutations.some(function(mutation) {
+      // Re-patch when a storefront anchor's href is RESET by other runtime code
+      // after our initial patch. The baked-in updateHeaderAuthState (shipped in
+      // the stored script.js, which re-publishing does NOT regenerate) pins the
+      // navbar account/login icon back to the unprefixed default-language page
+      // once the customer profile finishes loading — often AFTER our scheduled
+      // patch() passes. On courses pages there is no language signal in the URL
+      // (language lives in localStorage), so the clobbered icon sends an English
+      // shopper to the Hebrew /account static file. Watching href mutations lets
+      // us immediately re-prefix it. The href !== buildPath(href) guard makes
+      // our own corrective setAttribute idempotent (no observer loop).
+      if (mutation.type === 'attributes') {
+        var tgt = mutation.target;
+        if (tgt && tgt.nodeType === 1 && tgt.tagName === 'A') {
+          var href = tgt.getAttribute('href');
+          return isStorefrontPath(href) && href !== buildPath(href);
+        }
+        return false;
+      }
       return Array.prototype.some.call(mutation.addedNodes || [], function(node) {
         return node.nodeType === 1 && (
           (node.matches && node.matches('a[href], .zappy-products-dropdown, #zappy-catalog-menu')) ||
@@ -3691,7 +3742,7 @@ function fixContrast(){
       });
     });
     if (shouldPatch) setTimeout(patch, 0);
-  }).observe(document.documentElement, { childList: true, subtree: true });
+  }).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['href'] });
   setTimeout(patch, 250);
   setTimeout(patch, 1500);
 })();
