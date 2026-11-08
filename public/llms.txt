@@ -111,7 +111,7 @@ Information about WCAG compliance and accessibility features.
   - `phone` (tel, required)
   - `email` (email)
   - `message` (textarea)
-  - `consent` (checkbox)
+  - `consent` (checkbox, required)
 
 ---
 

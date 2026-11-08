@@ -3677,6 +3677,28 @@ html, body {
   border-color: var(--accent-color, var(--accent, #A8452A));
 }
 
+.family-services > div > div[style*="grid"] {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.family-important a[href="/blog/lawyer-role-divorce"] {
+  direction: rtl;
+}
+
+@media (max-width: 900px) {
+.family-services > div > div[style*="grid"] {
+  grid-template-columns: repeat(2, 1fr);
+}
+}
+
+@media (max-width: 600px) {
+.family-services > div > div[style*="grid"] {
+  grid-template-columns: 1fr;
+}
+}
+
 /* ZAPPY_ANNOUNCEMENT_HEADER_OFFSET_CSS_V3 */
 :root {
   --zappy-header-stack-height: calc(var(--zappy-announcement-height, 40px) + var(--header-height, 72px));
