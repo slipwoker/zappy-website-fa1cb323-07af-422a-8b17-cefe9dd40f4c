@@ -3711,6 +3711,45 @@ html, body {
 }
 }
 
+#blog-hero {
+  background: var(--background-color, var(--background, var(--bg-light, #F5EFE4)));
+  padding: 90px 20px;
+  text-align: center;
+}
+
+#blog-hero .container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#blog-hero .blog-label {
+  display: inline-block;
+  color: var(--accent-color, var(--accent, #A8452A));
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  margin: 0 0 14px 0;
+}
+
+#blog-hero h1 {
+  color: var(--primary-color, var(--primary, #221E3D));
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0 0 18px 0;
+}
+
+#blog-hero p {
+  color: var(--text-color, var(--text, var(--text-dark, #4A4A4A)));
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin: 0 auto;
+  max-width: 640px;
+}
+/* zappy-self-heal */
+#blog-hero p { color: var(--text-color, var(--text, var(--text-dark, #4A4A4A))) !important; }
+
+
 /* ZAPPY_ANNOUNCEMENT_HEADER_OFFSET_CSS_V3 */
 :root {
   --zappy-header-stack-height: calc(var(--zappy-announcement-height, 40px) + var(--header-height, 72px));
