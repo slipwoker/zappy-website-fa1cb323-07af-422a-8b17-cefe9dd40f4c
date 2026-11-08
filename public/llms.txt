@@ -81,6 +81,9 @@ https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/alimony-custody
 ### Page
 https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/prenup-property
 
+### Page
+https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/poa-guide
+
 ## Legal & Policy
 
 ### Privacy Policy
@@ -114,7 +117,7 @@ Information about WCAG compliance and accessibility features.
   - `phone` (tel, required)
   - `email` (email)
   - `message` (textarea)
-  - `consent` (checkbox, required)
+  - `consent` (checkbox)
 
 ---
 

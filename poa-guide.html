@@ -1,0 +1,883 @@
+<!DOCTYPE html><html lang="he" dir="rtl"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>Generated Website</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: 'fa1cb323-07af-422a-8b17-cefe9dd40f4c',
+    apiUrl: 'https://api.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        var clickMeta = {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        };
+        
+        trackEvent('click', clickMeta);
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        var navMeta = {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        };
+        
+        trackEvent('navigation', navMeta);
+      }
+    }, true);
+  }
+  
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+<!-- Zappy Marketing Events -->
+<script>
+(function() {
+  'use strict';
+  if (window.zappyFireMarketingEvent) return;
+
+  var ECOM_MODE = "";
+  var IS_CATALOG = false;
+  var IS_FULL = false;
+  var DIRECT_GA = true;
+  var DIRECT_META = true;
+  var GA_SEND_TO = "G-47QTW1LY2Q";
+
+  var ECOM_ALIAS = {
+    begin_checkout: 'checkout_started',
+    purchase: 'checkout_complete',
+    add_to_cart: 'add_to_cart',
+    view_product: 'view_product'
+  };
+
+  function pagePath() {
+    try {
+      if (window.ZAPPY_CONFIG && window.ZAPPY_CONFIG.currentPagePath) {
+        return window.ZAPPY_CONFIG.currentPagePath;
+      }
+    } catch (e) {}
+    try { return window.location.pathname || '/'; } catch (e2) { return '/'; }
+  }
+
+  function normalizeItems(meta) {
+    meta = meta || {};
+    var raw = meta.items || meta.cartItems || meta.cart_items || meta.lineItems || [];
+    if (!Array.isArray(raw)) raw = [];
+    var out = [];
+    for (var i = 0; i < raw.length; i++) {
+      var item = raw[i];
+      if (!item || typeof item !== 'object') continue;
+      var id = String(item.item_id || item.productId || item.product_id || item.id || '').trim();
+      var name = String(item.item_name || item.productName || item.product_name || item.name || '').trim();
+      var price = parseFloat(item.price != null ? item.price : (item.unitPrice != null ? item.unitPrice : 0)) || 0;
+      var quantity = Math.max(1, parseInt(item.quantity != null ? item.quantity : (item.qty != null ? item.qty : 1), 10) || 1);
+      if (!id && !name) continue;
+      out.push({ item_id: id || name, item_name: name || id, price: price, quantity: quantity });
+    }
+    return out;
+  }
+
+  function buildGa4Params(eventId, meta) {
+    meta = meta || {};
+    var items = normalizeItems(meta);
+    var value = parseFloat(meta.value != null ? meta.value : (meta.total != null ? meta.total : 0)) || 0;
+    var currency = String(meta.currency || 'USD').toUpperCase();
+
+    if (eventId === 'checkout_complete') {
+      return {
+        transaction_id: String(meta.transaction_id || meta.orderId || meta.order_id || meta.orderNumber || '') || undefined,
+        value: value,
+        currency: currency,
+        items: items
+      };
+    }
+    if (eventId === 'checkout_started') {
+      return { value: value, currency: currency, items: items };
+    }
+    if (eventId === 'add_to_cart') {
+      var atcItems = items.length ? items : [{
+        item_id: String(meta.productId || meta.product_id || ''),
+        item_name: String(meta.productName || meta.product_name || ''),
+        price: parseFloat(meta.value != null ? meta.value : (meta.price != null ? meta.price : 0)) || 0,
+        quantity: parseInt(meta.quantity != null ? meta.quantity : 1, 10) || 1
+      }].filter(function(x) { return x.item_id || x.item_name; });
+      return {
+        value: value || (atcItems[0] ? atcItems[0].price * atcItems[0].quantity : 0),
+        currency: currency,
+        items: atcItems
+      };
+    }
+    if (eventId === 'view_product') {
+      var vpItems = items.length ? items : [{
+        item_id: String(meta.productId || meta.product_id || ''),
+        item_name: String(meta.productName || meta.product_name || ''),
+        price: parseFloat(meta.price != null ? meta.price : (meta.value != null ? meta.value : 0)) || 0,
+        quantity: 1
+      }].filter(function(x) { return x.item_id || x.item_name; });
+      return {
+        currency: currency,
+        value: value || (vpItems[0] ? vpItems[0].price : 0),
+        items: vpItems
+      };
+    }
+    if (eventId === 'whatsapp_click' || eventId === 'phone_click') {
+      return { method: eventId === 'whatsapp_click' ? 'whatsapp' : 'phone', page_path: meta.pagePath || pagePath() };
+    }
+    if (eventId === 'contact_form_submitted' || eventId === 'product_inquiry') {
+      return { page_path: meta.pagePath || pagePath() };
+    }
+    return meta;
+  }
+
+  function buildMetaParams(eventId, meta) {
+    meta = meta || {};
+    var items = normalizeItems(meta);
+    var value = parseFloat(meta.value != null ? meta.value : (meta.total != null ? meta.total : 0)) || 0;
+    var currency = String(meta.currency || 'USD').toUpperCase();
+    var contentIds = [];
+    var numItems = 0;
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].item_id) contentIds.push(items[i].item_id);
+      numItems += items[i].quantity || 1;
+    }
+
+    if (eventId === 'checkout_complete') {
+      return {
+        value: value,
+        currency: currency,
+        content_ids: contentIds.length ? contentIds : undefined,
+        content_type: 'product',
+        num_items: numItems || undefined,
+        order_id: String(meta.order_id || meta.orderId || meta.transaction_id || meta.orderNumber || '') || undefined
+      };
+    }
+    if (eventId === 'checkout_started') {
+      return {
+        value: value,
+        currency: currency,
+        content_ids: contentIds.length ? contentIds : undefined,
+        content_type: 'product',
+        num_items: numItems || parseInt(meta.itemCount != null ? meta.itemCount : 0, 10) || undefined
+      };
+    }
+    if (eventId === 'add_to_cart') {
+      var id = String(meta.productId || meta.product_id || contentIds[0] || '');
+      return {
+        value: value || (items[0] ? items[0].price * items[0].quantity : 0),
+        currency: currency,
+        content_ids: id ? [id] : (contentIds.length ? contentIds : undefined),
+        content_type: 'product',
+        content_name: meta.productName || meta.product_name || (items[0] && items[0].item_name),
+        num_items: parseInt(meta.quantity != null ? meta.quantity : (numItems || 1), 10) || 1
+      };
+    }
+    if (eventId === 'view_product') {
+      var vid = String(meta.productId || meta.product_id || contentIds[0] || '');
+      return {
+        value: value || parseFloat(meta.price != null ? meta.price : 0) || 0,
+        currency: currency,
+        content_ids: vid ? [vid] : (contentIds.length ? contentIds : undefined),
+        content_type: 'product',
+        content_name: meta.productName || meta.product_name || (items[0] && items[0].item_name)
+      };
+    }
+    if (eventId === 'whatsapp_click' || eventId === 'phone_click') {
+      return {
+        content_name: eventId === 'whatsapp_click' ? 'WhatsApp' : 'Phone',
+        content_category: 'contact'
+      };
+    }
+    if (eventId === 'contact_form_submitted' || eventId === 'product_inquiry') {
+      return {
+        content_name: eventId === 'product_inquiry' ? 'Product inquiry' : 'Contact form',
+        content_category: meta.productName || meta.product_name || undefined
+      };
+    }
+    return meta;
+  }
+
+  var PLATFORM = {
+    whatsapp_click: { ga4: 'contact', meta: 'Contact', gtm: 'whatsapp_click', ecom: false },
+    phone_click: { ga4: 'contact', meta: 'Contact', gtm: 'phone_click', ecom: false },
+    contact_form_submitted: { ga4: 'generate_lead', meta: 'Lead', gtm: 'contact_form_submitted', ecom: false },
+    checkout_started: { ga4: 'begin_checkout', meta: 'InitiateCheckout', gtm: 'begin_checkout', ecom: true },
+    checkout_complete: { ga4: 'purchase', meta: 'Purchase', gtm: 'purchase', ecom: true },
+    product_inquiry: { ga4: 'generate_lead', meta: 'Lead', gtm: 'product_inquiry', ecom: false },
+    add_to_cart: { ga4: 'add_to_cart', meta: 'AddToCart', gtm: 'add_to_cart', ecom: true },
+    view_product: { ga4: 'view_item', meta: 'ViewContent', gtm: 'view_item', ecom: true }
+  };
+
+  function purchaseDedupKey(orderId) {
+    return 'zappy_purchase_fired_' + String(orderId || '');
+  }
+
+  function purchaseMetaDedupKey(orderId) {
+    return 'zappy_purchase_meta_fired_' + String(orderId || '');
+  }
+
+  function alreadyFiredPurchase(orderId) {
+    if (!orderId) return false;
+    try {
+      return window.sessionStorage.getItem(purchaseDedupKey(orderId)) === '1';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function markPurchaseFired(orderId) {
+    if (!orderId) return;
+    try { window.sessionStorage.setItem(purchaseDedupKey(orderId), '1'); } catch (e) {}
+  }
+
+  function alreadyFiredPurchaseMeta(orderId) {
+    if (!orderId) return false;
+    try {
+      return window.sessionStorage.getItem(purchaseMetaDedupKey(orderId)) === '1';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function markPurchaseMetaFired(orderId) {
+    if (!orderId) return;
+    try { window.sessionStorage.setItem(purchaseMetaDedupKey(orderId), '1'); } catch (e) {}
+  }
+
+  function getPendingMetaEvents() {
+    try {
+      if (!Array.isArray(window.__zappyPendingMetaEvents)) {
+        window.__zappyPendingMetaEvents = [];
+      }
+      return window.__zappyPendingMetaEvents;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function enqueueMetaEvent(eventName, params, orderId) {
+    var q = getPendingMetaEvents();
+    if (orderId) {
+      for (var i = 0; i < q.length; i++) {
+        if (q[i] && q[i].orderId === orderId && q[i].eventName === eventName) return;
+      }
+    }
+    q.push({ eventName: eventName, params: params || {}, orderId: orderId || null });
+  }
+
+  /**
+   * Live sites replace the eager Meta snippet with a consent-gated lazy
+   * loader. Payment providers bounce the shopper back to /order-success
+   * before CookieConsent hydrates, so confirm-order used to fire Purchase
+   * while window.fbq was still undefined — then sessionStorage blocked a
+   * retry. Queue until fbq exists, then flush.
+   */
+  function flushPendingMetaEvents() {
+    if (typeof window.fbq !== 'function') return;
+    var q = getPendingMetaEvents().slice();
+    try { window.__zappyPendingMetaEvents = []; } catch (e) {}
+    for (var i = 0; i < q.length; i++) {
+      var item = q[i];
+      if (!item || !item.eventName) continue;
+      if (item.orderId && alreadyFiredPurchaseMeta(item.orderId)) continue;
+      try {
+        window.fbq('track', item.eventName, item.params || {});
+        if (item.orderId) markPurchaseMetaFired(item.orderId);
+      } catch (e2) {}
+    }
+  }
+  window.zappyFlushPendingMetaEvents = flushPendingMetaEvents;
+
+  if (DIRECT_META) {
+    var metaFlushAttempts = 0;
+    var metaFlushTimer = setInterval(function() {
+      metaFlushAttempts++;
+      flushPendingMetaEvents();
+      var pendingLen = 0;
+      try { pendingLen = (window.__zappyPendingMetaEvents || []).length; } catch (e) {}
+      if ((pendingLen === 0 && typeof window.fbq === 'function') || metaFlushAttempts > 60) {
+        clearInterval(metaFlushTimer);
+      }
+    }, 500);
+  }
+
+  /**
+   * Fire a marketing event to first-party analytics + GA4/GTM/Meta when present.
+   * @param {string} eventName marketing ID or ecommerce alias
+   * @param {object} [metadata]
+   * @param {{ skipFirstParty?: boolean }} [opts]
+   */
+  window.zappyFireMarketingEvent = function(eventName, metadata, opts) {
+    try {
+      opts = opts || {};
+      metadata = metadata || {};
+      var eventId = ECOM_ALIAS[eventName] || eventName;
+      var plat = PLATFORM[eventId];
+      if (!plat) return;
+
+      if (!metadata.pagePath && !metadata.page_path) {
+        metadata.pagePath = pagePath();
+      }
+
+      var oid = '';
+      var purchaseAlreadySent = false;
+      var purchaseMetaAlreadySent = false;
+      if (eventId === 'checkout_complete') {
+        oid = String(metadata.orderId || metadata.order_id || metadata.transaction_id || '');
+        purchaseAlreadySent = !!(oid && alreadyFiredPurchase(oid));
+        purchaseMetaAlreadySent = !!(oid && alreadyFiredPurchaseMeta(oid));
+        if (purchaseAlreadySent && purchaseMetaAlreadySent) return;
+      }
+
+      // First-party (skip when already tracked via zappyTrackEcomAnalytics path
+      // that opts out, or when caller already recorded under a different name)
+      if (!opts.skipFirstParty && !purchaseAlreadySent) {
+        try {
+          if (window.zappyAnalytics && typeof window.zappyAnalytics.track === 'function') {
+            window.zappyAnalytics.track(eventId, metadata);
+          }
+        } catch (e1) {}
+      }
+
+      // GTM / dataLayer — platform-standard ecommerce event names.
+      // Always push. A bare gtag.js snippet ignores plain event objects;
+      // a GTM container is what turns them into GA4/Ads hits.
+      if (!purchaseAlreadySent) {
+        try {
+          window.dataLayer = window.dataLayer || [];
+          if (plat.ecom) {
+            var ga4ForGtm = buildGa4Params(eventId, metadata);
+            var ecommerce = {};
+            if (ga4ForGtm.transaction_id) ecommerce.transaction_id = ga4ForGtm.transaction_id;
+            if (ga4ForGtm.value != null) ecommerce.value = ga4ForGtm.value;
+            if (ga4ForGtm.currency) ecommerce.currency = ga4ForGtm.currency;
+            if (ga4ForGtm.items) ecommerce.items = ga4ForGtm.items;
+            // Clear first so GTM does not merge this hit with the previous ecommerce object.
+            window.dataLayer.push({ ecommerce: null });
+            window.dataLayer.push({ event: plat.gtm, ecommerce: ecommerce });
+            // Secondary Zappy-specific trigger for merchants who want it
+            if (eventId === 'checkout_complete' || eventId === 'checkout_started') {
+              window.dataLayer.push({ ecommerce: null });
+              window.dataLayer.push({ event: eventId, ecommerce: ecommerce });
+            }
+          } else {
+            var dl = { event: plat.gtm };
+            for (var k in metadata) {
+              if (Object.prototype.hasOwnProperty.call(metadata, k)) dl[k] = metadata[k];
+            }
+            window.dataLayer.push(dl);
+          }
+        } catch (e2) {}
+
+        // Direct Google Analytics snippet only. GTM also defines window.gtag;
+        // calling it then sends the same event again to every Google tag the
+        // container loaded. send_to keeps a direct GA install off those tags
+        // when the merchant also has GTM.
+        if (DIRECT_GA) {
+          try {
+            if (typeof window.gtag === 'function') {
+              var gaParams = buildGa4Params(eventId, metadata);
+              if (GA_SEND_TO && gaParams && typeof gaParams === 'object') {
+                var gaCopy = {};
+                for (var gk in gaParams) {
+                  if (Object.prototype.hasOwnProperty.call(gaParams, gk)) gaCopy[gk] = gaParams[gk];
+                }
+                gaCopy.send_to = GA_SEND_TO;
+                gaParams = gaCopy;
+              }
+              window.gtag('event', plat.ga4, gaParams);
+            }
+          } catch (e3) {}
+        }
+
+        if (oid) markPurchaseFired(oid);
+      }
+
+      // Meta Pixel — only the Zappy pixel integration. A pixel pasted inside
+      // GTM already initializes fbq; calling it from here would double-count.
+      // Live sites lazy-load fbq after marketing consent. If the stub is not
+      // defined yet, queue and flush when the pixel arrives.
+      if (DIRECT_META) {
+        try {
+          if (purchaseMetaAlreadySent) {
+            // already delivered to Meta
+          } else {
+            var metaParams = buildMetaParams(eventId, metadata);
+            if (typeof window.fbq === 'function') {
+              window.fbq('track', plat.meta, metaParams);
+              if (oid) markPurchaseMetaFired(oid);
+            } else {
+              enqueueMetaEvent(plat.meta, metaParams, eventId === 'checkout_complete' ? oid : null);
+            }
+          }
+        } catch (e4) {}
+      }
+    } catch (err) {}
+  };
+
+  // ---- Click listeners (capture) ----
+  var recent = Object.create(null);
+  function dedupe(key) {
+    var now = Date.now();
+    if (recent[key] && now - recent[key] < 800) return true;
+    recent[key] = now;
+    return false;
+  }
+
+  function closest(el, selector) {
+    if (!el) return null;
+    if (el.closest) return el.closest(selector);
+    return null;
+  }
+
+  function findAnchor(el) {
+    var node = el;
+    while (node && node !== document) {
+      if (node.tagName === 'A') return node;
+      node = node.parentElement;
+    }
+    return null;
+  }
+
+  function isWhatsAppHref(href) {
+    if (!href) return false;
+    var h = String(href).toLowerCase();
+    return h.indexOf('wa.me/') !== -1 ||
+      h.indexOf('api.whatsapp.com') !== -1 ||
+      h.indexOf('whatsapp.com/send') !== -1 ||
+      h.indexOf('whatsapp:') === 0;
+  }
+
+  document.addEventListener('click', function(e) {
+    try {
+      var target = e.target;
+      if (!target) return;
+
+      // WhatsApp
+      var waFloat = closest(target, '.whatsapp-float, a.whatsapp-float, [data-zappy-whatsapp]');
+      var anchor = findAnchor(target);
+      var href = (anchor && anchor.href) || '';
+      if (waFloat || (anchor && isWhatsAppHref(href))) {
+        if (!dedupe('wa:' + href)) {
+          var waSource = waFloat ? 'float' : 'link';
+          window.zappyFireMarketingEvent('whatsapp_click', {
+            source: waSource,
+            href: href || null,
+            pagePath: pagePath()
+          });
+        }
+        return;
+      }
+
+      // Phone
+      var phoneBtn = closest(target, '.phone-header-btn, .nav-phone-btn, .call-btn, [data-zappy-phone]');
+      var telHref = '';
+      if (anchor && anchor.href && String(anchor.href).toLowerCase().indexOf('tel:') === 0) {
+        telHref = anchor.href;
+      } else if (phoneBtn && phoneBtn.href && String(phoneBtn.href).toLowerCase().indexOf('tel:') === 0) {
+        telHref = phoneBtn.href;
+      }
+      if (phoneBtn || telHref) {
+        var phone = '';
+        if (telHref) {
+          phone = String(telHref).replace(/^tel:/i, '').trim();
+        }
+        if (!dedupe('tel:' + (phone || (phoneBtn && phoneBtn.id) || 'btn'))) {
+          window.zappyFireMarketingEvent('phone_click', {
+            source: phoneBtn ? 'button' : 'link',
+            phone: phone || null,
+            href: telHref || null,
+            pagePath: pagePath()
+          });
+        }
+        return;
+      }
+
+      // Catalog / product inquiry
+      if (IS_CATALOG || IS_FULL) {
+        var inq = closest(target, '.card-inquiry-btn, #zappy-pdp-inquiry-btn, a.inquiry-btn');
+        if (inq) {
+          if (!dedupe('inq:' + (inq.id || inq.className))) {
+            var product = window.currentProduct || null;
+            var productId = (inq.getAttribute && inq.getAttribute('data-product-id')) ||
+              (product && product.id) || null;
+            var productName = (inq.getAttribute && inq.getAttribute('data-product-name')) ||
+              (product && product.name) || null;
+            var channel = 'contact_page';
+            var inqHref = (inq.tagName === 'A' && inq.href) ? inq.href : '';
+            if (inqHref && String(inqHref).toLowerCase().indexOf('mailto:') === 0) channel = 'mailto';
+            window.zappyFireMarketingEvent('product_inquiry', {
+              source: inq.id === 'zappy-pdp-inquiry-btn' ? 'pdp' : 'card',
+              productId: productId,
+              productName: productName,
+              channel: channel,
+              pagePath: pagePath()
+            });
+          }
+        }
+      }
+    } catch (err) {}
+  }, true);
+})();
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"LocalBusiness","@id":"https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com#organization","name":"אבי בן דוד, עו״ד","url":"https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com","address":{"@type":"PostalAddress","streetAddress":"שד' ההסתדרות 66, חיפה, ישראל"},"contactPoint":[{"@type":"ContactPoint","contactType":"customer service","email":"Avibd@bendavidlaw.co.il","telephone":"972544544546"}]},{"@type":"WebSite","@id":"https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com#website","url":"https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com","name":"אבי בן דוד, עו״ד","publisher":{"@id":"https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com#organization"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com"},{"@type":"ListItem","position":2,"name":"Poa Guide","item":"https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/poa-guide"}]}]}</script>
+    <!-- Favicons --> <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"> <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"> <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"> <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png"> <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png"> <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png"> <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"> <style> /* Zappy Attribution Header Styles */ .zappy-header { position: fixed; top: 0; left: 0; width: 100%; background: white; box-shadow: 0px 4px 19px 0px rgba(0,0,0,0.04); padding: 16px 10px; text-align: center; font-family: 'Nunito', sans-serif; font-size: 16px; color: #4a4a4a; line-height: 21px; z-index: 99999; display: flex; align-items: center; justify-content: center; min-height: 21px; direction: ltr !important; unicode-bidi: isolate; } .zappy-header p { margin: 0; padding: 0; font-weight: 400; font-size: 16px; line-height: 21px; white-space: nowrap; display: inline-block; vertical-align: baseline; margin-bottom: 0 !important; direction: ltr !important; } .zappy-header .zappy-link { font-weight: 700; color: #4a4a4a; text-decoration: none; transition: opacity 0.2s; } .zappy-header .zappy-link:hover { opacity: 0.7; }</style> <!-- Cookie Consent --> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css">  <!-- Mickidum Accessibility Toolbar -->  <style> /* Dropdown sub-menu styles (AI-generated page) */ .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu) { position: relative; } .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu { display: block; position: absolute; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; } .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; } .sub-menu li { list-style: none; margin: 0; padding: 0; } .sub-menu a { display: block; padding: 10px 16px; color: #333; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; } .sub-menu a:hover { background-color: #f5f5f5; } /* RTL dropdown positioning */ [dir="rtl"] .sub-menu, html[lang="he"] .sub-menu, html[lang="ar"] .sub-menu { left: auto; right: 0; } </style> <!-- ZAPPY_INTEGRATION_START analytics:add_facebook_pixel --> <!-- Facebook Pixel --> <!-- ZAPPY_INTEGRATION_END analytics:add_facebook_pixel --> <meta name="facebook-domain-verification" content="nc4rvkhd1ksy361kw72yd8oj6g6vlr"> <style id="zappy-cta-mobile-style"> /* Hide CTA list item on desktop (tablets and up) */ @media (min-width: 769px) { .nav-cta-item-mobile { display: none !important; } } /* Show CTA list item on mobile */ @media (max-width: 768px) { .nav-cta-item-mobile { display: list-item !important; } } </style> <style id="zappy-nested-menu-style"> /* Desktop only: vertically center nav items */ @media (min-width: 769px) { .nav-menu, #navMenu { align-items: center !important; } } /* Menu Group styling (non-clickable parent) - TOP LEVEL ONLY with ultra-specific selector */ .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block !important; padding: 0.5rem 1rem !important; color: var(--nav-color) !important; font-weight: 500 !important; line-height: 1.7 !important; cursor: default !important; user-select: none !important; vertical-align: middle !important; text-decoration: none !important; margin: 0 !important; transition: color 0.3s ease !important; } .nav-menu > li > .menu-group-title:hover, #navMenu > li > .menu-group-title:hover { color: var(--nav-hover-color) !important; } /* Desktop: show submenu on Menu Group hover */ li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; /* Enable interaction when hovering */ } /* Hide menu items marked as hidden (overrides hover states) */ .zappy-hidden-menu-item, li:has(.menu-group-title):hover > .sub-menu .zappy-hidden-menu-item { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; } /* Keep submenu visible when hovering over the submenu itself */ .sub-menu:hover { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; } /* Nested dropdown menu styles - using more specific selectors */ .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu { display: block !important; /* Ensure submenu is in the DOM */ position: absolute !important; top: 100%; left: 0; right: auto; min-width: 200px; background: white; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); border-radius: 8px; padding: 8px 0; margin-top: 0px; /* Remove gap to prevent hover loss */ opacity: 0 !important; visibility: hidden !important; transform: translateY(-10px); transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s; z-index: 1000; list-style: none; pointer-events: none; /* Prevent interaction when hidden */ } /* RTL (Hebrew/Arabic) submenu positioning - align to right instead of left */ [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto; right: 0; } /* Show submenu on parent hover - more specific selectors */ .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; /* Enable interaction when visible */ } /* Parent item must be relatively positioned */ .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu) { position: relative; } /* Style for submenu items */ .sub-menu li { list-style: none; margin: 0; padding: 0; } .sub-menu a, .sub-menu .menu-group-title { display: block !important; padding: 10px 12px !important; color: #333 !important; font-weight: 600 !important; text-decoration: none; transition: background-color 0.2s; white-space: nowrap; cursor: default; } .sub-menu a:hover { background-color: #f5f5f5; } /* CRITICAL: Override submenu styles for TOP-LEVEL Menu Groups only - must come AFTER submenu styles */ .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block !important; padding: 0.5rem 1rem !important; color: var(--nav-color) !important; font-weight: 500 !important; line-height: 1.7 !important; cursor: default !important; user-select: none !important; vertical-align: middle !important; text-decoration: none !important; margin: 0 !important; transition: color 0.3s ease !important; } .nav-menu > li > .menu-group-title:hover, #navMenu > li > .menu-group-title:hover { color: var(--nav-hover-color) !important; background-color: transparent !important; } /* On mobile, show nested menus as expandable accordion */ @media (max-width: 768px) { /* Mobile submenu styling */ .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; margin-top: 0 !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease, visibility 0.3s ease, padding 0.3s ease; padding: 0 !important; border-radius: 0 !important; } /* Expanded state — no internal scroll; parent navMenu scrolls */ .sub-menu.mobile-expanded { max-height: none !important; overflow-y: visible !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; } /* RTL padding adjustment */ [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded, html[lang="ar"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; } /* Disable hover behavior on mobile */ .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; } /* Enable visibility for expanded submenus */ .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; } .sub-menu a { padding: 10px 0 !important; display: block !important; font-size: 14px !important; white-space: normal !important; } .sub-menu a:hover { background-color: transparent !important; } /* Parent item wrapper - flex layout with relative positioning for absolute toggle */ .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; position: relative !important; min-height: 44px !important; } /* Parent link - takes full width since toggle is absolute (not a flex child) */ .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { flex: 1 !important; min-width: 0 !important; } /* Normalize menu-group-title in mobile nav to match link alignment */ .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { padding: 0 !important; line-height: inherit !important; } /* Submenu takes full width below parent */ .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu, .navbar li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; } /* HIDE EXISTING CHEVRONS/ARROWS from cloned sites to prevent duplicates */ .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; } /* Toggle arrow button - flex child that stretches to match nav-link height */ .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: auto !important; background: transparent !important; border: none !important; cursor: pointer !important; padding: 0 !important; margin: 0 !important; position: static !important; flex-shrink: 0 !important; align-self: stretch !important; z-index: 2 !important; -webkit-tap-highlight-color: transparent; } .mobile-submenu-toggle::after { content: '' !important; display: block !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; } /* Rotate arrow when expanded */ .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; } } /* Hide toggle button on desktop */ @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } } </style> <script id="zappy-mobile-menu-script"> // Mobile menu toggle for nested submenus (including Menu Groups) // Uses separate toggle button - link navigates, arrow toggles submenu (function() { function initMobileMenuToggles() { // Only run on mobile if (window.innerWidth > 768) { // Remove any toggle buttons on desktop document.querySelectorAll('.mobile-submenu-toggle').forEach(btn => btn.remove()); document.querySelectorAll('.sub-menu.mobile-expanded').forEach(menu => { menu.classList.remove('mobile-expanded'); }); console.log('[MOBILE MENU] Desktop mode - cleanup done'); return; } console.log('[MOBILE MENU] Initializing mobile menu toggles...'); // Find all parent menu items (items with .sub-menu) const menuItemsWithSubmenus = document.querySelectorAll( '.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)' ); console.log('[MOBILE MENU] Found', menuItemsWithSubmenus.length, 'items with submenus'); menuItemsWithSubmenus.forEach(function(li) { // Skip if already has toggle button if (li.querySelector('.mobile-submenu-toggle')) { return; } const submenu = li.querySelector('.sub-menu'); const parentLink = li.querySelector(':scope > a') || li.querySelector(':scope > .menu-group-title'); if (!submenu || !parentLink) return; // Create toggle button const toggleBtn = document.createElement('button'); toggleBtn.className = 'mobile-submenu-toggle'; toggleBtn.setAttribute('aria-label', 'Toggle submenu'); toggleBtn.setAttribute('type', 'button'); // Insert toggle button after the link parentLink.insertAdjacentElement('afterend', toggleBtn); console.log('[MOBILE MENU] Created toggle button for:', parentLink.textContent?.trim()); // Handle toggle button click - only toggles submenu toggleBtn.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); const isExpanded = submenu.classList.contains('mobile-expanded'); // Close all other submenus first document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { if (menu !== submenu) { menu.classList.remove('mobile-expanded'); const otherToggle = menu.parentElement.querySelector('.mobile-submenu-toggle'); if (otherToggle) otherToggle.classList.remove('expanded'); } }); // Toggle this submenu submenu.classList.toggle('mobile-expanded'); toggleBtn.classList.toggle('expanded'); console.log('[MOBILE MENU] Toggled submenu:', !isExpanded ? 'expanded' : 'collapsed'); }); // Parent link navigates normally - no preventDefault }); } // Initialize on DOM load if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileMenuToggles); } else { initMobileMenuToggles(); } // Re-initialize on window resize (but use debounce to avoid too many calls) let resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileMenuToggles, 250); }); // Also initialize when mobile menu becomes visible // This handles cases where the mobile menu is hidden initially const observer = new MutationObserver(function(mutations) { mutations.forEach(function(mutation) { if (mutation.type === 'attributes' && mutation.attributeName === 'class') { const target = mutation.target; if (target.classList.contains('active') || target.style.display !== 'none') { console.log('[MOBILE MENU] Mobile menu became visible, re-initializing...'); setTimeout(initMobileMenuToggles, 100); } } }); }); // Observe mobile menu containers const mobileMenus = document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu'); mobileMenus.forEach(function(menu) { observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] }); }); })(); </script> <!-- ZAPPY_INTEGRATION_START analytics:add_google_analytics --> <!-- Google Analytics --> <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-47QTW1LY2Q"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-47QTW1LY2Q'); </script> <!-- ZAPPY_INTEGRATION_END analytics:add_google_analytics -->     <!-- ZAPPY_INTEGRATION_START analytics:add_google_tag_manager -->
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TN44STVH');</script>
+<!-- ZAPPY_INTEGRATION_END analytics:add_google_tag_manager -->
+    <style id="zappy-critical-above-fold-css">
+html{box-sizing:border-box;-webkit-text-size-adjust:100%}*,*::before,*::after{box-sizing:inherit}body{margin:0;min-width:320px;overflow-x:clip}img,svg,video{max-width:100%;height:auto}main{display:block}.container{width:min(100% - 32px,1200px);margin-inline:auto}.navbar,nav.navbar,header .navbar,header[role="banner"]{position:relative;z-index:1000;width:100%}.nav-container,.navbar .container{display:flex;align-items:center;justify-content:space-between;min-height:64px}.logo,.logo-link img{display:block;width:35px;height:35px;object-fit:contain}.nav-menu,#navMenu{list-style:none;margin:0;padding:0}.navbar a,.nav-menu a,#navMenu a,.navbar .nav-links a{color:inherit;text-decoration:none}.navbar .sub-menu,.nav-menu .sub-menu,#navMenu .sub-menu{display:none}.fa,.fas,.far,.fab,.fa-solid,.fa-regular,.fa-brands{display:inline-block;min-width:1em;text-align:center}html:not(#zappy-noop)[data-zappy-site-type="ecommerce"] .phone-header-btn,html:not(#zappy-noop) .navbar:has(.nav-ecommerce-icons)>.phone-header-btn{display:none!important;visibility:hidden!important;width:0!important;height:0!important;pointer-events:none!important}.zappy-preview-empty-store-cta{display:none!important;visibility:hidden!important;height:0!important;max-height:0!important;overflow:hidden!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important}.zappy-catalog-menu{background:var(--surface-color,var(--surface,linear-gradient(135deg,#f8f9fa 0%,#fff 100%)));border-bottom:1px solid var(--border-color,#e5e7eb);padding:0;position:sticky;top:0;z-index:90}.zappy-catalog-menu[dir=rtl],.zappy-catalog-menu.rtl{direction:rtl}.zappy-catalog-menu[dir=ltr],.zappy-catalog-menu.ltr{direction:ltr}.catalog-menu-container{max-width:1440px;margin:0 auto;display:flex;align-items:center;gap:8px;padding:10px 24px;overflow:visible}.catalog-menu-categories,.catalog-menu-list{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin:0;padding:0;list-style:none}.catalog-menu-item{display:inline-flex;align-items:center;padding:8px 16px;font-size:14px;font-weight:500;color:var(--text-color,var(--text,#374151));text-decoration:none;border-radius:20px;white-space:nowrap}.catalog-menu-all{background:var(--primary-color,var(--primary,#111));color:var(--text-light,#fff)!important}.catalog-menu-parent{position:relative;display:inline-flex;align-items:center}.catalog-menu-trigger{display:inline-flex;align-items:center;gap:6px}.catalog-menu-chevron{flex-shrink:0}.catalog-menu-parent>.sub-menu{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}.hero-section,.index-hero-section,section[class*="hero"]{position:relative;overflow:hidden}.hero-section,.index-hero-section{min-height:560px}section[data-hero-type*="fullscreen"]{min-height:100vh}.hero-bg-wrapper,.hero-bg-image,section[class*="hero"] [class*="hero-bg"]{position:absolute;inset:0;width:100%;height:100%}.hero-bg-wrapper img,.hero-bg-image img,section[class*="hero"] [data-hero-bg],section[class*="hero"] img[data-hero-background="true"]{width:100%!important;height:100%!important;object-fit:cover!important;display:block}.hero-content,section[class*="hero"] .container{position:relative;z-index:2}@media(max-width:768px){:root{--header-height:72px;--total-header-height:72px;--zappy-mobile-menu-top:72px}html[data-zappy-site-type="ecommerce"] body{padding-top:var(--total-header-height,72px)}html[data-zappy-site-type="ecommerce"] body>nav.navbar,html[data-zappy-site-type="ecommerce"] body>.navbar:not(.zappy-catalog-menu){position:fixed!important;top:0;left:0;right:0;z-index:100000;width:100%;margin-bottom:0}.zappy-catalog-menu{position:fixed;top:var(--header-height,72px);left:0;right:0;z-index:99999}.nav-container,.navbar .container{min-height:60px}.nav-menu,#navMenu{max-width:100vw;overflow-x:hidden}.hero-section,.index-hero-section,section[class*="hero"],section[data-hero-type*="fullscreen"]{min-height:100svh}.hero-bg-wrapper,.hero-bg-image,.hero-scrim{min-height:100svh}}
+:root{--nav-bg:#F5EFE4}.navbar{background-color:#F5EFE4!important}
+
+/* ZAPPY_ANNOUNCEMENT_HEADER_OFFSET_CSS_V3 */
+:root {
+  --zappy-header-stack-height: calc(var(--zappy-announcement-height, 40px) + var(--header-height, 72px));
+}
+body:has(.zappy-announcement-bar) nav.navbar:not(.zappy-catalog-menu),
+body:has(.zappy-announcement-bar) header.navbar,
+body:has(.zappy-announcement-bar) .navbar:not(.zappy-catalog-menu):not(.mobile-search-panel) {
+  top: var(--zappy-announcement-height, 40px) !important;
+}
+
+
+
+/* ZAPPY_CONTENT_ALIGNMENT_FIRST_PAINT_CSS_V1 */
+[data-zappy-content-align] {
+  display: flex !important;
+  flex-direction: column !important;
+}
+[data-zappy-content-align^="top-"] { justify-content: flex-start !important; }
+[data-zappy-content-align^="upper-"],
+[data-zappy-content-align^="center-"],
+[data-zappy-content-align^="lower-"] { justify-content: center !important; }
+[data-zappy-content-align^="bottom-"] { justify-content: flex-end !important; }
+[data-zappy-content-align$="-left"],
+[data-zappy-content-align$="-mid-left"] {
+  align-items: flex-start !important;
+  text-align: start !important;
+}
+[data-zappy-content-align$="-center"] {
+  align-items: center !important;
+  text-align: center !important;
+}
+[data-zappy-content-align$="-right"],
+[data-zappy-content-align$="-mid-right"] {
+  align-items: flex-end !important;
+  text-align: end !important;
+}
+[data-zappy-content-align] [data-zappy-align-target] {
+  margin-left: auto;
+  margin-right: auto;
+}
+[data-zappy-content-align$="-center"] [data-zappy-align-target],
+[data-zappy-content-align$="-center"] [data-zappy-align-target] > * {
+  text-align: center !important;
+}
+
+</style>
+    <link rel="stylesheet" href="/styles.css">
+    <script>window.ZAPPY_WEBSITE_ID = "fa1cb323-07af-422a-8b17-cefe9dd40f4c"; window.ZAPPY_API_BASE = "https://api.zappy5.com";</script>
+
+    <style id="zappy-widget-visibility">
+      html[dir="rtl"] .whatsapp-float { right: 20px !important; left: auto !important; }
+      html[dir="ltr"] .whatsapp-float, html:not([dir]) .whatsapp-float { left: 20px !important; right: auto !important; }
+      html[dir="rtl"] #mic-access-tool-general-button, html[dir="rtl"] .mic-access-tool-general-button,
+      html[dir="rtl"] #mic-init-access-tool .mic-access-tool-general-button,
+      html[dir="rtl"] #mic-init-access-tool #mic-access-tool-general-button,
+      html[dir="rtl"] ._access-icon { left: 20px !important; right: auto !important; }
+      html[dir="ltr"] #mic-access-tool-general-button, html[dir="ltr"] .mic-access-tool-general-button,
+      html[dir="ltr"] #mic-init-access-tool .mic-access-tool-general-button,
+      html[dir="ltr"] #mic-init-access-tool #mic-access-tool-general-button,
+      html[dir="ltr"] ._access-icon,
+      html:not([dir]) #mic-access-tool-general-button, html:not([dir]) .mic-access-tool-general-button,
+      html:not([dir]) #mic-init-access-tool .mic-access-tool-general-button,
+      html:not([dir]) #mic-init-access-tool #mic-access-tool-general-button,
+      html:not([dir]) ._access-icon { right: 20px !important; left: auto !important; }
+      @media (max-width: 768px) { .whatsapp-float { display: flex !important; } }
+      @media (min-width: 769px) { .whatsapp-float { display: flex !important; } }
+      @media (max-width: 768px) {
+        #mic-access-tool-general-button, .mic-access-tool-general-button,
+        #mic-init-access-tool .mic-access-tool-general-button, #mic-init-access-tool #mic-access-tool-general-button,
+        ._access-icon, #mic-access-tool-box, .mic-access-tool-box,
+        #mic-init-access-tool #mic-access-tool-box, div[id*="mic-access-tool-box"], ._access-menu {
+          display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important;
+        }
+      }
+      @media (min-width: 769px) {
+        #mic-access-tool-general-button, .mic-access-tool-general-button,
+        #mic-init-access-tool .mic-access-tool-general-button, #mic-init-access-tool #mic-access-tool-general-button,
+        ._access-icon, #mic-access-tool-box, .mic-access-tool-box,
+        #mic-init-access-tool #mic-access-tool-box, div[id*="mic-access-tool-box"], ._access-menu {
+          display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important;
+        }
+      }
+    </style>
+</head>
+<body>
+
+    <!-- ZAPPY_INTEGRATION_START analytics:add_google_tag_manager -->
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TN44STVH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- ZAPPY_INTEGRATION_END analytics:add_google_tag_manager --> <!-- Zappy Attribution Header -->  <nav class="navbar" id="navbar"> <div class="container nav-container"> <div class="nav-brand"> <a href="/" class="logo-link"> <img src="/assets/logo-1769349059477-fk1f7f.webp?v=1769349060299-tnu782" alt="אבי בן דוד, עו&amp;quot;ד" class="logo" decoding="async" width="35" height="35"> </a> </div> <button class="mobile-toggle" id="mobileToggle" aria-label="תפריט"> <svg style="display:block !important" class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"> <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path> </svg> <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none !important"> <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path> </svg> </button> <button class="phone-header-btn" aria-label="התקשר אלינו" data-phone="972544544546"> <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"> <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path> </svg> </button> <ul class="nav-menu" id="navMenu"><li><a href="/services">השירותים שלנו&amp;nbsp;</a></li><li><a href="/about">אודות</a></li><li><a href="/disability-assessment-calculator" class="">מחשבון הערכת נכות</a></li><li><a href="/blog" class="nav-link">מאמרים</a><ul class="sub-menu"><li><a href="/blog/ptsd-claims">פוסט טראומה בחרבות ברזל: הכרה וזכויות משפטיות | אבי בן דוד</a></li><li><a href="/blog/medical-committee">הכנה לוועדה רפואית: המדריך לנכה צה"ל | אבי בן דוד</a></li><li><a href="/idf-veterans-representation">שקיפות הגינות וייצוג נכי צה"ל</a></li><li><a href="/blog/legal-representation" class="nav-link">ייצוג משפטי</a></li></ul></li><li><a href="/reviews" class="nav-link">לקוחות ממליצים</a></li><li><a href="/guides" class="nav-link">מדריכים</a><ul class="sub-menu"><li><a href="/guides/family-rights">זכויות הורים לחיילים שנפצעו בשירות</a></li><li><a href="/guides/disability-recognition">המדריך המלא להכרה בנכות משרד הביטחון - חרבות ברזל</a></li><li><a href="/guides/medical-committees">הכנה לוועדות רפואיות במשרד הביטחון</a></li><li><a href="/guides/rehabilitation-guide">המדריך המלא למימוש זכויות מול אגף השיקום | אבי בן דוד</a></li></ul></li><li class="nav-cta-item-mobile"><a href="/contact">צור קשר</a></li><li><a href="/idf-disabled" class="">נכי צה״ל</a></li><li><a href="/temporary-disability" class="">נכות זמנית</a></li><li><a href="/alimony-custody" class="">מזונות ומשמורת</a></li><li><a href="/prenup-property" class="">הסכם ממון</a></li><li><a href="/poa-guide" class="">מדריך ייפוי כוח מתמשך</a></li></ul> <div class="nav-cta-container"> <li class="nav-cta-item"> <a href="/contact" class="nav-cta-btn">צור קשר</a> </li> </div> </div> </nav><main>
+      <section id="layout-1794176631979" class="py-16 md:py-24 bg-white layout-section zappy-removable" data-zappy-component="true" style="width: 100%; padding: 60px 0;">
+        <div class="container mx-auto px-4 md:px-8 text-center">
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">מדריך ייפוי כוח מתמשך</h1>
+          <p class="text-gray-600 text-lg">This page is ready for your content.</p>
+        </div>
+      </section>
+    </main>       <!-- WhatsApp floating button - desktop: fixed top-right, mobile: fixed bottom-right --> <style> .whatsapp-float-wrapper { position: fixed; top: 120px; right: 30px; z-index: 9999; display: flex; align-items: center; gap: 12px; direction: rtl; } .whatsapp-btn-inline { width: 120px; height: 120px; background-color: #25D366; color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 60px; box-shadow: 0 4px 16px rgba(37,211,102,0.5); text-decoration: none; flex-shrink: 0; } .whatsapp-float-label { background: #25D366; color: #ffffff; padding: 10px 16px; border-radius: 20px; font-size: 14px; font-weight: 700; white-space: nowrap; box-shadow: 0 4px 12px rgba(37,211,102,0.4); line-height: 1.4; text-align: center; } @media (max-width: 768px) { .whatsapp-float-wrapper { top: auto; bottom: 80px; right: 20px; left: auto; gap: 8px; } .whatsapp-btn-inline { width: 90px; height: 90px; font-size: 45px; } .whatsapp-float-label { font-size: 12px; padding: 8px 12px; } } </style>  <!-- Legal Footer --> <footer class="legal-footer"> <div class="container"> <div class="footer-main"> <div class="all-rights-reserved"> <p>© 2026 אבי בן דוד, עו"ד. כל הזכויות שמורות.<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><span style="display:block;margin-top:8px;color:inherit;">המידע באתר כללי ואינו מהווה ייעוץ משפטי.</span></p> </div> <div class="footer-social"><a href="https://facebook.com/profile.php?id=61586762410240" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="display:none;"><i class="fab fa-facebook"></i></a> <a href="https://instagram.com/bendavidlaw" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="display:none;"><i class="fab fa-instagram"></i></a> <a href="https://wa.me/972544544546?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A0%D7%99%20%D7%A6%D7%A8%D7%99%D7%9A%20%D7%99%D7%99%D7%A6%D7%95%D7%92%20%D7%9E%D7%A9%D7%A4%D7%98%D7%99%20%D7%9C%D7%A0%D7%9B%D7%95%D7%AA%20%D7%A6%D7%94%22%D7%9C.%20%D7%90%D7%A4%D7%A9%D7%A8%20%D7%99%D7%99%D7%A2%D7%95%D7%A5%20%D7%A8%D7%90%D7%A9%D7%95%D7%A0%D7%99%3F" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" style="display:none;"><i class="fab fa-whatsapp"></i></a> <a href="https://tiktok.com/@avi.ben.david14?lang=en" target="_blank" rel="noopener noreferrer" aria-label="TikTok" data-element-id="element-ai-1778139138367-tk9x2m" data-element-type="social-link"><i class="fab fa-tiktok"></i></a> <a href="https://youtube.com/@AviBenDavid-g9c" target="_blank" rel="noopener noreferrer" aria-label="YouTube" data-element-id="element-ai-1778770497848-yt3k9p" data-element-type="social-link"><i class="fab fa-youtube"></i></a></div> <div class="footer-legal"> <a href="/privacy" aria-label="מדיניות פרטיות"> מדיניות פרטיות </a> <span class="separator">|</span> <a href="/accessibility" aria-label="נגישות"> נגישות </a> <span class="separator">|</span> <a href="/terms" aria-label="תנאי שימוש"> תנאי שימוש </a> </div> </div> <div class="zappy-attribution"> <p>נוצר באמצעות&amp;nbsp;<a href="https://zappy5.com" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">Zappy</a></p> </div> </div> </footer>  <style> .zappy-sticky-bar { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; display: flex; z-index: 99990; box-shadow: 0 -3px 16px rgba(0,0,0,0.18); } .zappy-sticky-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 10px; font-size: 1rem; font-weight: 700; text-decoration: none; color: #ffffff; transition: filter 0.2s; } .zappy-sticky-btn:hover { filter: brightness(1.1); } .zappy-sticky-call { background: #2c3e50; } .zappy-sticky-whatsapp { background: #25D366; } @media (max-width: 480px) { .zappy-sticky-btn { font-size: 0.88rem; gap: 6px; padding: 13px 6px; } } </style> <!-- Zappy Attribution Header Script --> <script> (function() { var websiteId = 'fa1cb323-07af-422a-8b17-cefe9dd40f4c'; // Don't show header in preview mode var currentUrl = window.location.href; var isPreview = currentUrl.includes('/preview/') || currentUrl.includes('/preview-fullscreen/') || currentUrl.includes('localhost:5001') || currentUrl.includes('localhost:3000'); if (isPreview) { return; // Exit early in preview mode } fetch('https://api.zappy5.com/api/website/' + websiteId + '/tier') .then(function(response) { return response.json(); }) .then(function(data) { if (data.showAttribution) { var header = document.getElementById('zappy-attribution-header'); if (header) { // Use dynamic announcement content if available if (data.announcement && data.announcement.html) { header.innerHTML = data.announcement.html; } // Apply fixed positioning styles inline (works for existing sites too) header.style.cssText = 'position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important; z-index: 99999 !important; display: flex !important; justify-content: center !important; align-items: center !important; text-align: center !important; box-sizing: border-box !important;'; // Fix child elements that might have position: fixed from old CSS var children = header.querySelectorAll('*'); for (var i = 0; i < children.length; i++) { children[i].style.position = 'static'; } // Get header height var headerHeight = header.offsetHeight; // Find and fix navbar to be fixed as well (prevents gap at top of page) var navSelectors = ['nav', '.navbar', '.nav']; var navbar = null; for (var j = 0; j < navSelectors.length; j++) { navbar = document.querySelector(navSelectors[j]); if (navbar && navbar.id !== 'zappy-attribution-header') break; navbar = null; } if (navbar) { var navbarHeight = navbar.offsetHeight; navbar.style.cssText += '; position: fixed !important; top: ' + headerHeight + 'px !important; left: 0 !important; right: 0 !important; width: 100% !important; z-index: 99998 !important;'; document.body.style.paddingTop = (headerHeight + navbarHeight) + 'px'; } else { document.body.style.paddingTop = headerHeight + 'px'; } } } }) .catch(function(error) { console.error('Failed to check tier:', error); }); })(); </script>  
+    <script src="/script.js"></script>
+
+    <script id="zappy-facebook-pixel-lazy-loader">
+(function(){var pixelIds=["4339677629690112"];if(!pixelIds.length||window.__zappyFacebookPixelLazyLoader)return;window.__zappyFacebookPixelLazyLoader=true;var loaded=false;function hasMarketingConsent(){try{var cc=window.CookieConsent;if(!cc||typeof cc.acceptedCategory!=='function')return false;return !!cc.acceptedCategory('marketing');}catch(e){return false;}}function load(){if(loaded||!hasMarketingConsent())return;loaded=true;!function(f,b,e,v,n,t,s){if(f.fbq&&f.fbq.loaded)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');pixelIds.forEach(function(id){try{fbq('init',id);}catch(e){}});try{fbq('track','PageView');}catch(e){}try{if(typeof window.zappyFlushPendingMetaEvents==='function'){window.zappyFlushPendingMetaEvents();}else if(window.__zappyPendingMetaEvents&&window.__zappyPendingMetaEvents.length){var q=window.__zappyPendingMetaEvents;window.__zappyPendingMetaEvents=[];for(var i=0;i<q.length;i++){try{fbq('track',q[i].eventName,q[i].params||{});}catch(e2){}}}}catch(e3){}}function tryLoad(){load();}['cc:onConsent','cc:onChange','cc:onFirstConsent'].forEach(function(evt){window.addEventListener(evt,tryLoad);});var attempts=0;var timer=setInterval(function(){attempts++;tryLoad();if(loaded||attempts>60)clearInterval(timer);},500);if('requestIdleCallback'in window){requestIdleCallback(tryLoad,{timeout:8000});}else{setTimeout(tryLoad,6000);}})();
+</script>
+    <script id="zappy-font-awesome-loader">
+(function(){if(window.__zappyFontAwesomeLoader)return;window.__zappyFontAwesomeLoader=true;var href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';function load(){if(document.querySelector('link[href*="font-awesome"][href*="all.min.css"]'))return;var l=document.createElement('link');l.rel='stylesheet';l.href=href;l.crossOrigin='anonymous';l.referrerPolicy='no-referrer';document.head.appendChild(l);}function schedule(){if('requestIdleCallback'in window){requestIdleCallback(load,{timeout:5000});}else{setTimeout(load,3500);}}['pointerdown','keydown','touchstart','mouseover'].forEach(function(evt){window.addEventListener(evt,load,{once:true,passive:true});});schedule();})();
+</script>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+</body></html>
