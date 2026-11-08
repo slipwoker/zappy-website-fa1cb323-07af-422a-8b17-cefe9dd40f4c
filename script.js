@@ -299,6 +299,35 @@ window.onload = function() {
 })();
 /* ZAPPY_CUSTOM_JS_END:81e98543bed5 */
 
+/* ZAPPY_CUSTOM_JS_START:449a879ca001 */
+(function () {
+  function __zappyCustomInit() {
+    try {
+(function () {
+  var items = document.querySelectorAll('.idf-faq-item');
+  if (!items.length) return;
+  items.forEach(function (item) {
+    var q = item.querySelector('.idf-faq-question');
+    if (!q) return;
+    q.addEventListener('click', function () {
+      var isActive = item.classList.contains('active');
+      items.forEach(function (other) { other.classList.remove('active'); });
+      if (!isActive) item.classList.add('active');
+    });
+  });
+})();
+    } catch (e) {
+      if (typeof console !== 'undefined' && console.warn) { console.warn('[zappy-custom-js]', e); }
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', __zappyCustomInit);
+  } else {
+    __zappyCustomInit();
+  }
+})();
+/* ZAPPY_CUSTOM_JS_END:449a879ca001 */
+
 
 /* ZAPPY_PUBLISHED_LIGHTBOX_RUNTIME */
 (function(){
@@ -1839,240 +1868,6 @@ window.onload = function() {
   } catch (e) {}
 })();
 /* END ZAPPY_MOBILE_MENU_TOGGLE */
-
-
-/* ZAPPY_FAQ_ACCORDION_TOGGLE */
-(function(){
-  try {
-    if (window.__zappyFaqToggleInit) return;
-    window.__zappyFaqToggleInit = true;
-
-    var answerSel = '[class*="faq-answer"], [class*="faq-content"], [class*="faq-body"], [class*="faq-item__answer"], .accordion-content, .accordion-body';
-
-    // Pick the collapsible answer element for an item WITHOUT ever choosing a
-    // wrapper that contains the question/header toggle. Some AI-generated FAQs
-    // nest the clickable question INSIDE a .faq-content wrapper; collapsing that
-    // wrapper (max-height:0/opacity:0) would hide the question itself, leaving
-    // only the number visible and nothing to click to expand. Skipping any
-    // candidate that contains the toggle keeps the header visible and collapses
-    // only the real answer body.
-    function pickAnswer(item, question) {
-      var matches = item.querySelectorAll(answerSel);
-      for (var i = 0; i < matches.length; i++) {
-        var el = matches[i];
-        if (el === question) continue;
-        if (question && el.contains(question)) continue;
-        return el;
-      }
-      // No safe collapsible found (only wrappers that hold the toggle): leave
-      // the content expanded rather than hiding the question.
-      return null;
-    }
-
-    function initFaqToggle() {
-      var items = document.querySelectorAll('[class*="faq-item"], .accordion-item');
-      if (!items.length) return;
-
-      items.forEach(function(item) {
-        if (item.closest(answerSel)) return;
-        var question = item.querySelector(
-          '[class*="faq-question"], [class*="faq-header"], [class*="faq-item__question"], [class*="faq-item__btn"], [class*="faq-btn"], .accordion-header, .accordion-toggle'
-        );
-        if (!question) return;
-        if (question.__zappyFaqBound) return;
-        if (question.hasAttribute('onclick')) question.removeAttribute('onclick');
-        question.__zappyFaqBound = true;
-        question.style.cursor = 'pointer';
-
-        // Shared answer expand/collapse animation (used by both the <details>
-        // toggle path and the generic click path) so the two stay identical.
-        function expandFaqAnswer(answer) {
-          if (!answer) return;
-          answer.style.display = '';
-          answer.style.paddingTop = '';
-          answer.style.paddingBottom = '';
-          var inners = answer.querySelectorAll(answerSel);
-          inners.forEach(function(inn) {
-            inn.style.maxHeight = '';
-            inn.style.overflow = '';
-            inn.style.opacity = '';
-            inn.style.paddingTop = '';
-            inn.style.paddingBottom = '';
-          });
-          answer.style.transition = 'none';
-          answer.style.maxHeight = 'none';
-          answer.style.opacity = '0';
-          var realH = answer.scrollHeight;
-          answer.style.maxHeight = '0';
-          answer.offsetHeight;
-          answer.style.transition = 'max-height 0.35s ease, opacity 0.25s ease, padding 0.25s ease';
-          answer.style.maxHeight = realH + 'px';
-          answer.style.overflow = 'hidden';
-          answer.style.opacity = '1';
-        }
-        function collapseFaqAnswer(answer) {
-          if (!answer) return;
-          answer.style.transition = 'max-height 0.35s ease, opacity 0.25s ease, padding 0.25s ease';
-          answer.style.maxHeight = '0';
-          answer.style.overflow = 'hidden';
-          answer.style.opacity = '0';
-          answer.style.paddingTop = '0';
-          answer.style.paddingBottom = '0';
-        }
-
-        // Native <details>/<summary> accordions: the browser hides the answer
-        // whenever the <details> lacks the `open` attribute, so animating
-        // max-height alone is NOT enough — and a click handler that
-        // preventDefault()s the summary blocks the native open toggle, leaving
-        // the answer permanently clamped (max-height:0 inside a closed details).
-        // Drive the animation off the native `toggle` event instead — it fires
-        // no matter WHERE inside the summary the user clicks (text, icon,
-        // padding) — and let the browser own the `open` state. This is the
-        // modern FAQ markup the legacy click+preventDefault path never handled.
-        var detailsEl = (item.tagName === 'DETAILS')
-          ? item
-          : (question.closest ? question.closest('details') : null);
-        if (detailsEl) {
-          if (detailsEl.__zappyFaqToggleBound) return;
-          detailsEl.__zappyFaqToggleBound = true;
-          detailsEl.addEventListener('toggle', function() {
-            var isActive = detailsEl.open;
-            item.classList.toggle('active', isActive);
-            question.setAttribute('aria-expanded', isActive ? 'true' : 'false');
-            if (isActive) {
-              // Single-open accordion: close the OTHER open <details> in this
-              // FAQ list. Match by the SAME faq-item selector (NOT
-              // `details[class*="faq-item"]`) and resolve each item's
-              // <details>, because the faq-item / accordion-item class
-              // frequently lives on a WRAPPER (e.g.
-              // `<div class="faq-item"><details>…</details></div>`) rather
-              // than on the <details> itself — querying for class-bearing
-              // <details> would miss those siblings and let multiple answers
-              // stay open.
-              var parent = item.parentElement;
-              if (parent) {
-                var sibItems = parent.querySelectorAll('[class*="faq-item"], .accordion-item');
-                sibItems.forEach(function(sibItem) {
-                  if (sibItem === item) return;
-                  var sibDetails = (sibItem.tagName === 'DETAILS') ? sibItem : sibItem.querySelector('details');
-                  if (sibDetails && sibDetails !== detailsEl && sibDetails.open) sibDetails.open = false;
-                });
-              }
-              expandFaqAnswer(pickAnswer(item, question));
-            } else {
-              collapseFaqAnswer(pickAnswer(item, question));
-            }
-            var chevron = question.querySelector('[class*="chevron"], [class*="icon"], svg');
-            if (chevron) {
-              chevron.style.transform = isActive ? 'rotate(180deg)' : 'rotate(0deg)';
-              chevron.style.transition = 'transform 0.3s ease';
-            }
-          });
-          if (detailsEl.open) { item.classList.add('active'); expandFaqAnswer(pickAnswer(item, question)); }
-          return;
-        }
-
-        question.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-
-          var parent = item.parentElement;
-          if (parent) {
-            var siblings = parent.querySelectorAll('[class*="faq-item"], .accordion-item');
-            siblings.forEach(function(sib) {
-              if (sib !== item && sib.classList.contains('active')) {
-                sib.classList.remove('active');
-                var sibQ = sib.querySelector('[class*="faq-question"], [class*="faq-header"], [class*="faq-item__question"], [class*="faq-item__btn"], [class*="faq-btn"], .accordion-header');
-                if (sibQ) sibQ.setAttribute('aria-expanded', 'false');
-                var sibA = pickAnswer(sib, sibQ);
-                if (sibA) {
-                  sibA.style.maxHeight = '0';
-                  sibA.style.overflow = 'hidden';
-                  sibA.style.opacity = '0';
-                  sibA.style.paddingTop = '0';
-                  sibA.style.paddingBottom = '0';
-                }
-              }
-            });
-          }
-
-          var isActive = item.classList.toggle('active');
-          question.setAttribute('aria-expanded', isActive ? 'true' : 'false');
-
-          var answer = pickAnswer(item, question);
-          if (answer) {
-            if (isActive) {
-              answer.style.display = '';
-              answer.style.paddingTop = '';
-              answer.style.paddingBottom = '';
-              var inners = answer.querySelectorAll(answerSel);
-              inners.forEach(function(inn) {
-                inn.style.maxHeight = '';
-                inn.style.overflow = '';
-                inn.style.opacity = '';
-                inn.style.paddingTop = '';
-                inn.style.paddingBottom = '';
-              });
-              answer.style.transition = 'none';
-              answer.style.maxHeight = 'none';
-              answer.style.opacity = '0';
-              var realH = answer.scrollHeight;
-              answer.style.maxHeight = '0';
-              answer.offsetHeight;
-              answer.style.transition = 'max-height 0.35s ease, opacity 0.25s ease, padding 0.25s ease';
-              answer.style.maxHeight = realH + 'px';
-              answer.style.overflow = 'hidden';
-              answer.style.opacity = '1';
-            } else {
-              answer.style.transition = 'max-height 0.35s ease, opacity 0.25s ease, padding 0.25s ease';
-              answer.style.maxHeight = '0';
-              answer.style.overflow = 'hidden';
-              answer.style.opacity = '0';
-              answer.style.paddingTop = '0';
-              answer.style.paddingBottom = '0';
-            }
-          }
-
-          var chevron = question.querySelector('[class*="chevron"], [class*="icon"], svg');
-          if (chevron) {
-            chevron.style.transform = isActive ? 'rotate(180deg)' : 'rotate(0deg)';
-            chevron.style.transition = 'transform 0.3s ease';
-          }
-        });
-      });
-
-      items.forEach(function(item) {
-        if (item.classList.contains('active')) return;
-        // Native <details> manage their own open/closed visibility; never clamp
-        // an open one to max-height:0 (its toggle handler already expanded it).
-        if (item.tagName === 'DETAILS' && item.open) return;
-        if (item.closest(answerSel)) return;
-        var question = item.querySelector('[class*="faq-question"], [class*="faq-header"], [class*="faq-item__question"], [class*="faq-item__btn"], [class*="faq-btn"], .accordion-header, .accordion-toggle');
-        // No clickable question/header toggle exists → this is a STATIC FAQ
-        // (e.g. a grid of badge + always-visible content), not an accordion.
-        // Collapsing it here would hide the content with no way to expand it,
-        // since no click handler was bound above. Leave it fully visible.
-        if (!question) return;
-        var answer = pickAnswer(item, question);
-        if (answer) {
-          answer.style.maxHeight = '0';
-          answer.style.overflow = 'hidden';
-          answer.style.opacity = '0';
-          answer.style.paddingTop = '0';
-          answer.style.paddingBottom = '0';
-          answer.style.transition = 'max-height 0.35s ease, opacity 0.25s ease, padding 0.25s ease';
-        }
-      });
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initFaqToggle, { once: true });
-    } else {
-      initFaqToggle();
-    }
-  } catch (e) {}
-})();
-/* END ZAPPY_FAQ_ACCORDION_TOGGLE */
 
 
 /* ZAPPY_RUNTIME_CONTRAST_FIX */
