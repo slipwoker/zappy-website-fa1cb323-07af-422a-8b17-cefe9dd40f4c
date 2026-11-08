@@ -79,7 +79,7 @@ body {
   font-family: 'Rubik', 'Noto Sans Hebrew', Arial, sans-serif;
   line-height: 1.7;
   color: #2c3e50;
-  background: #f8f9fa;
+  background: #F5EFE4;
 }
 
 img {
@@ -89,16 +89,24 @@ img {
 }
 
 :root {
-  --primary-color: #6b8e6f;
-  --secondary-color: #d4a574;
-  --accent-color: #8b7355;
-  --bg-white: #ffffff;
-  --bg-light: #f8f9fa;
-  --text-dark: #2c3e50;
+--primary-color: #221E3D;
+  --secondary-color: #E6D3B8;
+  --accent-color: #A8452A;
+  --bg-white: #F5EFE4;
+  --bg-light: #F5EFE4;
+  --text-dark: #4A4A4A;
   --text-light: #ffffff;
   --nav-color: #2c3e50;
-  --nav-hover-color: #6b8e6f;
+  --nav-hover-color: #221E3D;
   --shadow: 0 4px 12px rgba(0,0,0,0.1);
+  --background-color: #F5EFE4;
+  --surface-color: #FBF7F0;
+  --text-color: #4A4A4A;
+  --text-secondary-color: #626262;
+  --bg-dark: #1a1a1a;
+  --text-muted: #626262;
+  --border-light: #737476;
+  --border-dark: #6a7484;
 }
 
 .container {
@@ -108,7 +116,7 @@ img {
 }
 
 .navbar {
-  background: #f8f9fa;
+  background: #F5EFE4;
   padding: 20px 0;
   position: sticky;
   top: 0;
@@ -977,7 +985,7 @@ img, picture, figure {
 
     /* Legal Footer Styles - Header Colors */
     .legal-footer {
-      background-color: #f2f2f2;
+      background-color: #F5EFE4;
       color: #1a1a1a;
       padding: 20px 0;
       font-size: 16px;
@@ -1345,7 +1353,7 @@ img, picture, figure {
 .mic-access-tool-box-header,
 div[id*="mic-access-tool-box"] header,
 div[id*="mic-access-tool-box"] .header {
-  background: #f2f2f2 !important;
+  background: #F5EFE4 !important;
   color: white !important;
 }
 
@@ -1382,7 +1390,7 @@ div[id*="mic-access-tool-box"] button:hover {
 #mic-access-tool-box button[title*="Reset"],
 #mic-access-tool-box [class*="reset"],
 div[id*="mic-access-tool-box"] button[class*="reset"] {
-  background: #f2f2f2 !important;
+  background: #F5EFE4 !important;
   color: white !important;
 }
 
@@ -1453,7 +1461,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 }
 
 .article-idf-tag {
-  background: var(--secondary-color, #d4a574);
+  background: var(--secondary-color, #E6D3B8);
   color: #1e2a1e;
   font-size: 13px;
   font-weight: 700;
@@ -1488,7 +1496,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
   color: rgba(255,255,255,0.88);
   line-height: 1.85;
   margin: 0;
-  border-right: 4px solid var(--secondary-color, #d4a574);
+  border-right: 4px solid var(--secondary-color, #E6D3B8);
   padding-right: 20px;
   max-width: 740px;
 }
@@ -1527,7 +1535,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 
 /* ---- Article Body ---- */
 .article-idf-body {
-  background: #ffffff;
+  background: #F5EFE4;
   border-radius: 18px;
   box-shadow: 0 4px 32px rgba(44,62,80,0.07);
   padding: 52px 52px 48px;
@@ -1553,9 +1561,9 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 .article-idf-section-num {
   font-size: 11px;
   font-weight: 700;
-  color: var(--primary-color, #6b8e6f);
+  color: var(--primary-color, #221E3D);
   background: rgba(107,142,111,0.1);
-  border: 1.5px solid var(--primary-color, #6b8e6f);
+  border: 1.5px solid var(--primary-color, #221E3D);
   border-radius: 6px;
   padding: 3px 9px;
   letter-spacing: 0.06em;
@@ -1626,11 +1634,11 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 .article-idf-principle-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 32px rgba(107,142,111,0.18);
-  border-color: var(--primary-color, #6b8e6f);
+  border-color: var(--primary-color, #221E3D);
 }
 
 .article-idf-principle-icon {
-  color: var(--primary-color, #6b8e6f);
+  color: var(--primary-color, #221E3D);
   margin-bottom: 14px;
   display: flex;
 }
@@ -1638,7 +1646,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 .article-idf-principle-num {
   font-size: 11px;
   font-weight: 700;
-  color: var(--secondary-color, #d4a574);
+  color: var(--secondary-color, #E6D3B8);
   letter-spacing: 0.08em;
   margin-bottom: 10px;
 }
@@ -1662,7 +1670,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 .article-idf-closing-quote {
   background: linear-gradient(135deg, rgba(107,142,111,0.1) 0%, rgba(212,165,116,0.08) 100%);
   border: none;
-  border-right: 5px solid var(--primary-color, #6b8e6f);
+  border-right: 5px solid var(--primary-color, #221E3D);
   border-radius: 0 12px 12px 0;
   padding: 32px 36px 28px;
   margin: 0;
@@ -1694,7 +1702,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 
 .article-idf-quote-footer cite {
   font-size: 0.9rem;
-  color: var(--accent-color, #8b7355);
+  color: var(--accent-color, #A8452A);
   font-style: normal;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -1739,7 +1747,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: var(--secondary-color, #d4a574);
+  color: var(--secondary-color, #E6D3B8);
   text-transform: uppercase;
   margin-bottom: 10px;
 }
@@ -1764,7 +1772,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: var(--secondary-color, #d4a574);
+  background: var(--secondary-color, #E6D3B8);
   color: #1e2a1e;
   font-size: 1rem;
   font-weight: 700;
@@ -1780,7 +1788,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 
 .article-idf-cta-btn:hover,
 .article-idf-cta-btn:focus-visible {
-  background: #c49060;
+  background: #E6D3B8;
   transform: translateY(-2px);
   box-shadow: 0 8px 28px rgba(212,165,116,0.45);
   outline: none;
@@ -2054,7 +2062,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
   bottom: 18px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--secondary-color, #d4a574);
+  background: var(--secondary-color, #E6D3B8);
   color: #fff;
   border-radius: 30px;
   padding: 7px 18px;
@@ -2086,7 +2094,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 .abd-profile-label {
   font-size: 13px;
   font-weight: 600;
-  color: var(--secondary-color, #d4a574);
+  color: var(--secondary-color, #E6D3B8);
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 8px;
@@ -2102,7 +2110,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 
 .abd-profile-title {
   font-size: 1.1rem;
-  color: var(--primary-color, #6b8e6f);
+  color: var(--primary-color, #221E3D);
   font-weight: 600;
   margin: 0 0 20px 0;
   letter-spacing: 0.3px;
@@ -2111,7 +2119,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 .abd-profile-divider {
   width: 60px;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary-color, #6b8e6f), var(--secondary-color, #d4a574));
+  background: linear-gradient(90deg, var(--primary-color, #221E3D), var(--secondary-color, #E6D3B8));
   border-radius: 4px;
   margin-bottom: 24px;
 }
@@ -2147,7 +2155,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
   flex-shrink: 0;
   width: 26px;
   height: 26px;
-  background: var(--primary-color, #6b8e6f);
+  background: var(--primary-color, #221E3D);
   color: #fff;
   border-radius: 50%;
   display: flex;
@@ -2170,7 +2178,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--primary-color, #6b8e6f);
+  background: var(--primary-color, #221E3D);
   color: #fff;
   text-decoration: none;
   padding: 14px 30px;
@@ -2184,14 +2192,14 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 
 .abd-cta-primary:hover,
 .abd-cta-primary:focus {
-  background: #5a7a5e;
+  background: #221E3D;
   transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(107, 142, 111, 0.45);
   outline: none;
 }
 
 .abd-cta-primary:focus-visible {
-  outline: 3px solid var(--secondary-color, #d4a574);
+  outline: 3px solid var(--secondary-color, #E6D3B8);
   outline-offset: 3px;
 }
 
@@ -2203,24 +2211,24 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 .abd-cta-secondary {
   display: inline-flex;
   align-items: center;
-  color: var(--accent-color, #8b7355);
+  color: var(--accent-color, #A8452A);
   text-decoration: none;
   font-size: 0.97rem;
   font-weight: 600;
-  border-bottom: 2px solid var(--secondary-color, #d4a574);
+  border-bottom: 2px solid var(--secondary-color, #E6D3B8);
   padding-bottom: 2px;
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .abd-cta-secondary:hover,
 .abd-cta-secondary:focus {
-  color: var(--primary-color, #6b8e6f);
-  border-color: var(--primary-color, #6b8e6f);
+  color: var(--primary-color, #221E3D);
+  border-color: var(--primary-color, #221E3D);
   outline: none;
 }
 
 .abd-cta-secondary:focus-visible {
-  outline: 2px solid var(--primary-color, #6b8e6f);
+  outline: 2px solid var(--primary-color, #221E3D);
   outline-offset: 4px;
   border-radius: 2px;
 }
@@ -2348,7 +2356,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
   position: absolute;
   bottom: 22px;
   left: 22px;
-  background: var(--secondary-color, #d4a574);
+  background: var(--secondary-color, #E6D3B8);
   border-radius: 14px;
   padding: 12px 18px;
   display: flex;
@@ -2391,7 +2399,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 .hero-split-tag {
   display: inline-block;
   background: rgba(107, 142, 111, 0.12);
-  color: var(--primary-color, #6b8e6f);
+  color: var(--primary-color, #221E3D);
   border: 1px solid rgba(107, 142, 111, 0.30);
   border-radius: 30px;
   padding: 6px 18px;
@@ -2415,7 +2423,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 .hero-split-subtitle {
   font-size: 1.35rem;
   font-weight: 600;
-  color: var(--accent-color, #8b7355);
+  color: var(--accent-color, #A8452A);
   margin: 0 0 20px 0;
   line-height: 1.4;
 }
@@ -2449,7 +2457,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 }
 
 .hero-feature-icon {
-  color: var(--primary-color, #6b8e6f);
+  color: var(--primary-color, #221E3D);
   font-size: 1rem;
   font-weight: 700;
   flex-shrink: 0;
@@ -2466,7 +2474,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 
 .hero-cta-primary {
   display: inline-block;
-  background: var(--primary-color, #6b8e6f);
+  background: var(--primary-color, #221E3D);
   color: #fff;
   text-decoration: none;
   padding: 15px 32px;
@@ -2481,41 +2489,41 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 
 .hero-cta-primary:hover,
 .hero-cta-primary:focus {
-  background: #5a7a5e;
+  background: #221E3D;
   transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(107, 142, 111, 0.45);
   outline: none;
 }
 
 .hero-cta-primary:focus-visible {
-  outline: 3px solid var(--secondary-color, #d4a574);
+  outline: 3px solid var(--secondary-color, #E6D3B8);
   outline-offset: 3px;
 }
 
 .hero-cta-secondary {
   display: inline-block;
   background: transparent;
-  color: var(--accent-color, #8b7355);
+  color: var(--accent-color, #A8452A);
   text-decoration: none;
   padding: 14px 28px;
   border-radius: 50px;
   font-size: 1rem;
   font-weight: 600;
-  border: 2px solid var(--accent-color, #8b7355);
+  border: 2px solid var(--accent-color, #A8452A);
   transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
   white-space: nowrap;
 }
 
 .hero-cta-secondary:hover,
 .hero-cta-secondary:focus {
-  background: var(--accent-color, #8b7355);
+  background: var(--accent-color, #A8452A);
   color: #fff;
   transform: translateY(-2px);
   outline: none;
 }
 
 .hero-cta-secondary:focus-visible {
-  outline: 3px solid var(--primary-color, #6b8e6f);
+  outline: 3px solid var(--primary-color, #221E3D);
   outline-offset: 3px;
 }
 
@@ -2678,7 +2686,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 .idf-about-badge {
   display: inline-block;
   background: rgba(107, 142, 111, 0.12);
-  color: var(--primary-color, #6b8e6f);
+  color: var(--primary-color, #221E3D);
   border: 1px solid rgba(107, 142, 111, 0.35);
   border-radius: 30px;
   padding: 6px 20px;
@@ -2754,7 +2762,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
   position: absolute;
   bottom: -20px;
   left: -20px;
-  background: var(--secondary-color, #d4a574);
+  background: var(--secondary-color, #E6D3B8);
   color: #fff;
   border-radius: 14px;
   padding: 14px 22px;
@@ -2813,7 +2821,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
   display: flex;
   align-items: flex-start;
   gap: 14px;
-  background: #fff;
+  background: #F5EFE4;
   border: 1px solid rgba(107, 142, 111, 0.20);
   border-radius: 12px;
   padding: 14px 18px;
@@ -2836,7 +2844,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--primary-color, #6b8e6f);
+  color: var(--primary-color, #221E3D);
   margin-top: 2px;
 }
 
@@ -2859,7 +2867,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 
 .idf-about-value-desc {
   font-size: 0.87rem;
-  color: #5a6a7a;
+  color: #221E3D;
   line-height: 1.5;
 }
 
@@ -2867,14 +2875,14 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: var(--primary-color, #6b8e6f);
+  background: var(--primary-color, #221E3D);
   color: #fff;
   text-decoration: none;
   font-size: 1.02rem;
   font-weight: 700;
   padding: 15px 32px;
   border-radius: 50px;
-  border: 2px solid var(--primary-color, #6b8e6f);
+  border: 2px solid var(--primary-color, #221E3D);
   box-shadow: 0 6px 24px rgba(107, 142, 111, 0.30);
   transition: background 0.28s ease, transform 0.25s ease, box-shadow 0.28s ease;
   align-self: flex-start;
@@ -2890,7 +2898,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 }
 
 .idf-about-cta:focus-visible {
-  outline: 3px solid var(--secondary-color, #d4a574);
+  outline: 3px solid var(--secondary-color, #E6D3B8);
   outline-offset: 3px;
 }
 
@@ -2929,7 +2937,7 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 .idf-about-stat-number {
   font-size: 2.2rem;
   font-weight: 800;
-  color: var(--secondary-color, #d4a574);
+  color: var(--secondary-color, #E6D3B8);
   line-height: 1;
 }
 
@@ -3108,6 +3116,343 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
   object-fit: cover !important;
 }
 }
+/* === BUTTON TEXT OVERRIDES START === */
+.btn-secondary,
+.btn--secondary,
+[class*="btn-secondary"],
+[class*="btn--secondary"] { color: #333333 !important; }
+.navbar .nav-cta-btn,
+.nav-cta-btn { color: #FFFFFF !important; }
+/* === BUTTON TEXT OVERRIDES END === */
+
+
+/* ZAPPY_ANNOUNCEMENT_HEADER_OFFSET_CSS_V3 */
+:root {
+  --zappy-header-stack-height: calc(var(--zappy-announcement-height, 40px) + var(--header-height, 72px));
+}
+body:has(.zappy-announcement-bar) nav.navbar:not(.zappy-catalog-menu),
+body:has(.zappy-announcement-bar) header.navbar,
+body:has(.zappy-announcement-bar) .navbar:not(.zappy-catalog-menu):not(.mobile-search-panel) {
+  top: var(--zappy-announcement-height, 40px) !important;
+}
+
+
+
+/* ZAPPY_MOBILE_CATEGORIES_SUBMENU_CSS_V1 */
+.mobile-categories-submenu { display: none !important; }
+.mobile-categories-submenu.active { display: block !important; }
+
+
+/* ZAPPY_CONTENT_ALIGNMENT_FIRST_PAINT_CSS_V1 */
+[data-zappy-content-align] {
+  display: flex !important;
+  flex-direction: column !important;
+}
+[data-zappy-content-align^="top-"] { justify-content: flex-start !important; }
+[data-zappy-content-align^="upper-"],
+[data-zappy-content-align^="center-"],
+[data-zappy-content-align^="lower-"] { justify-content: center !important; }
+[data-zappy-content-align^="bottom-"] { justify-content: flex-end !important; }
+[data-zappy-content-align$="-left"],
+[data-zappy-content-align$="-mid-left"] {
+  align-items: flex-start !important;
+  text-align: start !important;
+}
+[data-zappy-content-align$="-center"] {
+  align-items: center !important;
+  text-align: center !important;
+}
+[data-zappy-content-align$="-right"],
+[data-zappy-content-align$="-mid-right"] {
+  align-items: flex-end !important;
+  text-align: end !important;
+}
+[data-zappy-content-align] [data-zappy-align-target] {
+  margin-left: auto;
+  margin-right: auto;
+}
+[data-zappy-content-align$="-center"] [data-zappy-align-target],
+[data-zappy-content-align$="-center"] [data-zappy-align-target] > * {
+  text-align: center !important;
+}
+
+
+/* ZAPPY_PRODUCT_BREADCRUMB_MOBILE_HIDE_CSS_V1 */
+@media (max-width: 768px) {
+  .product-breadcrumb { display: none !important; }
+}
+
+
+/* ZAPPY_SHARE_BAR_LAYOUT_ENSURE_V3
+   Blog / article share bars: row layout, reading column, orange secondary chips. */
+
+/* Share bars must stay a horizontal chip row. AI cosmetic CSS and leaked
+   mobile rules historically set flex-direction:column globally and left
+   <br> clusters between the label and icons. */
+.social-share-bar,
+[class*="__share-bar"] {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+.social-share-bar > br,
+[class*="__share-bar"] > br {
+  display: none !important;
+}
+
+/* Constrain share / back / hero / title to the same column as body copy
+   (AI pages often only set max-width on __body). */
+[class*="blog-article-section"] > [class*="__share-bar"],
+[class*="blog-article-section"] > .social-share-bar,
+[class*="blog-article-section"] > [class*="__back-container"],
+[class*="blog-article-section"] > [class*="__hero-figure"],
+[class*="blog-article-section"] > [class*="__article-header"],
+[class*="blog-article-section"] > header:not(.site-header):not(.sim-header),
+[class*="blog-article-section"] [class*="__container"] > [class*="__share-bar"],
+[class*="blog-article-section"] [class*="__container"] > .social-share-bar,
+[class*="blog-article-section"] [class*="__container"] > [class*="__back-container"],
+[class*="blog-article-section"] [class*="__container"] > [class*="__hero-figure"],
+[class*="blog-article-section"] [class*="__container"] > [class*="__article-header"] {
+  max-width: 800px !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+[class*="blog-article-section"] [class*="__hero-figure"] img,
+[class*="blog-article-section"] [class*="__hero-img"] {
+  max-width: 100% !important;
+}
+
+/* Unify blog share chips to orange secondary outline (jewish-life canonical).
+   Overrides brand-colored inline styles, btn-primary fills, and display:none
+   on LinkedIn/X that made article share bars look inconsistent. */
+[class*="blog-article-section"] .social-share-bar,
+[class*="blog-article-section"] [class*="__share-bar"] {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+[class*="blog-article-section"] .social-share-bar a,
+[class*="blog-article-section"] .social-share-bar button,
+[class*="blog-article-section"] [class*="__share-bar"] a,
+[class*="blog-article-section"] [class*="__share-bar"] button,
+[class*="blog-article-section"] .share-copy,
+[class*="blog-article-section"] .share-linkedin,
+[class*="blog-article-section"] .share-twitter,
+[class*="blog-article-section"] .share-facebook,
+[class*="blog-article-section"] .share-whatsapp,
+[class*="blog-article-section"] [class*="__share-btn"],
+[class*="blog-article-section"] [class*="__share-icon"],
+[class*="blog-article-section"] .share-btn,
+[class*="blog-article-section"] .share-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  background-image: none !important;
+  border: 1.5px solid var(--secondary, #ff8a3d) !important;
+  color: var(--secondary, #ff8a3d) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  text-decoration: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  outline: none !important;
+}
+[class*="blog-article-section"] .social-share-bar a svg,
+[class*="blog-article-section"] .social-share-bar button svg,
+[class*="blog-article-section"] [class*="__share-bar"] a svg,
+[class*="blog-article-section"] [class*="__share-bar"] button svg {
+  width: 18px !important;
+  height: 18px !important;
+  max-width: 18px !important;
+  max-height: 18px !important;
+  color: inherit !important;
+  fill: currentColor;
+  stroke: currentColor;
+}
+[class*="blog-article-section"] .social-share-bar__label,
+[class*="blog-article-section"] [class*="__share-label"],
+[class*="blog-article-section"] .share-label {
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  color: var(--text-dark, #1a1a1a) !important;
+  white-space: nowrap !important;
+}
+
+
+/* ZAPPY_CLOSED_MOBILE_NAV_HIDE_V1 */
+@media (max-width: 768px) {
+  .navbar .nav-menu:not(.active):not(.open),
+  nav.navbar .nav-menu:not(.active):not(.open),
+  #navMenu:not(.active):not(.open) {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  .navbar .nav-menu:not(.active):not(.open) *,
+  nav.navbar .nav-menu:not(.active):not(.open) *,
+  #navMenu:not(.active):not(.open) * {
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+  .navbar .nav-menu:not(.active):not(.open) .sub-menu,
+  nav.navbar .nav-menu:not(.active):not(.open) .sub-menu,
+  #navMenu:not(.active):not(.open) .sub-menu {
+    display: none !important;
+  }
+}
+
+
+/* ZAPPY_MOBILE_NAV_ACCORDION_V1 */
+@media (max-width: 768px) {
+  #navMenu.active, #navMenu.open, .nav-menu.active, .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
+  #navMenu.active > li, #navMenu.open > li, .nav-menu.active > li, .nav-menu.open > li {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    inset: auto !important;
+    transform: none !important;
+  }
+  #navMenu .sub-menu, .nav-menu .sub-menu, .navbar .sub-menu,
+  .zappy-products-dropdown > .sub-menu,
+  .nav-menu .zappy-products-dropdown > .sub-menu,
+  .nav-menu.active .zappy-products-dropdown > .sub-menu,
+  .nav-menu.active .zappy-products-dropdown .sub-menu,
+  #navMenu li:hover > .sub-menu, .nav-menu li:hover > .sub-menu, .navbar li:hover > .sub-menu,
+  #navMenu li:focus-within > .sub-menu, .nav-menu li:focus-within > .sub-menu {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+    position: static !important;
+    transform: none !important;
+  }
+  #navMenu .sub-menu.mobile-expanded,
+  .nav-menu .sub-menu.mobile-expanded,
+  .navbar .sub-menu.mobile-expanded,
+  .zappy-products-dropdown > .sub-menu.mobile-expanded,
+  .nav-menu.active .zappy-products-dropdown > .sub-menu.mobile-expanded,
+  .nav-menu.active .zappy-products-dropdown .sub-menu.mobile-expanded,
+  /* Hover/focus-within hide is (1,2,1). The plain .mobile-expanded
+     rule is only (1,2,0), so a tap that leaves the row hovered or
+     focused keeps the opened submenu at display:none. These selectors
+     are (1,3,1) and win. */
+  #navMenu li:hover > .sub-menu.mobile-expanded,
+  #navMenu li:focus-within > .sub-menu.mobile-expanded,
+  .nav-menu li:hover > .sub-menu.mobile-expanded,
+  .nav-menu li:focus-within > .sub-menu.mobile-expanded,
+  .navbar li:hover > .sub-menu.mobile-expanded,
+  .navbar li:focus-within > .sub-menu.mobile-expanded {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    pointer-events: auto !important;
+    position: static !important;
+    transform: none !important;
+    width: 100% !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    float: none !important;
+  }
+}
+
+
+/* ZAPPY_OPEN_MOBILE_NAV_VISIBLE_V1 */
+/* Beat baked ".navbar #navMenu.nav-menu { opacity:0; visibility:hidden; max-height:0 }"
+   which still matches the open drawer. */
+@media (max-width: 768px) {
+  .navbar #navMenu.nav-menu.active,
+  .navbar #navMenu.nav-menu.open,
+  nav.navbar #navMenu.nav-menu.active,
+  nav.navbar #navMenu.nav-menu.open,
+  html body .navbar #navMenu.nav-menu.active,
+  html body .navbar #navMenu.nav-menu.open,
+  html[dir="rtl"] body .navbar #navMenu.nav-menu.active,
+  html[lang="he"] body .navbar #navMenu.nav-menu.active,
+  html[lang="ar"] body .navbar #navMenu.nav-menu.active,
+  html[dir="rtl"] body .navbar #navMenu.nav-menu.open,
+  html[lang="he"] body .navbar #navMenu.nav-menu.open,
+  html[lang="ar"] body .navbar #navMenu.nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: calc(100dvh - var(--zappy-mobile-menu-top, var(--total-header-height, var(--zappy-navbar-bottom, 70px)))) !important;
+    height: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    pointer-events: auto !important;
+  }
+}
+
+
+/* ZAPPY_MOBILE_MENU_GROUP_TITLE_V1 */
+/* Menu-group titles: match open-drawer link padding + beat scrolled frosted-text. */
+@media (max-width: 768px) {
+  html body .navbar .nav-menu.active > li > .menu-group-title,
+  html body nav.navbar .nav-menu.active > li > .menu-group-title,
+  html body .navbar #navMenu.active > li > .menu-group-title,
+  html body #navMenu.active > li > .menu-group-title,
+  html body .navbar .nav-menu.open > li > .menu-group-title,
+  html body #navMenu.open > li > .menu-group-title,
+  html body .navbar.scrolled .nav-menu.active > li > .menu-group-title,
+  html body .navbar.scrolled #navMenu.active > li > .menu-group-title,
+  html body .navbar.scrolled .nav-menu.open > li > .menu-group-title,
+  html body .navbar.scrolled #navMenu.open > li > .menu-group-title,
+  html body .navbar.scrolled .nav-menu.active > li.menu-group-item > .menu-group-title,
+  html body .navbar.scrolled #navMenu.active > li.menu-group-item > .menu-group-title {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+    padding: 12px 16px !important;
+    min-height: 44px !important;
+    line-height: 1.4 !important;
+    font-weight: 600 !important;
+    font-size: inherit !important;
+    color: var(--nav-text, var(--text-light, #fff7ed)) !important;
+  }
+  html body .navbar .nav-menu.active > li.menu-group-item,
+  html body .navbar #navMenu.active > li.menu-group-item,
+  html body .navbar .nav-menu.open > li.menu-group-item,
+  html body #navMenu.open > li.menu-group-item {
+    margin: 4px 0 !important;
+  }
+}
+/* END ZAPPY_MOBILE_MENU_GROUP_TITLE */
+
 
 /* zappy-nav-child-indent */
 .zappy-products-dropdown .zappy-nav-child > a,
@@ -3153,9 +3498,11 @@ nav .sub-menu.zappy-empty-submenu,
 }
 
 
-/* ========== RTL MOBILE NAVBAR FIX (zappy-rtl-mobile-fix) ========== */
+/* ========== RTL MOBILE NAVBAR FIX (zappy-rtl-mobile-fix-v2) ========== */
 /* High-specificity rules to ensure RTL positioning wins over any [lang="en"] conflicts */
 /* For RTL sites: hamburger on RIGHT, phone on LEFT (mirror of LTR layout) */
+/* Mobile menu panel is FULL-BLEED (left+right:0) — V1's left:auto pin was for
+   the retired half-width drawer and must not return. */
 /* NOTE: Includes both html[dir="rtl"] AND [dir="rtl"] selectors as fallback */
 /* because some pages may be wrapped with <html lang="en"> (missing dir="rtl" on html) */
 /* but still have dir="rtl" on <body> or other ancestor elements */
@@ -3196,7 +3543,7 @@ nav .sub-menu.zappy-empty-submenu,
     right: auto !important;
   }
   
-  /* RTL Mobile Menu - slides from RIGHT */
+  /* RTL Mobile Menu panel — full-bleed (matches current overlay generator) */
   html[dir="rtl"] .navbar .nav-menu,
   html[dir="rtl"] nav .nav-menu,
   html[dir="rtl"] header .nav-menu,
@@ -3209,8 +3556,10 @@ nav .sub-menu.zappy-empty-submenu,
   [dir="rtl"] .nav-menu,
   html[lang="he"] .nav-menu,
   html[lang="ar"] .nav-menu {
-    left: auto !important;
+    left: 0 !important;
     right: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
   }
   
   /* RTL Mobile Menu Links - text align right */
@@ -3435,7 +3784,9 @@ nav .sub-menu.zappy-empty-submenu,
   
   /* AI-generated section grids with common naming patterns */
   /* These often have fixed pixel column widths that don't adapt to mobile */
-  [class*="-grid"]:not([data-zappy-auto-grid]):not(.zappy-preserve-css-grid):not([data-zappy-explicit-columns="true"]) {
+  /* Exclude .zappy-qv-book-cal-grid — the booking date picker must stay 7-col
+     on mobile (Quick View + PDP). Class name matches [class*="-grid"]. */
+  [class*="-grid"]:not([data-zappy-auto-grid]):not(.zappy-preserve-css-grid):not([data-zappy-explicit-columns="true"]):not(.zappy-qv-book-cal-grid) {
     grid-template-columns: 1fr !important;
   }
   
@@ -3843,8 +4194,22 @@ form.contact-form .contact-input, form.contact-form .contact-textarea { width: 1
 
 /* ZAPPY_SECTION_BG_TYPE_FIX */
 [data-zappy-bg-type="color"] { background-image: none !important; background-color: var(--zappy-bg-color, transparent) !important; }
-[data-zappy-bg-type="image"] { background-image: linear-gradient(var(--zappy-bg-overlay, rgba(0,0,0,0)), var(--zappy-bg-overlay, rgba(0,0,0,0))), var(--zappy-bg-image, none) !important; background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important; }
+[data-zappy-bg-type="image"] { background-image: linear-gradient(var(--zappy-bg-overlay, rgba(0,0,0,0)), var(--zappy-bg-overlay, rgba(0,0,0,0))), var(--zappy-bg-image, none) !important; background-size: var(--zappy-bg-size, cover) !important; background-position: var(--zappy-bg-position, center) !important; background-repeat: no-repeat !important; }
 [data-zappy-bg-type="video"] { background-image: none !important; }
+/* Full-bleed hero single-image model: overlay/darkness tint layer sits above the
+   <img data-hero-bg> and below the hero content. Inline styles carry the tint;
+   this rule is the positioning safety-net. */
+.zappy-hero-overlay { position: absolute !important; inset: 0 !important; z-index: 1 !important; pointer-events: none !important; }
+section[data-hero-type^="fullscreen"] > .hero-bg-wrapper,
+section[data-hero-type^="fullscreen"] > [class*="hero-bg"],
+section[class*="hero"][data-zappy-bg-overlay-opacity] > .hero-bg-wrapper {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
 
 
 /* ZAPPY_IOS_NAVBAR_GAP_FIX */
@@ -3950,13 +4315,29 @@ html[dir="ltr"] .zappy-products-dropdown .zappy-nav-child > a {
   .navbar .nav-menu.active > li.zappy-products-dropdown > a,
   nav.navbar .nav-menu.active > li.zappy-products-dropdown > a,
   #navMenu.active > li.zappy-products-dropdown > a,
-  .nav-menu.open > li.zappy-products-dropdown > a {
+  .nav-menu.open > li.zappy-products-dropdown > a,
+  .navbar .nav-menu.active > li:has(> .sub-menu) > a,
+  nav.navbar .nav-menu.active > li:has(> .sub-menu) > a,
+  #navMenu.active > li:has(> .sub-menu) > a,
+  .nav-menu.open > li:has(> .sub-menu) > a,
+  .navbar .nav-menu.active > li.menu-item-has-children > a,
+  nav.navbar .nav-menu.active > li.menu-item-has-children > a,
+  #navMenu.active > li.menu-item-has-children > a,
+  .nav-menu.open > li.menu-item-has-children > a {
     padding-right: 56px !important;
   }
   html[dir="rtl"] .navbar .nav-menu.active > li.zappy-products-dropdown > a,
   html[dir="rtl"] nav.navbar .nav-menu.active > li.zappy-products-dropdown > a,
   html[dir="rtl"] #navMenu.active > li.zappy-products-dropdown > a,
-  html[dir="rtl"] .nav-menu.open > li.zappy-products-dropdown > a {
+  html[dir="rtl"] .nav-menu.open > li.zappy-products-dropdown > a,
+  html[dir="rtl"] .navbar .nav-menu.active > li:has(> .sub-menu) > a,
+  html[dir="rtl"] nav.navbar .nav-menu.active > li:has(> .sub-menu) > a,
+  html[dir="rtl"] #navMenu.active > li:has(> .sub-menu) > a,
+  html[dir="rtl"] .nav-menu.open > li:has(> .sub-menu) > a,
+  html[dir="rtl"] .navbar .nav-menu.active > li.menu-item-has-children > a,
+  html[dir="rtl"] nav.navbar .nav-menu.active > li.menu-item-has-children > a,
+  html[dir="rtl"] #navMenu.active > li.menu-item-has-children > a,
+  html[dir="rtl"] .nav-menu.open > li.menu-item-has-children > a {
     padding-right: 16px !important;
     padding-left: 56px !important;
   }
@@ -3974,11 +4355,11 @@ html[dir="ltr"] .zappy-products-dropdown .zappy-nav-child > a {
   --cc-modal-bg: #ffffff;
   --cc-primary-color: #1f2937;
   --cc-secondary-color: #4b5563;
-  --cc-btn-primary-bg: #6b8e6f;
+  --cc-btn-primary-bg: #221e3d;
   --cc-btn-primary-color: #ffffff;
-  --cc-btn-primary-border: #6b8e6f;
-  --cc-btn-primary-hover-bg: #527556;
-  --cc-btn-primary-hover-border: #527556;
+  --cc-btn-primary-border: #221e3d;
+  --cc-btn-primary-hover-bg: #090524;
+  --cc-btn-primary-hover-border: #090524;
   --cc-btn-primary-hover-color: #ffffff;
   /* --cc-btn-secondary-* are used by BOTH the bar's "Customize" link and
    * the preferences modal's "Accept Necessary" / "Save Preferences" pills.
@@ -3992,7 +4373,7 @@ html[dir="ltr"] .zappy-products-dropdown .zappy-nav-child > a {
   --cc-btn-secondary-hover-bg: #e5e7eb;
   --cc-btn-secondary-hover-color: #111827;
   --cc-btn-secondary-hover-border: #d1d5db;
-  --cc-toggle-on-bg: #6b8e6f;
+  --cc-toggle-on-bg: #221e3d;
 }
 
 #cc-main,
@@ -4018,7 +4399,7 @@ html[dir="ltr"] .zappy-products-dropdown .zappy-nav-child > a {
   -webkit-backdrop-filter: saturate(180%) blur(12px);
   backdrop-filter: saturate(180%) blur(12px);
   border: none !important;
-  border-top: 1px solid rgba(107, 142, 111, 0.18) !important;
+  border-top: 1px solid rgba(34, 30, 61, 0.18) !important;
   border-radius: 0 !important;
   box-shadow: 0 -1px 12px rgba(0, 0, 0, 0.04) !important;
   display: flex !important;
@@ -4105,7 +4486,7 @@ html[dir="ltr"] .zappy-products-dropdown .zappy-nav-child > a {
  * defaults for the preferences modal's two secondary pills). */
 #zappy-cookie-banner .zappy-cookie-banner__button--customize {
   background-color: transparent !important;
-  color: #6b8e6f !important;
+  color: #221e3d !important;
   border: none !important;
   padding: 0 8px !important;
   height: 32px !important;
@@ -4115,7 +4496,7 @@ html[dir="ltr"] .zappy-products-dropdown .zappy-nav-child > a {
 }
 
 #zappy-cookie-banner .zappy-cookie-banner__button--customize:hover {
-  color: #527556 !important;
+  color: #090524 !important;
   background-color: transparent !important;
 }
 
@@ -4311,6 +4692,7 @@ html[dir="ltr"] .service-detail.service-reverse .service-detail-content { order:
 /* ZAPPY_MOBILE_NAV_ICON_ALIGNMENT_FIX */
 /* ZAPPY_MOBILE_NAV_ICON_ALIGNMENT_FIX_V3 */
 /* ZAPPY_MOBILE_NAV_ICON_ALIGNMENT_FIX_V4 */
+/* ZAPPY_MOBILE_NAV_ICON_ALIGNMENT_FIX_V5 */
 /* The mobile hamburger / phone buttons are absolutely positioned. Keep the
    navbar itself as a non-collapsing containing block so auto-margin centering
    stays aligned even when generated mobile CSS moves every nav child out of flow. */
@@ -4318,6 +4700,67 @@ html[dir="ltr"] .service-detail.service-reverse .service-detail-content { order:
   .navbar,
   nav.navbar {
     min-height: 70px !important;
+  }
+
+  /* V5: Desktop .nav-search-box must stay hidden on mobile. AI/customization CSS
+     often force-shows it with higher specificity than the generator's plain
+     .nav-search-box { display:none } (e.g. .navbar .nav-ecommerce-icons.nav-icons-left
+     .nav-search-box { display:flex; background: cream }), which paints an empty
+     cream/white square left of the cart on RTL ecommerce navs. Beat that chain. */
+  html body .navbar .nav-search-box,
+  html body nav.navbar .nav-search-box,
+  html body .navbar .nav-ecommerce-icons .nav-search-box,
+  html body .navbar .nav-ecommerce-icons.nav-icons-left .nav-search-box,
+  html body .navbar .nav-container .nav-ecommerce-icons.nav-icons-left .nav-search-box {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    pointer-events: none !important;
+  }
+
+  /* V5: Search-toggle SVG is frequently recolored to --nav-text (cream/white) by
+     AI customization at .navbar .nav-container .nav-ecommerce-icons.nav-icons-right
+     .nav-search-toggle svg, while the pill button itself keeps the correct
+     contrasting color from the luminance-aware pill rules. Inherit that color
+     with a selector that out-ranks the nav-text stroke paint so the icon stays
+     legible on light AND dark pills (no hardcoded text-dark). */
+  html body .navbar .nav-container .nav-ecommerce-icons.nav-icons-right .nav-search-toggle svg,
+  html body .navbar .nav-container .nav-ecommerce-icons.nav-icons-right .nav-search-toggle svg *,
+  html body .navbar .nav-ecommerce-icons.nav-icons-right .nav-search-toggle svg,
+  html body .navbar .nav-ecommerce-icons.nav-icons-right .nav-search-toggle svg * {
+    color: inherit !important;
+    stroke: currentColor !important;
+    fill: none !important;
+  }
+
+  /* V5: Keep the three mobile icon couples on one baseline — absolute groups +
+     hamburger all center against the same navbar box. */
+  html body .navbar .nav-ecommerce-icons.nav-icons-left,
+  html body .navbar .nav-ecommerce-icons.nav-icons-right,
+  html body .navbar .nav-icons-left,
+  html body .navbar .nav-icons-right {
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+    align-items: center !important;
+  }
+  html body .navbar .nav-ecommerce-icons.nav-icons-right .nav-search-toggle,
+  html body .navbar .nav-search-toggle {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 9999px !important;
+    align-self: center !important;
   }
 
   /* E-commerce mobile navbar icon-group alignment.
@@ -4425,6 +4868,35 @@ html[dir="ltr"] .service-detail.service-reverse .service-detail-content { order:
     min-width: 0 !important;
     overflow: hidden !important;
   }
+}
+
+
+/* ZAPPY_FULLSCREEN_HERO_SCRIM_OPACITY_CAP — keep fullscreen hero images visible while preserving text contrast */
+section[data-hero-type="fullscreen-scrim"]:not([data-zappy-bg-overlay-opacity]) > [class*="scrim"],
+section[data-hero-type="fullscreen-scrim"]:not([data-zappy-bg-overlay-opacity]) > [class*="bg-wrapper"] [class*="scrim"],
+section[class*="hero"]:not([data-zappy-bg-overlay-opacity]) > .hero-scrim,
+section[class*="hero"]:not([data-zappy-bg-overlay-opacity]) > [class*="hero-scrim"],
+section[class*="hero"]:not([data-zappy-bg-overlay-opacity]) > [class*="bg-wrapper"] [class*="scrim"] {
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+  background-image: linear-gradient(180deg, rgba(0,0,0,0.16) 0%, rgba(0,0,0,0.32) 62%, rgba(0,0,0,0.42) 100%), linear-gradient(to right, rgba(0,0,0,0.52) 0%, rgba(0,0,0,0.36) 36%, rgba(0,0,0,0.06) 78%) !important;
+  background-color: transparent !important;
+}
+html[dir="rtl"] section[data-hero-type="fullscreen-scrim"]:not([data-zappy-bg-overlay-opacity]) > [class*="scrim"],
+html[dir="rtl"] section[data-hero-type="fullscreen-scrim"]:not([data-zappy-bg-overlay-opacity]) > [class*="bg-wrapper"] [class*="scrim"],
+html[dir="rtl"] section[class*="hero"]:not([data-zappy-bg-overlay-opacity]) > .hero-scrim,
+html[dir="rtl"] section[class*="hero"]:not([data-zappy-bg-overlay-opacity]) > [class*="hero-scrim"],
+html[dir="rtl"] section[class*="hero"]:not([data-zappy-bg-overlay-opacity]) > [class*="bg-wrapper"] [class*="scrim"] {
+  background-image: linear-gradient(180deg, rgba(0,0,0,0.16) 0%, rgba(0,0,0,0.32) 62%, rgba(0,0,0,0.42) 100%), linear-gradient(to left, rgba(0,0,0,0.52) 0%, rgba(0,0,0,0.36) 36%, rgba(0,0,0,0.06) 78%) !important;
+}
+section[data-hero-type="fullscreen-scrim"]:not([data-zappy-bg-overlay-opacity]) > img[data-hero-bg],
+section[data-hero-type="fullscreen-scrim"]:not([data-zappy-bg-overlay-opacity]) > [class*="hero-bg"] img[data-hero-bg],
+section[data-hero-type="fullscreen-scrim"]:not([data-zappy-bg-overlay-opacity]) > [class*="bg-wrapper"] img[data-hero-bg],
+section[class*="hero"]:not([data-zappy-bg-overlay-opacity]):has(> [class*="scrim"]) > img[data-hero-bg],
+section[class*="hero"]:not([data-zappy-bg-overlay-opacity]) > [class*="bg-wrapper"] img[data-hero-bg] {
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
 }
 
 

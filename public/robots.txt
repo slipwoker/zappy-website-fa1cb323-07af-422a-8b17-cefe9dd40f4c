@@ -50,4 +50,4 @@ Allow: /
 User-agent: MistralAI-User
 Allow: /
 
-Sitemap: https://bendavidlaw.co.il/sitemap.xml
+Sitemap: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/sitemap.xml

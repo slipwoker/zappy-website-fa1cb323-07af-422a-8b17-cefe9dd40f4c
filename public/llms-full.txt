@@ -1,12 +1,12 @@
 # אבי בן דוד, עו״ד
 
-Source: https://bendavidlaw.co.il
+Source: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com
 
 ---
 
 ## אבי בן דוד, עו"ד | ייצוג נכי צה"ל ופגועי חרבות ברזל
 
-URL: https://bendavidlaw.co.il
+URL: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com
 Description: עורך דין אבי בן דוד מתמחה בייצוג נכי צה"ל ופגועי מלחמת חרבות ברזל מול אגף השיקום. פגישת ייעוץ ראשונית ללא התחייבות.
 
 אבי בן דוד, עו"ד | ייצוג נכי צה"ל ופגועי חרבות ברזל
@@ -115,7 +115,7 @@ Happily created by Zappy
 
 ## השירותים שלנו | ייצוג משפטי לנכי צה"ל | אבי בן דוד עו"ד
 
-URL: https://bendavidlaw.co.il/services
+URL: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/services
 Description: שירותי ייצוג משפטי מקיפים לנכי צה"ל: הגשת תביעות, ייצוג בוועדות רפואיות, ערעורים ומימוש זכויות מול אגף השיקום.
 
 השירותים שלנו | ייצוג משפטי לנכי צה"ל | אבי בן דוד עו"ד
@@ -442,7 +442,7 @@ Happily created by Zappy
 
 ## אודות | עו"ד אבי בן דוד | מומחה לנכי צה"ל
 
-URL: https://bendavidlaw.co.il/about
+URL: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/about
 Description: היכרות עם עו"ד אבי בן דוד, מומחה לייצוג נכי צה"ל ופגועי שירות צבאי. ניסיון רב שנים בהשגת זכויות לנפגעי מלחמת חרבות ברזל.
 
 אודות | עו"ד אבי בן דוד | מומחה לנכי צה"ל
@@ -817,7 +817,7 @@ Happily created by Zappy
 
 ## מדיניות פרטיות
 
-URL: https://bendavidlaw.co.il/privacy
+URL: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/privacy
 Description: מדיניות הפרטיות שלנו - כיצד אנו אוספים, משתמשים ומגנים על המידע שלכם
 
 מדיניות פרטיות
@@ -1006,7 +1006,7 @@ Description: מדיניות הפרטיות שלנו - כיצד אנו אוספי
 
 ## הצהרת נגישות
 
-URL: https://bendavidlaw.co.il/accessibility
+URL: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/accessibility
 Description: הצהרת הנגישות שלנו - מחויבותנו לנגישות דיגיטלית
 
 הצהרת נגישות
@@ -1204,7 +1204,7 @@ Description: הצהרת הנגישות שלנו - מחויבותנו לנגיש�
 
 ## תנאי שימוש
 
-URL: https://bendavidlaw.co.il/terms
+URL: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/terms
 Description: תנאי השימוש באתר - הזכויות והחובות של המשתמשים
 
 תנאי שימוש
@@ -1421,7 +1421,7 @@ Description: תנאי השימוש באתר - הזכויות והחובות של
 
 ## מחשבון הערכת נכות צה"ל | אבי בן דוד עו"ד
 
-URL: https://bendavidlaw.co.il/disability-assessment-calculator
+URL: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/disability-assessment-calculator
 
 מחשבון הערכת נכות צה"ל | אבי בן דוד עו"ד
 
@@ -1517,10 +1517,12 @@ URL: https://bendavidlaw.co.il/disability-assessment-calculator
 
 ## מאמרים | נכי צה"ל וזכויות משפטיות | אבי בן דוד עו"ד
 
-URL: https://bendavidlaw.co.il/blog
+URL: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/blog
 Description: מאמרים מקצועיים על זכויות נכי צה"ל, הכרה בנכות, ועדות רפואיות וייצוג משפטי מול אגף השיקום. מאת עו"ד אבי בן דוד.
 
 מאמרים | נכי צה"ל וזכויות משפטיות | אבי בן דוד עו"ד
+
+
 
 
 
@@ -1764,7 +1766,7 @@ Happily created by Zappy
 
 ## פוסט טראומה בחרבות ברזל: הכרה וזכויות משפטיות | אבי בן דוד עו"ד
 
-URL: https://bendavidlaw.co.il/blog/ptsd-claims
+URL: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/blog/ptsd-claims
 Description: המדריך המלא להכרה בפוסט טראומה (PTSD) בעקבות מלחמת חרבות ברזל. כיצד להגיש תביעה ומהם המסמכים הנדרשים.
 
 פוסט טראומה בחרבות ברזל: הכרה וזכויות משפטיות | אבי בן דוד עו"ד
@@ -1958,7 +1960,7 @@ Happily created by Zappy
 
 ## הכנה לוועדה רפואית: המדריך המלא לנכה צה"ל | אבי בן דוד עו"ד
 
-URL: https://bendavidlaw.co.il/blog/medical-committee
+URL: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/blog/medical-committee
 Description: איך מתכוננים לוועדה רפואית של משרד הביטחון? טיפים מעשיים לנכי צה"ל, מסמכים נדרשים והתנהלות נכונה מול הרופאים.
 
 הכנה לוועדה רפואית: המדריך המלא לנכה צה"ל | אבי בן דוד עו"ד
@@ -2152,7 +2154,7 @@ Happily created by Zappy
 
 ## ייצוג נכי צה"ל | שקיפות, הגינות ומקצועיות | אבי בן דוד עו"ד
 
-URL: https://bendavidlaw.co.il/idf-veterans-representation
+URL: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/idf-veterans-representation
 Description: עו"ד אבי בן דוד – נכה צה"ל ובעל 600 ימי מילואים – מייצג נכי צה"ל בשקיפות מלאה, שכר טרחה הוגן ושיח בגובה העיניים. ייצוג מקצועי לחיילים ומשפחות.
 
 ייצוג נכי צה"ל | שקיפות, הגינות ומקצועיות | אבי בן דוד עו"ד
@@ -2319,7 +2321,7 @@ Description: עו"ד אבי בן דוד – נכה צה"ל ובעל 600 ימי �
 
 ## לקוחות ממליצים | עו"ד אבי בן דוד | נכי צה"ל
 
-URL: https://bendavidlaw.co.il/reviews
+URL: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/reviews
 Description: קראו המלצות אמיתיות מלקוחות שזכו לייצוג מקצועי של עו"ד אבי בן דוד בתביעות נכות צה"ל מול אגף השיקום.
 
 לקוחות ממליצים | עו"ד אבי בן דוד | נכי צה"ל
@@ -2581,7 +2583,7 @@ Happily created by Zappy
 
 ## מדריכים | זכויות נכי צה"ל | עו"ד אבי בן דוד
 
-URL: https://bendavidlaw.co.il/guides
+URL: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/guides
 Description: מדריכים מקצועיים ומקיפים לנכי צה"ל: הכרה בנכות, ועדות רפואיות, שיקום וזכויות משפחה. מאת עו"ד אבי בן דוד.
 
 מדריכים | זכויות נכי צה"ל | עו"ד אבי בן דוד
@@ -2786,7 +2788,7 @@ Happily created by Zappy
 
 ## זכויות הורים לחיילים שנפצעו בשירות | מדריך מלא | אבי בן דוד עו"ד
 
-URL: https://bendavidlaw.co.il/guides/family-rights
+URL: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/guides/family-rights
 Description: מידע מקיף על זכויותיהם של הורים ובני משפחה של חיילים שנפצעו במלחמת חרבות ברזל. סיוע כלכלי, נפשי וייעוץ משפטי.
 
 זכויות הורים לחיילים שנפצעו בשירות | מדריך מלא | אבי בן דוד עו"ד
@@ -2953,7 +2955,7 @@ Happily created by Zappy
 
 ## המדריך המלא להכרה בנכות משרד הביטחון | חרבות ברזל | אבי בן דוד
 
-URL: https://bendavidlaw.co.il/guides/disability-recognition
+URL: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/guides/disability-recognition
 Description: מדריך מקיף בנושא הגשת תביעה להכרה בנכות משרד הביטחון. כל המידע הדרוש לחיילי חרבות ברזל, מאת עורך דין נכי צה"ל.
 
 המדריך המלא להכרה בנכות משרד הביטחון | חרבות ברזל | אבי בן דוד
@@ -3127,7 +3129,7 @@ Happily created by Zappy
 
 ## הכנה לוועדות רפואיות במשרד הביטחון | מדריך מקיף | אבי בן דוד עו"ד
 
-URL: https://bendavidlaw.co.il/guides/medical-committees
+URL: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/guides/medical-committees
 Description: כיצד להתכונן נכון לוועדה רפואית של משרד הביטחון? מדריך מעשי לחיילים שנפצעו, הכולל טיפים ומידע על חשיבות הייצוג המשפטי.
 
 הכנה לוועדות רפואיות במשרד הביטחון | מדריך מקיף | אבי בן דוד עו"ד
@@ -3299,7 +3301,7 @@ Happily created by Zappy
 
 ## המדריך המלא למימוש זכויות מול אגף השיקום | אבי בן דוד עו"ד
 
-URL: https://bendavidlaw.co.il/guides/rehabilitation-guide
+URL: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/guides/rehabilitation-guide
 Description: המדריך המלא למימוש זכויות נכי צה"ל מול אגף השיקום. שלבים בהגשת תביעה, ועדות רפואיות וערעורים. נכתב ע"י עו"ד אבי בן דוד.
 
 המדריך המלא למימוש זכויות מול אגף השיקום | אבי בן דוד עו"ד
@@ -3514,7 +3516,7 @@ Happily created by Zappy
 
 ## צור קשר | עו"ד אבי בן דוד | ייצוג נכי צה"ל
 
-URL: https://bendavidlaw.co.il/contact
+URL: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/contact
 Description: פנה לעו"ד אבי בן דוד לפגישת ייעוץ ראשונית ללא התחייבות. מתמחה בייצוג נכי צה"ל ופגועי מלחמת חרבות ברזל.
 
 צור קשר | עו"ד אבי בן דוד | ייצוג נכי צה"ל
@@ -3809,7 +3811,7 @@ Avibd@bendavidlaw.co.il
 
 ## ייצוג משפטי לנכי צה"ל | לתבוע לבד או עם עו"ד? | אבי בן דוד
 
-URL: https://bendavidlaw.co.il/blog/legal-representation
+URL: https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/blog/legal-representation
 Description: האם כדאי לתבוע את אגף השיקום לבד או עם עורך דין? והאם שווה להמתין למימון המדינה? מדריך מקיף מאת עו"ד אבי בן דוד, מומחה לייצוג נכי צה"ל.
 
 ייצוג משפטי לנכי צה"ל | לתבוע לבד או עם עו"ד? | אבי בן דוד
