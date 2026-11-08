@@ -3366,6 +3366,15 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
   display: block !important;
 }
 
+html, body {
+  overflow-x: clip;
+}
+
+#zappy-section-2 .quotes-marquee-bar {
+  width: 100%;
+  overflow: hidden;
+}
+
 /* ZAPPY_ANNOUNCEMENT_HEADER_OFFSET_CSS_V3 */
 :root {
   --zappy-header-stack-height: calc(var(--zappy-announcement-height, 40px) + var(--header-height, 72px));
