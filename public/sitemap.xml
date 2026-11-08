@@ -97,6 +97,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/idf-disabled</loc>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://zappy-site-fa1cb323-07af-422a-8b17.onrender.com/privacy</loc>
     <lastmod>2026-11-08</lastmod>
     <changefreq>monthly</changefreq>
