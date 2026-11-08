@@ -3274,6 +3274,96 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
   display: none !important;
 }
 
+#zappy-section-1 {
+  background: var(--surface-color, var(--surface, #FBF7F0)) !important;
+}
+
+#zappy-section-1 .concern-wrapper {
+  max-width: 880px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#zappy-section-1 .concern-wrapper h2 {
+  color: var(--primary-color, var(--primary, #221E3D));
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 800;
+  margin: 0 0 32px;
+}
+
+#zappy-section-1 .concern-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+#zappy-section-1 .concern-pill {
+  background: transparent;
+  color: var(--primary-color, var(--primary, #221E3D));
+  border: 1.5px solid var(--primary-color, var(--primary, #221E3D));
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+#zappy-section-1 .concern-pill:hover {
+  background: rgba(168,69,42,0.08);
+}
+
+#zappy-section-1 .concern-pill.active {
+  background: var(--accent-color, var(--accent, #A8452A));
+  border-color: var(--accent-color, var(--accent, #A8452A));
+  color: #ffffff;
+}
+
+#zappy-section-1 .concern-answer {
+  display: none;
+  max-width: 640px;
+  margin: 0 auto;
+  padding-top: 8px;
+}
+
+#zappy-section-1 .concern-answer.active {
+  display: block;
+}
+
+#zappy-section-1 .concern-quote {
+  display: block;
+  font-size: 5rem;
+  line-height: 0.6;
+  color: var(--accent-color, var(--accent, #A8452A));
+  font-family: Georgia, serif;
+  margin-bottom: 18px;
+}
+
+#zappy-section-1 .concern-answer p {
+  color: var(--primary-color, var(--primary, #221E3D));
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  line-height: 1.6;
+  font-weight: 500;
+  margin: 0 0 24px;
+}
+
+#zappy-section-1 .concern-answer a {
+  color: var(--accent-color, var(--accent, #A8452A));
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+}
+
+#zappy-section-1 .concern-answer a:hover {
+  text-decoration: underline;
+}
+/* zappy-self-heal */
+#zappy-section-1 .concern-answer { display: none !important; }
+
+
 /* ZAPPY_ANNOUNCEMENT_HEADER_OFFSET_CSS_V3 */
 :root {
   --zappy-header-stack-height: calc(var(--zappy-announcement-height, 40px) + var(--header-height, 72px));

@@ -267,6 +267,38 @@ window.onload = function() {
   } catch (e) {}
 })();
 
+/* ZAPPY_CUSTOM_JS_START:81e98543bed5 */
+(function () {
+  function __zappyCustomInit() {
+    try {
+(function(){
+  var section = document.querySelector('#zappy-section-1');
+  if (!section) return;
+  var pills = section.querySelectorAll('.concern-pill');
+  var answers = section.querySelectorAll('.concern-answer');
+  pills.forEach(function(pill){
+    pill.addEventListener('click', function(){
+      var idx = pill.getAttribute('data-concern');
+      pills.forEach(function(p){ p.classList.remove('active'); });
+      answers.forEach(function(a){ a.classList.remove('active'); });
+      pill.classList.add('active');
+      var target = section.querySelector('.concern-answer[data-answer="'+idx+'"]');
+      if (target) target.classList.add('active');
+    });
+  });
+})();
+    } catch (e) {
+      if (typeof console !== 'undefined' && console.warn) { console.warn('[zappy-custom-js]', e); }
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', __zappyCustomInit);
+  } else {
+    __zappyCustomInit();
+  }
+})();
+/* ZAPPY_CUSTOM_JS_END:81e98543bed5 */
+
 
 /* ZAPPY_PUBLISHED_LIGHTBOX_RUNTIME */
 (function(){
