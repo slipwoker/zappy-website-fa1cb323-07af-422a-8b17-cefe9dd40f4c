@@ -445,6 +445,45 @@ window.onload = function() {
 })();
 /* ZAPPY_CUSTOM_JS_END:28006b30ce91 */
 
+/* ZAPPY_CUSTOM_JS_START:809de3641bac */
+(function () {
+  function __zappyCustomInit() {
+    try {
+(function() {
+  var items = document.querySelectorAll('.poa-guide-body .faq-item');
+  if (!items.length) return;
+  items.forEach(function(item) {
+    var q = item.querySelector('.faq-question');
+    var a = item.querySelector('.faq-answer');
+    var icon = q ? q.querySelector('.fa-chevron-down') : null;
+    if (!q || !a) return;
+    q.addEventListener('click', function() {
+      var isOpen = a.style.maxHeight && a.style.maxHeight !== '0px';
+      items.forEach(function(other) {
+        var oa = other.querySelector('.faq-answer');
+        var oi = other.querySelector('.fa-chevron-down');
+        if (oa) oa.style.maxHeight = '0px';
+        if (oi) oi.style.transform = 'rotate(0deg)';
+      });
+      if (!isOpen) {
+        a.style.maxHeight = a.scrollHeight + 'px';
+        if (icon) icon.style.transform = 'rotate(180deg)';
+      }
+    });
+  });
+})();
+    } catch (e) {
+      if (typeof console !== 'undefined' && console.warn) { console.warn('[zappy-custom-js]', e); }
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', __zappyCustomInit);
+  } else {
+    __zappyCustomInit();
+  }
+})();
+/* ZAPPY_CUSTOM_JS_END:809de3641bac */
+
 
 /* ZAPPY_PUBLISHED_LIGHTBOX_RUNTIME */
 (function(){
