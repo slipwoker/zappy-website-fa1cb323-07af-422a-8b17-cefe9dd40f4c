@@ -3129,12 +3129,10 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 [class*="btn--secondary"] { color: #333333 !important; }
 .navbar .nav-cta-btn,
 .nav-cta-btn { color: #FFFFFF !important; }
-/* === BUTTON TEXT OVERRIDES END === */
-
 #section-dup-1780312214376 .hero-redesign-container {
   background: var(--background-color, var(--background, var(--bg-light, #F5EFE4))) !important;
-  height: auto !important;
-  min-height: 0 !important;
+  height: auto;
+  min-height: 0;
   padding: 80px 40px 80px;
 }
 
