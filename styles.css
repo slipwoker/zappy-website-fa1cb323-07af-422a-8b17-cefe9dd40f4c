@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&display=swap');
 
 /* Self-hosted fonts (Inter + Rubik for multi-language support) */
 
@@ -76,7 +76,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Rubik', 'Noto Sans Hebrew', Arial, sans-serif;
+  font-family: 'Assistant', sans-serif;
   line-height: 1.7;
   color: #2c3e50;
   background: #F5EFE4;
@@ -107,7 +107,13 @@ img {
   --text-muted: #626262;
   --border-light: #737476;
   --border-dark: #6a7484;
-}
+
+  --heading-font: 'Secular One', sans-serif;
+  --font-heading: 'Secular One', sans-serif;
+  --body-font: 'Assistant', sans-serif;
+  --font-family: 'Assistant', sans-serif;
+  --font-primary: 'Assistant', sans-serif;
+  --font-body: 'Assistant', sans-serif;}
 
 .container {
   max-width: 1440px;
@@ -3124,7 +3130,6 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 .navbar .nav-cta-btn,
 .nav-cta-btn { color: #FFFFFF !important; }
 /* === BUTTON TEXT OVERRIDES END === */
-
 
 /* ZAPPY_ANNOUNCEMENT_HEADER_OFFSET_CSS_V3 */
 :root {
