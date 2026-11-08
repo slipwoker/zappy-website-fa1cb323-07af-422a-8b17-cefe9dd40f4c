@@ -106,6 +106,9 @@ Information about WCAG compliance and accessibility features.
 - Fields:
   - `name` (text, required)
   - `phone` (tel, required)
+  - `email` (email)
+  - `message` (textarea)
+  - `consent` (checkbox, required)
 
 ---
 

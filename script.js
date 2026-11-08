@@ -328,6 +328,43 @@ window.onload = function() {
 })();
 /* ZAPPY_CUSTOM_JS_END:449a879ca001 */
 
+/* ZAPPY_CUSTOM_JS_START:5760342c03de */
+(function () {
+  function __zappyCustomInit() {
+    try {
+(function () {
+  var items = document.querySelectorAll('.faq-section .faq-item');
+  if (!items.length) return;
+  items.forEach(function (item) {
+    var q = item.querySelector('.faq-question');
+    if (!q) return;
+    q.addEventListener('click', function () {
+      var isActive = item.classList.contains('active');
+      items.forEach(function (other) {
+        other.classList.remove('active');
+        var a = other.querySelector('.faq-answer');
+        if (a) a.style.maxHeight = '0px';
+      });
+      if (!isActive) {
+        item.classList.add('active');
+        var ans = item.querySelector('.faq-answer');
+        if (ans) ans.style.maxHeight = ans.scrollHeight + 'px';
+      }
+    });
+  });
+})();
+    } catch (e) {
+      if (typeof console !== 'undefined' && console.warn) { console.warn('[zappy-custom-js]', e); }
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', __zappyCustomInit);
+  } else {
+    __zappyCustomInit();
+  }
+})();
+/* ZAPPY_CUSTOM_JS_END:5760342c03de */
+
 
 /* ZAPPY_PUBLISHED_LIGHTBOX_RUNTIME */
 (function(){

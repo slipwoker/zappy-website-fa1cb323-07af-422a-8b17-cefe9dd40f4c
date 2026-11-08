@@ -3375,6 +3375,308 @@ html, body {
   overflow: hidden;
 }
 
+.contact-hero {
+  background: var(--background-color, var(--background, var(--bg-light, #F5EFE4)));
+  padding: 72px 0 56px;
+  text-align: center;
+}
+
+.contact-hero .hero-label {
+  display: inline-block;
+  background: var(--secondary-color, var(--secondary, #E6D3B8));
+  color: var(--accent-color, var(--accent, #A8452A));
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  padding: 6px 16px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+
+.contact-hero h1 {
+  color: var(--primary-color, var(--primary, #221E3D));
+  font-family: 'Secular One', sans-serif;
+  font-size: 2.6rem;
+  line-height: 1.25;
+  margin: 0 0 18px;
+}
+
+.contact-hero .hero-sub {
+  color: var(--text-color, var(--text, var(--text-dark, #4A4A4A)));
+  font-size: 1.12rem;
+  line-height: 1.7;
+  max-width: 680px;
+  margin: 0 auto 30px;
+}
+
+.contact-hero .hero-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.contact-hero .btn-terracotta, .contact-two-col .btn-terracotta {
+  display: inline-block;
+  background: var(--accent-color, var(--accent, #A8452A));
+  color: #ffffff;
+  font-weight: 700;
+  padding: 14px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: none;
+  font-size: 1.02rem;
+  cursor: pointer;
+  transition: filter 0.2s;
+  font-family: 'Assistant', sans-serif;
+}
+
+.contact-hero .btn-terracotta:hover, .contact-two-col .btn-terracotta:hover {
+  filter: brightness(1.1);
+}
+
+.contact-hero .btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--primary-color, var(--primary, #221E3D));
+  font-weight: 700;
+  padding: 14px 22px;
+  border-radius: 8px;
+  border: 2px solid var(--primary-color, var(--primary, #221E3D));
+  text-decoration: none;
+  font-size: 1.02rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.contact-hero .btn-whatsapp:hover {
+  background: var(--primary-color, var(--primary, #221E3D));
+  color: #ffffff;
+}
+
+.contact-hero .btn-whatsapp i {
+  font-size: 1.15rem;
+}
+
+.contact-two-col {
+  background: var(--surface-color, var(--surface, #FBF7F0));
+  padding: 64px 0;
+}
+
+.contact-two-col .two-col-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.contact-two-col h2 {
+  color: var(--primary-color, var(--primary, #221E3D));
+  font-family: 'Secular One', sans-serif;
+  font-size: 1.7rem;
+  margin: 0 0 24px;
+}
+
+#zappy-section-1 .contact-details-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px;
+}
+
+#zappy-section-1 .contact-details-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--secondary-color, var(--secondary, #E6D3B8));
+}
+
+#zappy-section-1 .contact-details-list li:last-child {
+  border-bottom: none;
+}
+
+#zappy-section-1 .contact-details-list .cd-icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--secondary-color, var(--secondary, #E6D3B8));
+  color: var(--accent-color, var(--accent, #A8452A));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+}
+
+#zappy-section-1 .contact-details-list strong {
+  display: block;
+  color: var(--primary-color, var(--primary, #221E3D));
+  font-size: 1rem;
+  margin-bottom: 2px;
+}
+
+#zappy-section-1 .contact-details-list span {
+  color: var(--text-color, var(--text, var(--text-dark, #4A4A4A)));
+}
+
+#zappy-section-1 .contact-details-list div {
+  color: var(--text-color, var(--text, var(--text-dark, #4A4A4A)));
+}
+
+#zappy-section-1 .privacy-note {
+  color: var(--text-secondary-color, var(--text-secondary, var(--text-muted, #626262)));
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+#zappy-section-1 .contact-form-col {
+  background: #ffffff;
+  border: 1px solid var(--secondary-color, var(--secondary, #E6D3B8));
+  border-radius: 14px;
+  padding: 34px;
+}
+
+#zappy-section-1 .contact-form .form-group {
+  margin-bottom: 16px;
+}
+
+#zappy-section-1 .contact-form label {
+  display: block;
+  color: var(--primary-color, var(--primary, #221E3D));
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+#zappy-section-1 .contact-form input, #zappy-section-1 .contact-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--secondary-color, var(--secondary, #E6D3B8));
+  border-radius: 8px;
+  font-family: 'Assistant', sans-serif;
+  font-size: 1rem;
+  color: var(--text-color, var(--text, var(--text-dark, #4A4A4A)));
+  background: var(--surface-color, var(--surface, #FBF7F0));
+  box-sizing: border-box;
+}
+
+#zappy-section-1 .contact-form .consent-group .consent-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-weight: 400;
+  font-size: 0.88rem;
+  color: var(--text-color, var(--text, var(--text-dark, #4A4A4A)));
+  line-height: 1.5;
+}
+
+#zappy-section-1 .contact-form .consent-group input[type="checkbox"] {
+  width: auto;
+  margin-top: 3px;
+}
+
+#zappy-section-1 .contact-form .consent-label a {
+  color: var(--accent-color, var(--accent, #A8452A));
+  text-decoration: underline;
+}
+
+.faq-section {
+  background: var(--background-color, var(--background, var(--bg-light, #F5EFE4)));
+  padding: 64px 0;
+}
+
+.faq-section h2 {
+  color: var(--primary-color, var(--primary, #221E3D));
+  font-family: 'Secular One', sans-serif;
+  font-size: 2rem;
+  text-align: center;
+  margin: 0 0 36px;
+}
+
+.faq-section .faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.faq-section .faq-item {
+  background: #ffffff;
+  border: 1px solid rgba(168,69,42,0.3);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.faq-section .faq-question {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 20px 22px;
+  font-family: 'Assistant', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary-color, var(--primary, #221E3D));
+  text-align: right;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+
+.faq-section .faq-question::after {
+  content: '+';
+  font-size: 1.5rem;
+  color: var(--accent-color, var(--accent, #A8452A));
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+.faq-section .faq-item.active .faq-question::after {
+  content: '';
+  transform: rotate(45deg);
+}
+
+.faq-section .faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.faq-section .faq-answer p {
+  padding: 0 22px 20px;
+  margin: 0;
+  color: var(--text-color, var(--text, var(--text-dark, #4A4A4A)));
+  line-height: 1.7;
+}
+
+.faq-section .faq-item.active .faq-answer {
+  max-height: 500px;
+}
+
+@media (max-width: 768px) {
+.contact-two-col .two-col-wrap {
+  grid-template-columns: 1fr;
+}
+
+.contact-hero h1 {
+  font-size: 2rem;
+}
+
+#zappy-section-1 .contact-form-col {
+  padding: 24px;
+}
+}
+
+.contact-two-col .contact-form input:focus, .contact-two-col .contact-form textarea:focus {
+  outline: none;
+  border-color: var(--accent-color, var(--accent, #A8452A));
+}
+
 /* ZAPPY_ANNOUNCEMENT_HEADER_OFFSET_CSS_V3 */
 :root {
   --zappy-header-stack-height: calc(var(--zappy-announcement-height, 40px) + var(--header-height, 72px));
