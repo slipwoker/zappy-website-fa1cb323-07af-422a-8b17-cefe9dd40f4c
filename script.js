@@ -365,6 +365,46 @@ window.onload = function() {
 })();
 /* ZAPPY_CUSTOM_JS_END:5760342c03de */
 
+/* ZAPPY_CUSTOM_JS_START:a4899a23e346 */
+(function () {
+  function __zappyCustomInit() {
+    try {
+(function () {
+  var items = document.querySelectorAll('.family-faq-item');
+  if (!items.length) return;
+  items.forEach(function (item) {
+    var btn = item.querySelector('.family-faq-question');
+    var answer = item.querySelector('.family-faq-answer');
+    if (!btn || !answer) return;
+    btn.addEventListener('click', function () {
+      var isOpen = item.classList.contains('active');
+      items.forEach(function (other) {
+        other.classList.remove('active');
+        var a = other.querySelector('.family-faq-answer');
+        var b = other.querySelector('.family-faq-question span');
+        if (a) a.style.maxHeight = '0px';
+        if (b) b.textContent = '+';
+      });
+      if (!isOpen) {
+        item.classList.add('active');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        btn.querySelector('span').textContent = '−';
+      }
+    });
+  });
+})();
+    } catch (e) {
+      if (typeof console !== 'undefined' && console.warn) { console.warn('[zappy-custom-js]', e); }
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', __zappyCustomInit);
+  } else {
+    __zappyCustomInit();
+  }
+})();
+/* ZAPPY_CUSTOM_JS_END:a4899a23e346 */
+
 
 /* ZAPPY_PUBLISHED_LIGHTBOX_RUNTIME */
 (function(){

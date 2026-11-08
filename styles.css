@@ -3699,6 +3699,18 @@ html, body {
 }
 }
 
+.family-process > div > div[style*="grid"] {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+@media (max-width: 800px) {
+.family-process > div > div[style*="grid"] {
+  grid-template-columns: 1fr;
+}
+}
+
 /* ZAPPY_ANNOUNCEMENT_HEADER_OFFSET_CSS_V3 */
 :root {
   --zappy-header-stack-height: calc(var(--zappy-announcement-height, 40px) + var(--header-height, 72px));
